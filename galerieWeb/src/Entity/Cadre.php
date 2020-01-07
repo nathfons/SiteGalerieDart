@@ -26,18 +26,18 @@ class Cadre
     /**
      * @ORM\Column(type="float")
      */
-    private $prixcadreht;
+    private $prixCadreHt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\couleur")
      */
-    private $id_couleur;
+    private $idCouleur;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\matiere")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_matiere;
+    private $idMatiere;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="idCadre")
@@ -78,14 +78,14 @@ class Cadre
         return $this;
     }
 
-    public function getPrixcadreht(): ?float
+    public function getPrixCadreHt(): ?float
     {
-        return $this->prixcadreht;
+        return $this->PrixCadreHt;
     }
 
-    public function setPrixcadreht(float $prixcadreht): self
+    public function setPrixCadreHt(float $prixcadreht): self
     {
-        $this->prixcadreht = $prixcadreht;
+        $this->PrixCadreHt = $prixcadreht;
 
         return $this;
     }
