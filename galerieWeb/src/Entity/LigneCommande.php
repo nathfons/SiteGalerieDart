@@ -38,11 +38,6 @@ class LigneCommande
      */
     private $prixUnite;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $tva;
-
     public function getId(): ?int
     {
         return $this->id;

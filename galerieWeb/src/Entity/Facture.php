@@ -43,6 +43,11 @@ class Facture
      */
     private $idCommande;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $tva;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,18 @@ class Facture
     public function setIdCommande(?commande $idCommande): self
     {
         $this->idCommande = $idCommande;
+
+        return $this;
+    }
+
+    public function getTva(): ?float
+    {
+        return $this->tva;
+    }
+
+    public function setTva(float $tva): self
+    {
+        $this->tva = $tva;
 
         return $this;
     }

@@ -26,7 +26,7 @@ class Cadre
     /**
      * @ORM\Column(type="float")
      */
-    private $prixCadreHt;
+    private $prixCadreUniteHt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\couleur")
@@ -78,14 +78,14 @@ class Cadre
         return $this;
     }
 
-    public function getPrixCadreHt(): ?float
+    public function getPrixCadreUniteHt(): ?float
     {
-        return $this->PrixCadreHt;
+        return $this->PrixCadreUniteHt;
     }
 
-    public function setPrixCadreHt(float $prixcadreht): self
+    public function setPrixCadreUniteHt(float $prixcadreuniteht): self
     {
-        $this->PrixCadreHt = $prixcadreht;
+        $this->PrixCadreUniteHt = $prixcadreuniteht;
 
         return $this;
     }
