@@ -24,11 +24,6 @@ class Cadre
     private $imagecadre;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $dimension;
-
-    /**
      * @ORM\Column(type="float")
      */
     private $prixcadreht;
