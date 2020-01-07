@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,16 @@ class Cadre
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_matiere;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="idCadre")
+     */
+    private $produits;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +115,37 @@ class Cadre
     public function setIdMatiere(?matiere $id_matiere): self
     {
         $this->id_matiere = $id_matiere;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setIdCadre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produits->contains($produit)) {
+            $this->produits->removeElement($produit);
+            // set the owning side to null (unless already changed)
+            if ($produit->getIdCadre() === $this) {
+                $produit->setIdCadre(null);
+            }
+        }
 
         return $this;
     }
