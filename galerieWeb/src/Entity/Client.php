@@ -36,6 +36,16 @@ class Client
      */
     private $dateCreationCompte;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", mappedBy="idArtiste", cascade={"persist", "remove"})
+     */
+    private $utilisateur;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", mappedBy="idClient", cascade={"persist", "remove"})
+     */
+    private $idUtilisateur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +95,42 @@ class Client
     public function setDateCreationCompte(\DateTimeInterface $dateCreationCompte): self
     {
         $this->dateCreationCompte = $dateCreationCompte;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newIdArtiste = null === $utilisateur ? null : $this;
+        if ($utilisateur->getIdArtiste() !== $newIdArtiste) {
+            $utilisateur->setIdArtiste($newIdArtiste);
+        }
+
+        return $this;
+    }
+
+    public function getIdUtilisateur(): ?Utilisateur
+    {
+        return $this->idUtilisateur;
+    }
+
+    public function setIdUtilisateur(?Utilisateur $idUtilisateur): self
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newIdClient = null === $idUtilisateur ? null : $this;
+        if ($idUtilisateur->getIdClient() !== $newIdClient) {
+            $idUtilisateur->setIdClient($newIdClient);
+        }
 
         return $this;
     }

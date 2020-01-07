@@ -83,6 +83,11 @@ class Artiste
      */
     private $idProduit;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", mappedBy="idArtiste", cascade={"persist", "remove"})
+     */
+    private $idUtilisateur;
+
     public function __construct()
     {
         $this->idPhotographie = new ArrayCollection();
@@ -283,6 +288,24 @@ class Artiste
             if ($idProduit->getArtiste() === $this) {
                 $idProduit->setArtiste(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getIdUtilisateur(): ?Utilisateur
+    {
+        return $this->idUtilisateur;
+    }
+
+    public function setIdUtilisateur(?Utilisateur $idUtilisateur): self
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newIdArtiste = null === $idUtilisateur ? null : $this;
+        if ($idUtilisateur->getIdArtiste() !== $newIdArtiste) {
+            $idUtilisateur->setIdArtiste($newIdArtiste);
         }
 
         return $this;
