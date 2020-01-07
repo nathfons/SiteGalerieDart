@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+    <h1>Produit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ produit.id }}</td>
+            </tr>
+            <tr>
+                <th>TypeProduit</th>
+                <td>{{ produit.typeProduit }}</td>
+            </tr>
+            <tr>
+                <th>NomProduit</th>
+                <td>{{ produit.nomProduit }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ produit.dateCreation ? produit.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Descriptif</th>
+                <td>{{ produit.descriptif }}</td>
+            </tr>
+            <tr>
+                <th>Dimension</th>
+                <td>{{ produit.dimension }}</td>
+            </tr>
+            <tr>
+                <th>Cadre</th>
+                <td>{{ produit.cadre ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>PrixHT</th>
+                <td>{{ produit.prixHT }}</td>
+            </tr>
+            <tr>
+                <th>Approuve</th>
+                <td>{{ produit.approuve ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Remise</th>
+                <td>{{ produit.remise }}</td>
+            </tr>
+            <tr>
+                <th>Poids</th>
+                <td>{{ produit.poids }}</td>
+            </tr>
+            <tr>
+                <th>EnVente</th>
+                <td>{{ produit.enVente ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>EnStock</th>
+                <td>{{ produit.enStock ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>QuantiteStocks</th>
+                <td>{{ produit.quantiteStocks }}</td>
+            </tr>
+            <tr>
+                <th>QuantiteVendue</th>
+                <td>{{ produit.quantiteVendue }}</td>
+            </tr>
+            <tr>
+                <th>Photographie</th>
+                <td>{{ produit.photographie }}</td>
+            </tr>
+            <tr>
+                <th>Miniature</th>
+                <td>{{ produit.miniature }}</td>
+            </tr>
+            <tr>
+                <th>DimensionCadre</th>
+                <td>{{ produit.dimensionCadre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('produit_index') }}">back to list</a>
+
+    <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
+
+    {{ include('produit/_delete_form.html.twig') }}
+{% endblock %}
