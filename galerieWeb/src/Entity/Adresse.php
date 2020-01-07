@@ -31,6 +31,12 @@ class Adresse
      */
     private $rueEtNumero;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\client")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +74,18 @@ class Adresse
     public function setRueEtNumero(string $rueEtNumero): self
     {
         $this->rueEtNumero = $rueEtNumero;
+
+        return $this;
+    }
+
+    public function getIdClient(): ?client
+    {
+        return $this->id_client;
+    }
+
+    public function setIdClient(?client $id_client): self
+    {
+        $this->id_client = $id_client;
 
         return $this;
     }
