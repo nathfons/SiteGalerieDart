@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CadreRepository")
@@ -27,27 +28,16 @@ class Cadre
      * @ORM\Column(type="float")
      */
     private $prixCadreUniteHt;
+   
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Couleur", inversedBy="cadres")
+     */
+    private $couleur;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\couleur")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Matiere", inversedBy="cadres")
      */
-    private $idCouleur;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\matiere")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idMatiere;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="idCadre")
-     */
-    private $produits;
-
-    public function __construct()
-    {
-        $this->produits = new ArrayCollection();
-    }
+    private $matiere;
 
     public function getId(): ?int
     {
@@ -80,68 +70,39 @@ class Cadre
 
     public function getPrixCadreUniteHt(): ?float
     {
-        return $this->PrixCadreUniteHt;
+        return $this->prixCadreUniteHt;
     }
 
     public function setPrixCadreUniteHt(float $prixcadreuniteht): self
     {
-        $this->PrixCadreUniteHt = $prixcadreuniteht;
+        $this->prixCadreUniteHt = $prixcadreuniteht;
 
         return $this;
     }
 
-    public function getIdCouleur(): ?couleur
+
+    public function getCouleur(): ?Couleur
     {
-        return $this->id_couleur;
+        return $this->couleur;
     }
 
-    public function setIdCouleur(?couleur $id_couleur): self
+    public function setCouleur(?Couleur $couleur): self
     {
-        $this->id_couleur = $id_couleur;
+        $this->couleur = $couleur;
 
         return $this;
     }
-
-    public function getIdMatiere(): ?matiere
+   
+    public function getMatiere(): ?Matiere
     {
-        return $this->id_matiere;
+        return $this->matiere;
     }
 
-    public function setIdMatiere(?matiere $id_matiere): self
+    public function setMatiere(?Matiere $matiere): self
     {
-        $this->id_matiere = $id_matiere;
+        $this->matiere = $matiere;
 
         return $this;
     }
-
-    /**
-     * @return Collection|Produit[]
-     */
-    public function getProduits(): Collection
-    {
-        return $this->produits;
-    }
-
-    public function addProduit(Produit $produit): self
-    {
-        if (!$this->produits->contains($produit)) {
-            $this->produits[] = $produit;
-            $produit->setIdCadre($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduit(Produit $produit): self
-    {
-        if ($this->produits->contains($produit)) {
-            $this->produits->removeElement($produit);
-            // set the owning side to null (unless already changed)
-            if ($produit->getIdCadre() === $this) {
-                $produit->setIdCadre(null);
-            }
-        }
-
-        return $this;
-    }
+    
 }

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cadre{% endblock %}
+
+{% block body %}
+    <h1>Cadre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cadre.id }}</td>
+            </tr>
+            <tr>
+                <th>Imagecadre</th>
+                <td>{{ cadre.imagecadre }}</td>
+            </tr>
+            <tr>
+                <th>PrixCadreUniteHt</th>
+                <td>{{ cadre.prixCadreUniteHt }}</td>
+            </tr>
+             <tr>
+                <th>Couleur</th>
+                <td>{{ cadre.couleur.nomcouleur }}</td>
+            </tr>
+             <tr>
+                <th>Matiere</th>
+                <td>{{ cadre.matiere.nommatiere }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('cadre_index') }}">back to list</a>
+
+    <a href="{{ path('cadre_edit', {'id': cadre.id}) }}">edit</a>
+
+    {{ include('cadre/_delete_form.html.twig') }}
+{% endblock %}
