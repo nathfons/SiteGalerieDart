@@ -18,10 +18,7 @@ class Paragraphe
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $text;
+   
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PhotoParagraphe", mappedBy="paragraphe")
@@ -33,6 +30,11 @@ class Paragraphe
      */
     private $article;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $contenu;
+
     public function __construct()
     {
         $this->id_photo = new ArrayCollection();
@@ -43,17 +45,7 @@ class Paragraphe
         return $this->id;
     }
 
-    public function getText(): ?text
-    {
-        return $this->text;
-    }
-
-    public function setText(?text $text): self
-    {
-        $this->text = $text;
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection|PhotoParagraphe[]
@@ -94,6 +86,18 @@ class Paragraphe
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getContenu(): ?string
+    {
+        return $this->contenu;
+    }
+
+    public function setContenu(?string $contenu): self
+    {
+        $this->contenu = $contenu;
 
         return $this;
     }
