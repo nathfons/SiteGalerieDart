@@ -25,16 +25,18 @@ class Paragraphe
      */
     private $id_photo;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="idParagraphe")
-     */
-    private $article;
-
+   
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $contenu;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="paragraphes")
+     */
+    private $article;
+
+    
     public function __construct()
     {
         $this->id_photo = new ArrayCollection();
@@ -78,17 +80,7 @@ class Paragraphe
         return $this;
     }
 
-    public function getArticle(): ?Article
-    {
-        return $this->article;
-    }
-
-    public function setArticle(?Article $article): self
-    {
-        $this->article = $article;
-
-        return $this;
-    }
+   
 
     public function getContenu(): ?string
     {
@@ -101,4 +93,18 @@ class Paragraphe
 
         return $this;
     }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+   
 }

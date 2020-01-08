@@ -1,15 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Article{% endblock %}
+{% block title %}Paragraphe index{% endblock %}
 
 {% block body %}
-    <h1>Create new Article</h1>
-
-    {{ include('article/_form.html.twig') }}
-
-    <a href="{{ path('article_index') }}">back to list</a>
-
-<h1>Paragraphe index</h1>
+    <h1>Paragraphe index</h1>
 
     <table class="table">
         <thead>
@@ -37,6 +31,5 @@
         </tbody>
     </table>
 
-    
-
+    <a href="{{ path('paragraphe_new') }}">Create new</a>
 {% endblock %}

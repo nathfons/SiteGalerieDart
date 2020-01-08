@@ -46,11 +46,14 @@ class Article
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Paragraphe", mappedBy="article")
      */
-    private $idParagraphe;
+    private $paragraphes;
+
+    
 
     public function __construct()
     {
         $this->idParagraphe = new ArrayCollection();
+        $this->paragraphes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,31 +124,33 @@ class Article
     /**
      * @return Collection|Paragraphe[]
      */
-    public function getIdParagraphe(): Collection
+    public function getParagraphes(): Collection
     {
-        return $this->idParagraphe;
+        return $this->paragraphes;
     }
 
-    public function addIdParagraphe(Paragraphe $idParagraphe): self
+    public function addParagraphe(Paragraphe $paragraphe): self
     {
-        if (!$this->idParagraphe->contains($idParagraphe)) {
-            $this->idParagraphe[] = $idParagraphe;
-            $idParagraphe->setArticle($this);
+        if (!$this->paragraphes->contains($paragraphe)) {
+            $this->paragraphes[] = $paragraphe;
+            $paragraphe->setArticle($this);
         }
 
         return $this;
     }
 
-    public function removeIdParagraphe(Paragraphe $idParagraphe): self
+    public function removeParagraphe(Paragraphe $paragraphe): self
     {
-        if ($this->idParagraphe->contains($idParagraphe)) {
-            $this->idParagraphe->removeElement($idParagraphe);
+        if ($this->paragraphes->contains($paragraphe)) {
+            $this->paragraphes->removeElement($paragraphe);
             // set the owning side to null (unless already changed)
-            if ($idParagraphe->getArticle() === $this) {
-                $idParagraphe->setArticle(null);
+            if ($paragraphe->getArticle() === $this) {
+                $paragraphe->setArticle(null);
             }
         }
 
         return $this;
     }
+
+    
 }
