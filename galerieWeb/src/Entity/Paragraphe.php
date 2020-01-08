@@ -19,7 +19,7 @@ class Paragraphe
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=1000, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $text;
 
@@ -43,12 +43,12 @@ class Paragraphe
         return $this->id;
     }
 
-    public function getText(): ?string
+    public function getText(): ?text
     {
         return $this->text;
     }
 
-    public function setText(?string $text): self
+    public function setText(?text $text): self
     {
         $this->text = $text;
 

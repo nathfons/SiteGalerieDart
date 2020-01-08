@@ -34,7 +34,7 @@ class Produit
     private $dateCreation;
 
     /**
-     * @ORM\Column(type="string", length=2000)
+     * @ORM\Column(type="text")
      */
     private $descriptif;
 
@@ -177,12 +177,12 @@ class Produit
         return $this;
     }
 
-    public function getDescriptif(): ?string
+    public function getDescriptif(): ?text
     {
         return $this->descriptif;
     }
 
-    public function setDescriptif(string $descriptif): self
+    public function setDescriptif(text $descriptif): self
     {
         $this->descriptif = $descriptif;
 

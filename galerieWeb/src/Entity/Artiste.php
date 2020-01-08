@@ -19,7 +19,7 @@ class Artiste
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=10000)
+     * @ORM\Column(type="text")
      */
     private $biography;
 
@@ -49,7 +49,7 @@ class Artiste
     private $alaune;
 
     /**
-     * @ORM\Column(type="string", length=10000, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $textAlaune;
 
@@ -99,12 +99,12 @@ class Artiste
         return $this->id;
     }
 
-    public function getBiography(): ?string
+    public function getBiography(): ?text
     {
         return $this->biography;
     }
 
-    public function setBiography(string $biography): self
+    public function setBiography(text $biography): self
     {
         $this->biography = $biography;
 
@@ -171,12 +171,13 @@ class Artiste
         return $this;
     }
 
-    public function getTextAlaune(): ?string
+    public function getTextAlaune(): ?text
     {
+        
         return $this->textAlaune;
     }
 
-    public function setTextAlaune(?string $textAlaune): self
+    public function setTextAlaune(?text $textAlaune): self
     {
         $this->textAlaune = $textAlaune;
 
