@@ -17,6 +17,8 @@ class ArticleType extends AbstractType
             ->add('datePublication')
             ->add('dateFinPublication')
             ->add('photoTitre')
+            ->add('paragraphe', ParagrapheType::class, [
+            ])
         ;
     }
 
