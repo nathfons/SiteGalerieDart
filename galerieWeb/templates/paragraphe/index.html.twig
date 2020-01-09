@@ -10,6 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Contenu</th>
+                <th>Miniature</th>
+                <th>Photographie</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +20,8 @@
             <tr>
                 <td>{{ paragraphe.id }}</td>
                 <td>{{ paragraphe.contenu }}</td>
+                <td>{{ paragraphe.photo.miniature }}</td>
+                <td>{{ paragraphe.photo.photographie }}</td>
                 <td>
                     <a href="{{ path('paragraphe_show', {'id': paragraphe.id}) }}">show</a>
                     <a href="{{ path('paragraphe_edit', {'id': paragraphe.id}) }}">edit</a>

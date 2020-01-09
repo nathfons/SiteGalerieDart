@@ -1,0 +1,55 @@
+{% extends 'basemenu.html.twig' %}
+
+{% block title %}Artiste index{% endblock %}
+
+{% block contentPage %}
+    <h1>Artiste index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Biography</th>
+                <th>Approuve</th>
+                <th>Photographie</th>
+                <th>Miniature</th>
+                <th>Commission</th>
+                <th>Alaune</th>
+                <th>TextAlaune</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Telephone</th>
+                <th>DateCreationCompte</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for artiste in artistes %}
+            <tr>
+                <td>{{ artiste.id }}</td>
+                <td>{{ artiste.biography }}</td>
+                <td>{{ artiste.approuve ? 'Yes' : 'No' }}</td>
+                <td>{{ artiste.photographie }}</td>
+                <td>{{ artiste.miniature }}</td>
+                <td>{{ artiste.commission }}</td>
+                <td>{{ artiste.alaune ? 'Yes' : 'No' }}</td>
+                <td>{{ artiste.textAlaune }}</td>
+                <td>{{ artiste.nom }}</td>
+                <td>{{ artiste.prenom }}</td>
+                <td>{{ artiste.telephone }}</td>
+                <td>{{ artiste.dateCreationCompte ? artiste.dateCreationCompte|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('artiste_show', {'id': artiste.id}) }}">show</a>
+                    <a href="{{ path('artiste_edit', {'id': artiste.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('artiste_new') }}">Create new</a>
+{% endblock %}

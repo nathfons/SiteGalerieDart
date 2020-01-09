@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,16 @@ class PhotoParagraphe
      * @ORM\ManyToOne(targetEntity="App\Entity\Paragraphe", inversedBy="id_photo")
      */
     private $paragraphe;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Paragraphe", mappedBy="photo")
+     */
+    private $paragraphes;
+
+    public function __construct()
+    {
+        $this->paragraphes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -68,6 +80,37 @@ class PhotoParagraphe
     public function setParagraphe(?Paragraphe $paragraphe): self
     {
         $this->paragraphe = $paragraphe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Paragraphe[]
+     */
+    public function getParagraphes(): Collection
+    {
+        return $this->paragraphes;
+    }
+
+    public function addParagraphe(Paragraphe $paragraphe): self
+    {
+        if (!$this->paragraphes->contains($paragraphe)) {
+            $this->paragraphes[] = $paragraphe;
+            $paragraphe->setPhoto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParagraphe(Paragraphe $paragraphe): self
+    {
+        if ($this->paragraphes->contains($paragraphe)) {
+            $this->paragraphes->removeElement($paragraphe);
+            // set the owning side to null (unless already changed)
+            if ($paragraphe->getPhoto() === $this) {
+                $paragraphe->setPhoto(null);
+            }
+        }
 
         return $this;
     }

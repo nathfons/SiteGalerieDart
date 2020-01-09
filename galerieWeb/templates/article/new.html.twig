@@ -1,41 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'basemenu.html.twig' %}
 
 {% block title %}New Article{% endblock %}
 
-{% block body %}
+{% block contentPage %}
     <h1>Create new Article</h1>
 
     {{ include('article/_form.html.twig') }}
 
     <a href="{{ path('article_index') }}">back to list</a>
 
-<h1>Paragraphe index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Contenu</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for paragraphe in paragraphes %}
-            <tr>
-                <td>{{ paragraphe.id }}</td>
-                <td>{{ paragraphe.contenu }}</td>
-                <td>
-                    <a href="{{ path('paragraphe_show', {'id': paragraphe.id}) }}">show</a>
-                    <a href="{{ path('paragraphe_edit', {'id': paragraphe.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
     
 
