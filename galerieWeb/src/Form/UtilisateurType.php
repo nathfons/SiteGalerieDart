@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Utilisateur;
+use App\Entity\TypeUtilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class UtilisateurType extends AbstractType
 {
@@ -13,11 +16,24 @@ class UtilisateurType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
+            ->add('roles',ChoiceType::class,[
+                'choices'  => [
+                    'Admin' => "ROLE_ADMIN",
+                    'Artiste' => "ROLE_ARTISTE",
+                    'Client' => "ROLE_MULTIPLE",
+                
+    ],
+    'multiple' => true,
+    ])
             ->add('password')
             ->add('idArtiste')
             ->add('idClient')
-            ->add('type')
+            ->add('type', EntityType::class, [
+                //choise from entity
+                'class'=> TypeUtilisateur::class,
+                //User.name property visible
+                'choice_label' => 'nomType',
+            ])
         ;
     }
 
