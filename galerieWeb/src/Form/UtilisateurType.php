@@ -26,8 +26,6 @@ class UtilisateurType extends AbstractType
     'multiple' => true,
     ])
             ->add('password')
-            ->add('idArtiste')
-            ->add('idClient')
             ->add('type', EntityType::class, [
                 //choise from entity
                 'class'=> TypeUtilisateur::class,

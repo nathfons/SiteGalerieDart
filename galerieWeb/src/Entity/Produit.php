@@ -43,11 +43,7 @@ class Produit
      */
     private $dimension;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $estCadre;
-
+   
     
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Cadre", inversedBy="produits")
@@ -396,18 +392,7 @@ class Produit
         return $this;
     }
 
-    public function getEstCadre(): ?bool
-    {
-        return $this->estCadre;
-    }
-
-    public function setEstCadre(bool $estCadre): self
-    {
-        $this->estCadre = $estCadre;
-
-        return $this;
-    }
-
+    
     public function getCategorie(): ?Categorie
     {
         return $this->categorie;

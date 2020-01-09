@@ -36,21 +36,10 @@ class Utilisateur implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Artiste", inversedBy="idUtilisateur", cascade={"persist", "remove"})
-     */
-    private $idArtiste;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="idUtilisateur", cascade={"persist", "remove"})
-     */
-    private $idClient;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\TypeUtilisateur", inversedBy="utilisateurs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
-
    
 
     public function getId(): ?int
@@ -130,31 +119,7 @@ class Utilisateur implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
-    public function getIdArtiste(): ?Artiste
-    {
-        return $this->idArtiste;
-    }
-
-    public function setIdArtiste(?Artiste $idArtiste): self
-    {
-        $this->idArtiste = $idArtiste;
-
-        return $this;
-    }
-
-    public function getIdClient(): ?Client
-    {
-        return $this->idClient;
-    }
-
-    public function setIdClient(?Client $idClient): self
-    {
-        $this->idClient = $idClient;
-
-        return $this;
-    }
-
+    
     public function getType(): ?TypeUtilisateur
     {
         return $this->type;

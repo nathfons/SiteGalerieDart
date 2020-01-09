@@ -28,7 +28,7 @@ class ProduitType extends AbstractType
                 //choise from entity
                 'class'=> Artiste::class,
                 //User.name property visible
-                'choice_label' => 'nomartiste',
+                'choice_label' => 'nom',
             ])
             ->add('produitoriginal', EntityType::class, [
                 //choise from entity

@@ -2,10 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Utilisateur;
 use App\Entity\Artiste;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ArtisteType extends AbstractType
 {
@@ -23,7 +25,13 @@ class ArtisteType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('dateCreationCompte')
-            ->add('idUtilisateur')
+            
+            ->add('idUtilisateur', EntityType::class, [
+                //choise from entity
+                'class'=> Utilisateur::class,
+                //User.name property visible
+                'choice_label' => 'email',
+            ]) 
         ;
     }
 

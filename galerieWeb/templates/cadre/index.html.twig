@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Nomcadre</th>
                 <th>Imagecadre</th>
                 <th>PrixCadreUniteHt</th>
                 <th>Matiere</th>
@@ -20,6 +21,7 @@
         {% for cadre in cadres %}
             <tr>
                 <td>{{ cadre.id }}</td>
+                <td>{{ cadre.nomcadre }}</td>
                 <td>{{ cadre.imagecadre }}</td>
                 <td>{{ cadre.prixCadreUniteHt }}</td>
                 <td>{{ cadre.matiere.nommatiere }}</td>
