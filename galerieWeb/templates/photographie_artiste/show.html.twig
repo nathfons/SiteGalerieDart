@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PhotographieArtiste{% endblock %}
+
+{% block body %}
+    <h1>PhotographieArtiste</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ photographie_artiste.id }}</td>
+            </tr>
+            <tr>
+                <th>Photographie</th>
+                <td>{{ photographie_artiste.photographie }}</td>
+            </tr>
+            <tr>
+                <th>Miniature</th>
+                <td>{{ photographie_artiste.miniature }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('photographie_artiste_index') }}">back to list</a>
+
+    <a href="{{ path('photographie_artiste_edit', {'id': photographie_artiste.id}) }}">edit</a>
+
+    {{ include('photographie_artiste/_delete_form.html.twig') }}
+{% endblock %}

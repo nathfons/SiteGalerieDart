@@ -19,6 +19,16 @@ class Cadre
      */
     private $id;
 
+         /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="cadre")
+     */
+    private $produits;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -38,6 +48,11 @@ class Cadre
      * @ORM\ManyToOne(targetEntity="App\Entity\Matiere", inversedBy="cadres")
      */
     private $matiere;
+
+    /**
+     * @ORM\Column(type="string", length=60)
+     */
+    private $nomcadre;
 
     public function getId(): ?int
     {
@@ -105,4 +120,47 @@ class Cadre
         return $this;
     }
     
+      /**
+     * @return Collection|Produit[]
+     */
+    public function getProduit(): Collection
+    {
+        return $this->produit;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produit->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setCadre($this);
+        }
+        
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produits->contains($produit)) {
+            $this->cadres->removeElement($produit);
+            // set the owning side to null (unless already changed)
+            if ($produit->getCadre() === $this) {
+                $produit->setCadre(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNomcadre(): ?string
+    {
+        return $this->nomcadre;
+    }
+
+    public function setNomcadre(string $nomcadre): self
+    {
+        $this->nomcadre = $nomcadre;
+
+        return $this;
+    }
 }

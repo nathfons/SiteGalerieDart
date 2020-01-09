@@ -46,6 +46,12 @@ class Produit
     /**
      * @ORM\Column(type="boolean")
      */
+    private $estCadre;
+
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Cadre", inversedBy="produits")
+     */
     private $cadre;
 
     /**
@@ -99,7 +105,7 @@ class Produit
     private $miniature;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Artiste", inversedBy="idProduit")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Artiste", inversedBy="produits")
      */
     private $artiste;
 
@@ -107,18 +113,7 @@ class Produit
      * @ORM\ManyToOne(targetEntity="App\Entity\Produit", inversedBy="produits")
      */
     //id du Produit de l'oeuvre originale
-    private $idProduit;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="idProduit")
-     */
-    //produits derives
-    private $produits;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Cadre", inversedBy="produits")
-     */
-    private $idCadre;
+    private $produitoriginal;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -126,10 +121,10 @@ class Produit
     private $dimensionCadre;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie" , inversedBy="produits")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $idCategorie;
+    private $categorie;
 
     public function __construct()
     {
@@ -170,19 +165,19 @@ class Produit
         return $this->dateCreation;
     }
 
-    public function setDateCreation(?\DateTimeInterface $dateCreation): self
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
 
         return $this;
     }
 
-    public function getDescriptif(): ?text
+    public function getDescriptif(): ?string
     {
         return $this->descriptif;
     }
 
-    public function setDescriptif(text $descriptif): self
+    public function setDescriptif(string $descriptif): self
     {
         $this->descriptif = $descriptif;
 
@@ -201,16 +196,28 @@ class Produit
         return $this;
     }
 
-    public function getCadre(): ?bool
+    public function getCadre(): ?Cadre
     {
         return $this->cadre;
     }
 
-    public function setCadre(bool $cadre): self
+    public function setCadre(?Cadre $cadre): self
     {
         $this->cadre = $cadre;
 
         return $this;
+    }
+
+    public function setProduitoriginal(?self $produitoriginal): self
+    {
+        $this->produitoriginal = $produitoriginal;
+
+        return $this;
+    }
+
+    public function getProduitoriginal(): ?self
+    {
+        return $this->produitoriginal;
     }
 
     public function getPrixHT(): ?float
@@ -314,7 +321,7 @@ class Produit
         return $this->photographie;
     }
 
-    public function setPhotographie(?string $photographie): self
+    public function setPhotographie(string $photographie): self
     {
         $this->photographie = $photographie;
 
@@ -345,57 +352,34 @@ class Produit
         return $this;
     }
 
-    public function getIdProduit(): ?self
-    {
-        return $this->idProduit;
-    }
-
-    public function setIdProduit(?self $idProduit): self
-    {
-        $this->idProduit = $idProduit;
-
-        return $this;
-    }
-
+   
     /**
-     * @return Collection|self[]
+     * @return Collection|Produit[]
      */
     public function getProduits(): Collection
     {
         return $this->produits;
     }
 
-    public function addProduit(self $produit): self
+    public function addProduit(Produit $produit): self
     {
         if (!$this->produits->contains($produit)) {
             $this->produits[] = $produit;
-            $produit->setIdProduit($this);
+            $produit->setProduitOriginal($this);
         }
 
         return $this;
     }
 
-    public function removeProduit(self $produit): self
+    public function removeProduit(Produit $produit): self
     {
         if ($this->produits->contains($produit)) {
             $this->produits->removeElement($produit);
             // set the owning side to null (unless already changed)
-            if ($produit->getIdProduit() === $this) {
-                $produit->setIdProduit(null);
+            if ($produit->getProduitOriginal() === $this) {
+                $produit->setProduitOriginal(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getIdCadre(): ?Cadre
-    {
-        return $this->idCadre;
-    }
-
-    public function setIdCadre(?Cadre $idCadre): self
-    {
-        $this->idCadre = $idCadre;
 
         return $this;
     }
@@ -412,14 +396,38 @@ class Produit
         return $this;
     }
 
-    public function getIdCategorie(): ?Categorie
+    public function getEstCadre(): ?bool
     {
-        return $this->idCategorie;
+        return $this->estCadre;
     }
 
-    public function setIdCategorie(?Categorie $idCategorie): self
+    public function setEstCadre(bool $estCadre): self
     {
-        $this->idCategorie = $idCategorie;
+        $this->estCadre = $estCadre;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getProduit(): ?produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?produit $produit): self
+    {
+        $this->produit = $produit;
 
         return $this;
     }

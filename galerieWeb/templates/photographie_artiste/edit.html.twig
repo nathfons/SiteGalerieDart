@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PhotographieArtiste{% endblock %}
+
+{% block body %}
+    <h1>Edit PhotographieArtiste</h1>
+
+    {{ include('photographie_artiste/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('photographie_artiste_index') }}">back to list</a>
+
+    {{ include('photographie_artiste/_delete_form.html.twig') }}
+{% endblock %}

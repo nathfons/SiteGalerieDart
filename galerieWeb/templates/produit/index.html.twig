@@ -11,6 +11,9 @@
                 <th>Id</th>
                 <th>TypeProduit</th>
                 <th>NomProduit</th>
+                <th>Categorie</th>
+                <th>Artiste</th>
+                <th>Produit Original</th>
                 <th>DateCreation</th>
                 <th>Descriptif</th>
                 <th>Dimension</th>
@@ -35,10 +38,13 @@
                 <td>{{ produit.id }}</td>
                 <td>{{ produit.typeProduit }}</td>
                 <td>{{ produit.nomProduit }}</td>
+                <td>{{ produit.categorie.nomcategorie }}</td>
+                <td>{{ produit.artiste.nomartiste }}</td>
+                <td>{{ produit.produitoriginal }}</td>
                 <td>{{ produit.dateCreation ? produit.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ produit.descriptif }}</td>
                 <td>{{ produit.dimension }}</td>
-                <td>{{ produit.cadre ? 'Yes' : 'No' }}</td>
+                <td>{{ produit.cadre.nomcadre }}</td>
                 <td>{{ produit.prixHT }}</td>
                 <td>{{ produit.approuve ? 'Yes' : 'No' }}</td>
                 <td>{{ produit.remise }}</td>

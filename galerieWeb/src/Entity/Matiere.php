@@ -62,4 +62,34 @@ class Matiere
 
         return $this;
     }
+      /**
+     * @return Collection|Cadre[]
+     */
+    public function getCadres(): Collection
+    {
+        return $this->cadres;
+    }
+
+    public function addCadre(Cadre $cadre): self
+    {
+        if (!$this->cadre->contains($cadre)) {
+            $this->cadres[] = $cadre;
+            $cadre->setMatiere($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCadre(Cadre $cadre): self
+    {
+        if ($this->cadres->contains($cadre)) {
+            $this->cadres->removeElement($cadre);
+            // set the owning side to null (unless already changed)
+            if ($cadre->getMatiere() === $this) {
+                $cadre->setMatiere(null);
+            }
+        }
+
+        return $this;
+    }
 }

@@ -81,7 +81,7 @@ class Artiste
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="artiste")
      */
-    private $idProduit;
+    private $produits;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", mappedBy="idArtiste", cascade={"persist", "remove"})
@@ -263,37 +263,7 @@ class Artiste
         return $this;
     }
 
-    /**
-     * @return Collection|Produit[]
-     */
-    public function getIdProduit(): Collection
-    {
-        return $this->idProduit;
-    }
-
-    public function addIdProduit(Produit $idProduit): self
-    {
-        if (!$this->idProduit->contains($idProduit)) {
-            $this->idProduit[] = $idProduit;
-            $idProduit->setArtiste($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdProduit(Produit $idProduit): self
-    {
-        if ($this->idProduit->contains($idProduit)) {
-            $this->idProduit->removeElement($idProduit);
-            // set the owning side to null (unless already changed)
-            if ($idProduit->getArtiste() === $this) {
-                $idProduit->setArtiste(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     public function getIdUtilisateur(): ?Utilisateur
     {
         return $this->idUtilisateur;
@@ -307,6 +277,38 @@ class Artiste
         $newIdArtiste = null === $idUtilisateur ? null : $this;
         if ($idUtilisateur->getIdArtiste() !== $newIdArtiste) {
             $idUtilisateur->setIdArtiste($newIdArtiste);
+        }
+
+        return $this;
+    }
+
+       /**
+     * @return Collection|Produit[]
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produit->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setArtiste($this);
+        }
+        
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produits->contains($produit)) {
+            $this->cadres->removeElement($produit);
+            // set the owning side to null (unless already changed)
+            if ($produit->getArtiste() === $this) {
+                $produit->setArtiste(null);
+            }
         }
 
         return $this;

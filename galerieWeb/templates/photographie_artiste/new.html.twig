@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PhotographieArtiste{% endblock %}
+
+{% block body %}
+    <h1>Create new PhotographieArtiste</h1>
+
+    {{ include('photographie_artiste/_form.html.twig') }}
+
+    <a href="{{ path('photographie_artiste_index') }}">back to list</a>
+{% endblock %}

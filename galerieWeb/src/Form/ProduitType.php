@@ -3,9 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Produit;
+use App\Entity\Cadre;
+use App\Entity\Categorie;
+use App\Entity\Artiste;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ProduitType extends AbstractType
 {
@@ -14,10 +18,27 @@ class ProduitType extends AbstractType
         $builder
             ->add('typeProduit')
             ->add('nomProduit')
+            ->add('categorie', EntityType::class, [
+                //choise from entity
+                'class'=> Categorie::class,
+                //User.name property visible
+                'choice_label' => 'nomcategorie',
+            ])
+            ->add('artiste', EntityType::class, [
+                //choise from entity
+                'class'=> Artiste::class,
+                //User.name property visible
+                'choice_label' => 'nomartiste',
+            ])
+            ->add('produitoriginal', EntityType::class, [
+                //choise from entity
+                'class'=> Produit::class,
+                //User.name property visible
+                'choice_label' => 'produitoriginal',
+            ])
             ->add('dateCreation')
             ->add('descriptif')
             ->add('dimension')
-            ->add('cadre')
             ->add('prixHT')
             ->add('approuve')
             ->add('remise')
@@ -29,10 +50,12 @@ class ProduitType extends AbstractType
             ->add('photographie')
             ->add('miniature')
             ->add('dimensionCadre')
-            ->add('artiste')
-            ->add('idProduit')
-            ->add('idCadre')
-            ->add('idCategorie')
+            ->add('cadre', EntityType::class, [
+                //choise from entity
+                'class'=> Cadre::class,
+                //User.name property visible
+                'choice_label' => 'nomcadre',
+            ]) 
         ;
     }
 

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PhotographieArtiste index{% endblock %}
+
+{% block body %}
+    <h1>PhotographieArtiste index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Photographie</th>
+                <th>Miniature</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for photographie_artiste in photographie_artistes %}
+            <tr>
+                <td>{{ photographie_artiste.id }}</td>
+                <td>{{ photographie_artiste.photographie }}</td>
+                <td>{{ photographie_artiste.miniature }}</td>
+                <td>
+                    <a href="{{ path('photographie_artiste_show', {'id': photographie_artiste.id}) }}">show</a>
+                    <a href="{{ path('photographie_artiste_edit', {'id': photographie_artiste.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('photographie_artiste_new') }}">Create new</a>
+{% endblock %}
