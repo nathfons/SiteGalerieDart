@@ -26,7 +26,6 @@ class PanierService{
             $panier[$id]=1;
         }
         $this->session->set("panier",$panier);
-        dd( $this->session->get("panier"));
     }
 
     public function remove(int $id){
@@ -35,13 +34,11 @@ class PanierService{
             unset($panier[$id]);
         }
         $this->session->set("panier",$panier);
-        dd( $this->session->get("panier"));
     }
 
     public function empty(){
 
         $this->session->set("panier",[]);
-        dd( $this->session->get("panier"));
     }
 
     public function getFullPanier() : array{
@@ -49,7 +46,7 @@ class PanierService{
         $panierAvecDonnees = [];
         foreach($panier as $id => $quantite){
             $panierAvecDonnees[]=[
-                "produit" => $this->repositoryProduit->get($id),
+                "produit" => $this->repositoryProduit->find($id),
                 "quantite" => $quantite
             ];
         }

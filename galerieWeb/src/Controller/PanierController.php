@@ -37,7 +37,7 @@ class PanierController extends AbstractController
     }
 
     /**
-     * @Route("/panier/remove/", name="panierRemove")
+     * @Route("/panier/remove/{id}", name="panierRemove")
      */
     function remove($id,PanierService $service): Response{
         $service->remove($id);

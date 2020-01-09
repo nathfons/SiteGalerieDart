@@ -43,10 +43,7 @@ class Produit
      */
     private $dimension;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $estCadre;
+   
 
     
     /**
@@ -396,17 +393,6 @@ class Produit
         return $this;
     }
 
-    public function getEstCadre(): ?bool
-    {
-        return $this->estCadre;
-    }
-
-    public function setEstCadre(bool $estCadre): self
-    {
-        $this->estCadre = $estCadre;
-
-        return $this;
-    }
 
     public function getCategorie(): ?Categorie
     {
