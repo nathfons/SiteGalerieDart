@@ -44,7 +44,7 @@ class Article
     private $photoTitre;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Paragraphe", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="App\Entity\Paragraphe", mappedBy="article",cascade={"persist"})
      */
     private $paragraphes;
 

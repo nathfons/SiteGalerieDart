@@ -14,6 +14,7 @@ class ParagrapheType extends AbstractType
         $builder
             ->add('contenu')
             ->add('article')
+            ->add('photo', PhotoParagrapheType::class)
         ;
     }
 

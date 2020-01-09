@@ -19,13 +19,6 @@ class Paragraphe
     private $id;
 
    
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PhotoParagraphe", mappedBy="paragraphe")
-     */
-    private $id_photo;
-
-   
     /**
      * @ORM\Column(type="text", nullable=true)
      */
@@ -36,10 +29,16 @@ class Paragraphe
      */
     private $article;
 
+   
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PhotoParagraphe", inversedBy="paragraphes",cascade={"persist"})
+     */
+    private $photo;
+
     
     public function __construct()
     {
-        $this->id_photo = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -48,38 +47,6 @@ class Paragraphe
     }
 
    
-
-    /**
-     * @return Collection|PhotoParagraphe[]
-     */
-    public function getIdPhoto(): Collection
-    {
-        return $this->id_photo;
-    }
-
-    public function addIdPhoto(PhotoParagraphe $idPhoto): self
-    {
-        if (!$this->id_photo->contains($idPhoto)) {
-            $this->id_photo[] = $idPhoto;
-            $idPhoto->setParagraphe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdPhoto(PhotoParagraphe $idPhoto): self
-    {
-        if ($this->id_photo->contains($idPhoto)) {
-            $this->id_photo->removeElement($idPhoto);
-            // set the owning side to null (unless already changed)
-            if ($idPhoto->getParagraphe() === $this) {
-                $idPhoto->setParagraphe(null);
-            }
-        }
-
-        return $this;
-    }
-
    
 
     public function getContenu(): ?string
@@ -102,6 +69,19 @@ class Paragraphe
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+   
+    public function getPhoto(): ?PhotoParagraphe
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?PhotoParagraphe $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }
