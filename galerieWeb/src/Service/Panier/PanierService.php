@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Service\Cart;
+namespace App\Service\Panier;
 
 use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class CartService{
+class PanierService{
 
 
     protected  $session;

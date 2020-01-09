@@ -3,7 +3,7 @@
 {% block title %}Mon Panier{% endblock %}
 
 {% block contentPage %}
-{% if items| length >0 %}
+{% if achats| length >0 %}
         <table class ="table">
         <thead>
         <tr>
@@ -17,12 +17,12 @@
         <tbody>
         {% for achat in achats %}
         <tr>
-            <td>{{item.produit.nomProduit}}</td>
-            <td>{{item.produit.prixHT}}</td>
-            <td>{{item.quantite}}</td>
-            <td>{{item.produit.prixHT * item.quantite}}</td>
+            <td>{{achat.produit.nomProduit}}</td>
+            <td>{{achat.produit.prixHT}}</td>
+            <td>{{achat.quantite}}</td>
+            <td>{{achat.produit.prixHT * achat.quantite}}</td>
             <td>
-            <a href="{{ path('panierRemove', {'id': item.produit.id}) }}" >Supprimer</a>
+            <a href="{{ path('panierRemove', {'id': achat.produit.id}) }}" >Supprimer</a>
             </td>
         </tr>
         {% endfor %}
