@@ -99,12 +99,12 @@ class Artiste
         return $this->id;
     }
 
-    public function getBiography(): ?text
+    public function getBiography(): ?string
     {
         return $this->biography;
     }
 
-    public function setBiography(text $biography): self
+    public function setBiography(string $biography): self
     {
         $this->biography = $biography;
 
@@ -171,13 +171,13 @@ class Artiste
         return $this;
     }
 
-    public function getTextAlaune(): ?text
+    public function getTextAlaune(): ?string
     {
         
         return $this->textAlaune;
     }
 
-    public function setTextAlaune(?text $textAlaune): self
+    public function setTextAlaune(?string $textAlaune): self
     {
         $this->textAlaune = $textAlaune;
 
