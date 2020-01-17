@@ -44,7 +44,11 @@
                 <td>{{ produit.dateCreation ? produit.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ produit.descriptif }}</td>
                 <td>{{ produit.dimension }}</td>
+                {% if produit.cadre!= null %}
                 <td>{{ produit.cadre.nomcadre }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
                 <td>{{ produit.prixHT }}</td>
                 <td>{{ produit.approuve ? 'Yes' : 'No' }}</td>
                 <td>{{ produit.remise }}</td>
@@ -59,6 +63,7 @@
                 <td>
                     <a href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
                     <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
+                    <a href="{{ path('panierAdd', {'id': produit.id}) }}">Ajouter dans Panier</a>
                 </td>
             </tr>
         {% else %}
