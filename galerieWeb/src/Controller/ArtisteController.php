@@ -26,6 +26,26 @@ class ArtisteController extends AbstractController
     }
 
     /**
+     * @Route("/artistes", name="artistes_liste", methods={"GET"})
+     */
+    public function liste(ArtisteRepository $artisteRepository): Response
+    {
+        return $this->render('artiste/liste.html.twig', [
+            'artistes' => $artisteRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/artiste/{id}", name="artiste_detail", methods={"GET"})
+     */
+    public function artiste($id,ArtisteRepository $artisteRepository): Response
+    {
+        return $this->render('artiste/detail.html.twig', [
+            'artiste' => $artisteRepository->find($id),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="artiste_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response

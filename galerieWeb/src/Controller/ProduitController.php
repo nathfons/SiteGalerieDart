@@ -26,12 +26,42 @@ class ProduitController extends AbstractController
     }
 
     /**
-     * @Route("/liste", name="produit_liste")
+     * @Route("/listeOeuvres", name="oeuvres_liste", methods={"GET"})
      */
-    public function liste(ProduitRepository $produitRepository): Response
+    public function listeOeuvres(ProduitRepository $produitRepository): Response
     {
-        return $this->render('produit/liste.html.twig', [
+        return $this->render('produit/listeoeuvres.html.twig', [
+            'oeuvres' => $produitRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/listeProduits", name="produits_liste", methods={"GET"})
+     */
+    public function listeProduits(ProduitRepository $produitRepository): Response
+    {
+        return $this->render('produit/listeproduits.html.twig', [
             'produits' => $produitRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/detailOeuvre/{id}", name="oeuvre_detail", methods={"GET"})
+     */
+    public function detailOeuvre($id,ProduitRepository $produitRepository): Response
+    {
+        return $this->render('produit/detailOeuvre.html.twig', [
+            'oeuvre' => $produitRepository->find($id),
+        ]);
+    }
+
+    /**
+     * @Route("/detailProduit/{id}", name="produit_detail", methods={"GET"})
+     */
+    public function detailProduit($id,ProduitRepository $produitRepository): Response
+    {
+        return $this->render('produit/detailProduit.html.twig', [
+            'produit' => $produitRepository->find($id),
         ]);
     }
 

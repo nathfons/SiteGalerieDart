@@ -1,0 +1,35 @@
+{% extends 'basemenu.html.twig' %}
+
+{% block title %}Nos Oeuvres{% endblock %}
+
+{% block contentPage %}
+ <div class="bg-light p-3">
+        <h1>Nos Oeuvres</h1>
+    </div>
+
+    <div class="row">
+        {% for produit in produits %}
+            <div class="col-4 mt-4">
+                <div class="border border-dark rounded p-2 clearfix">
+                    <h2>
+                        {{ produit.nomProduit }}
+                        -
+                        {{ produit.prixHT }}
+                        €
+                    </h2>
+                    <hr>
+                    <a href="{{ path('produit_detail', {'id': produit.id}) }}" class="btn btn-success float-right">
+                        <i class="fas fa-shopping-cart mr-1"></i>
+                        Voir
+                    </a>
+                    <a href="{{ path('panierAdd', {'id': produit.id}) }}" class="btn btn-success float-right">
+                        <i class="fas fa-shopping-cart mr-1"></i>
+                        Ajouter
+                    </a>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

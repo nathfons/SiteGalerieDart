@@ -1,0 +1,15 @@
+{% extends 'basemenu.html.twig' %}
+
+{% block title %}Nos Artistes{% endblock %}
+
+{% block contentPage %}
+ <div class="bg-light p-3">
+        <h1>{{artiste.prenom}} {{artiste.nom}}</h1>
+    </div>
+
+    <div class="row">
+       <h1>Biographie </h1>
+        <p>{{artiste.biography}} </p>
+    </div>
+
+{% endblock %}
