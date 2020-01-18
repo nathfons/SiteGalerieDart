@@ -40,7 +40,11 @@
                 <td>{{ produit.nomProduit }}</td>
                 <td>{{ produit.categorie.nomcategorie }}</td>
                 <td>{{ produit.artiste.nom }}</td>
-                <td>{{ produit.produitoriginal }}</td>
+                {% if produit.produitoriginal!= null %}
+                <td>{{ produit.produitoriginal.nomProduit }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
                 <td>{{ produit.dateCreation ? produit.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ produit.descriptif }}</td>
                 <td>{{ produit.dimension }}</td>
