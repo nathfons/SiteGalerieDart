@@ -15,6 +15,7 @@ class CadreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('nomcadre')
             ->add('imagecadre')
             ->add('prixCadreUniteHt')
             ->add('couleur', EntityType::class, [

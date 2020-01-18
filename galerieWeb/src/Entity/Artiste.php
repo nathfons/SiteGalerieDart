@@ -84,7 +84,7 @@ class Artiste
     private $produits;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", mappedBy="idArtiste", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
      */
     private $idUtilisateur;
 
@@ -273,11 +273,7 @@ class Artiste
     {
         $this->idUtilisateur = $idUtilisateur;
 
-        // set (or unset) the owning side of the relation if necessary
-        $newIdArtiste = null === $idUtilisateur ? null : $this;
-        if ($idUtilisateur->getIdArtiste() !== $newIdArtiste) {
-            $idUtilisateur->setIdArtiste($newIdArtiste);
-        }
+        
 
         return $this;
     }
