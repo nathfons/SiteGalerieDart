@@ -18,11 +18,39 @@
 
         <title>{% block title %}Welcome to Galerie d'Art!{% endblock %}</title>
         
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <style>
+        .menu{
+            margin-left:10px;
+            margin-right:10px;
+        }
+        .titleMain{
+            margin-top:10px;
+            margin-bottom:10px;
+        }
+        body{
+            margin-left:10px;
+            margin-right:10px;
+        }
+        .footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+</style>
+{% endblock %}
+
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body >
+        {% block header %}{% endblock %}
+        {% block secondheader %}{% endblock %}
+        {% block  body  %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        {% block  footer  %}{% endblock %}
     </body>
     
 </html>

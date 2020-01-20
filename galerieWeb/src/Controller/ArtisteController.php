@@ -36,6 +36,46 @@ class ArtisteController extends AbstractController
     }
 
     /**
+     * @Route("/peintres/{letter}", name="peintres_liste", methods={"GET"})
+     */
+    public function listePeintres($letter,ArtisteRepository $artisteRepository): Response
+    {
+        return $this->render('artiste/liste.html.twig', [
+            'artistes' => $artisteRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/photographes/{letter}", name="photographes_liste", methods={"GET"})
+     */
+    public function listePhotographes($letter,ArtisteRepository $artisteRepository): Response
+    {
+        return $this->render('artiste/liste.html.twig', [
+            'artistes' => $artisteRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/sculpteurs/{letter}", name="sculpteurs_liste", methods={"GET"})
+     */
+    public function listeSculpteurs($letter,ArtisteRepository $artisteRepository): Response
+    {
+        return $this->render('artiste/liste.html.twig', [
+            'artistes' => $artisteRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/nouveaux/{letter}", name="nouveaux_liste", methods={"GET"})
+     */
+    public function listeNouveauxArtistes($letter,ArtisteRepository $artisteRepository): Response
+    {
+        return $this->render('artiste/liste.html.twig', [
+            'artistes' => $artisteRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/artiste/{id}", name="artiste_detail", methods={"GET"})
      */
     public function artiste($id,ArtisteRepository $artisteRepository): Response

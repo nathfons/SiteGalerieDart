@@ -19,6 +19,16 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+    public function findAllProduitsDeType($type): ?Produit
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.typeProduit = :type')
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */

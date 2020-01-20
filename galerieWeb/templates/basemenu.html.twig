@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 
- {% block body %}
- {% block titleMenu %}
- <div align="center">GALERIE D ART</div>
- {% endblock %}
 {% block header %}
-   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+ {% block titleMenu %}
+ <div class="titleMain" align="center">GALERIE D ART</div>
+ {% endblock %}
+   <nav class="navbar navbar-expand-lg navbar-dark bg-primary menu">
 
   <a class="navbar-brand" href="/">Accueil</a>
 
@@ -47,7 +47,12 @@
   </div> <!-- navbar-collapse.// -->
 
 </nav>
+
+{% endblock %}
+ {% block body %}
 {% block contentPage %}{% endblock %}
+{% block  footer  %}
+<div class=" bg-primary footer">Footer</div>
 {% endblock %}
 
 

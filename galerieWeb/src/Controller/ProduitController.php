@@ -31,6 +31,7 @@ class ProduitController extends AbstractController
     public function listeOeuvres(ProduitRepository $produitRepository): Response
     {
         return $this->render('produit/listeoeuvres.html.twig', [
+            //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
             'oeuvres' => $produitRepository->findAll(),
         ]);
     }
@@ -41,7 +42,7 @@ class ProduitController extends AbstractController
     public function listeProduits(ProduitRepository $produitRepository): Response
     {
         return $this->render('produit/listeproduits.html.twig', [
-            'produits' => $produitRepository->findAll(),
+            'produits' => $produitRepository->findAllProduitsDeType('Produit'),
         ]);
     }
 
