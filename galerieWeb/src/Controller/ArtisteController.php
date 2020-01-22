@@ -15,6 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ArtisteController extends AbstractController
 {
+
+    private $routeSelected="artistes_liste";
+    private $letterSelected = "*";
+
     /**
      * @Route("/", name="artiste_index", methods={"GET"})
      */
@@ -22,16 +26,22 @@ class ArtisteController extends AbstractController
     {
         return $this->render('artiste/index.html.twig', [
             'artistes' => $artisteRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSeleted
         ]);
     }
 
     /**
-     * @Route("/artistes", name="artistes_liste", methods={"GET"})
+     * @Route("/artistes/{letter}", name="artistes_liste", methods={"GET"})
      */
-    public function liste(ArtisteRepository $artisteRepository): Response
+    public function liste($letter,ArtisteRepository $artisteRepository): Response
     {
+        $this->routeSelected="artistes_liste";
+        $this->letterSeleted=$letter;
         return $this->render('artiste/liste.html.twig', [
             'artistes' => $artisteRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSeleted
         ]);
     }
 
@@ -40,8 +50,12 @@ class ArtisteController extends AbstractController
      */
     public function listePeintres($letter,ArtisteRepository $artisteRepository): Response
     {
+        $this->routeSelected="peintres_liste";
+        $this->letterSeleted=$letter;
         return $this->render('artiste/liste.html.twig', [
             'artistes' => $artisteRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSeleted
         ]);
     }
 
@@ -50,8 +64,12 @@ class ArtisteController extends AbstractController
      */
     public function listePhotographes($letter,ArtisteRepository $artisteRepository): Response
     {
+        $this->routeSelected="photographes_liste";
+        $this->letterSeleted=$letter;
         return $this->render('artiste/liste.html.twig', [
             'artistes' => $artisteRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSeleted
         ]);
     }
 
@@ -60,8 +78,12 @@ class ArtisteController extends AbstractController
      */
     public function listeSculpteurs($letter,ArtisteRepository $artisteRepository): Response
     {
+        $this->routeSelected="sculpteurs_liste";
+        $this->letterSeleted=$letter;
         return $this->render('artiste/liste.html.twig', [
             'artistes' => $artisteRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSeleted
         ]);
     }
 
@@ -70,8 +92,12 @@ class ArtisteController extends AbstractController
      */
     public function listeNouveauxArtistes($letter,ArtisteRepository $artisteRepository): Response
     {
+        $this->routeSelected="nouveaux_liste";
+        $this->letterSeleted=$letter;
         return $this->render('artiste/liste.html.twig', [
             'artistes' => $artisteRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSeleted
         ]);
     }
 
@@ -82,6 +108,8 @@ class ArtisteController extends AbstractController
     {
         return $this->render('artiste/detail.html.twig', [
             'artiste' => $artisteRepository->find($id),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSeleted
         ]);
     }
 

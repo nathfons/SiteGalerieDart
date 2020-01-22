@@ -2,6 +2,10 @@
 
 {% block secondheader %}
 {% block secondmenu %}
+
+ <div class="bg-light p-3">
+        <h1>Nos Artistes</h1>
+    </div>
    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary menu">
 
   
@@ -18,7 +22,7 @@
 
 	<li class="nav-item"><a class="nav-link" href="{{ path('sculpteurs_liste', {'letter': '*'}) }}"> Sculpteurs </a></li>
 
-<li class="nav-item"><a class="nav-link" href="{{ path('artistes_liste') }}"> Tous </a></li>
+<li class="nav-item"><a class="nav-link" href="{{ path('artistes_liste', {'letter': '*'}) }}"> Tous </a></li>
 
 	
 
@@ -31,33 +35,33 @@
 {% endblock %}
 {% block alphabet %}
 <div class="alphabet">
-<a class="letter" href="{{ path('artistes_liste') }}">A</a>
-<a class="letter" href="{{ path('artistes_liste') }}">B</a>
-<a class="letter" href="{{ path('artistes_liste') }}">C</a>
-<a class="letter" href="{{ path('artistes_liste') }}">D</a>
-<a class="letter" href="{{ path('artistes_liste') }}">E</a>
-<a class="letter" href="{{ path('artistes_liste') }}">F</a>
-<a class="letter" href="{{ path('artistes_liste') }}">F</a>
-<a class="letter" href="{{ path('artistes_liste') }}">H</a>
-<a class="letter" href="{{ path('artistes_liste') }}">I</a>
-<a class="letter" href="{{ path('artistes_liste') }}">J</a>
-<a class="letter" href="{{ path('artistes_liste') }}">K</a>
-<a class="letter" href="{{ path('artistes_liste') }}">L</a>
-<a class="letter" href="{{ path('artistes_liste') }}">M</a>
-<a class="letter" href="{{ path('artistes_liste') }}">N</a>
-<a class="letter" href="{{ path('artistes_liste') }}">O</a>
-<a class="letter" href="{{ path('artistes_liste') }}">P</a>
-<a class="letter" href="{{ path('artistes_liste') }}">Q</a>
-<a class="letter" href="{{ path('artistes_liste') }}">R</a>
-<a class="letter" href="{{ path('artistes_liste') }}">S</a>
-<a class="letter" href="{{ path('artistes_liste') }}">T</a>
-<a class="letter" href="{{ path('artistes_liste') }}">U</a>
-<a class="letter" href="{{ path('artistes_liste') }}">V</a>
-<a class="letter" href="{{ path('artistes_liste') }}">W</a>
-<a class="letter" href="{{ path('artistes_liste') }}">X</a>
-<a class="letter" href="{{ path('artistes_liste') }}">Y</a>
-<a class="letter" href="{{ path('artistes_liste') }}">Z</a>
-<a class="letter" href="{{ path('artistes_liste') }}">Tous</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'A'}) }}">A</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'B'}) }}">B</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'C'}) }}">C</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'D'}) }}">D</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'E'}) }}">E</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'F'}) }}">F</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'G'}) }}">F</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'H'}) }}">H</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'I'}) }}">I</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'J'}) }}">J</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'K'}) }}">K</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'L'}) }}">L</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'M'}) }}">M</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'N'}) }}">N</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'O'}) }}">O</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'P'}) }}">P</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'Q'}) }}">Q</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'R'}) }}">R</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'S'}) }}">S</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'T'}) }}">T</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'U'}) }}">U</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'V'}) }}">V</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'W'}) }}">W</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'X'}) }}">X</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'Y'}) }}">Y</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': 'Z'}) }}">Z</a>
+<a class="letter" href="{{ path(routeSelected, {'letter': '*'}) }}">Tous</a>
 </div>
 {% endblock %}
 {% endblock %}
