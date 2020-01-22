@@ -20,8 +20,6 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
-    //public EntityManager em;
-
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */
