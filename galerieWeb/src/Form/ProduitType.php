@@ -23,18 +23,31 @@ class ProduitType extends AbstractType
                 'class'=> Categorie::class,
                 //User.name property visible
                 'choice_label' => 'nomcategorie',
+                'placeholder' => 'obligatoire',
+                //'expanded' => true,
+                
             ])
             ->add('artiste', EntityType::class, [
                 //choise from entity
                 'class'=> Artiste::class,
                 //User.name property visible
                 'choice_label' => 'nom',
+                'placeholder' => 'obligatoire',
+                //'expanded' => true,
             ])
             ->add('produitoriginal', EntityType::class, [
+                'required' => false,
+                'placeholder' => 'pour original',
+
                 //choise from entity
                 'class'=> Produit::class,
                 //User.name property visible
-                'choice_label' => 'produitoriginal',
+                'choice_label' => function (Produit $produit) {
+                   return $produit->getNomProduit();
+                },
+                'choice_value' => function (Produit $entity = null) {
+                    return $entity ? $entity->getId() : '';
+                },
             ])
             ->add('dateCreation')
             ->add('descriptif')
@@ -49,13 +62,26 @@ class ProduitType extends AbstractType
             ->add('quantiteVendue')
             ->add('photographie')
             ->add('miniature')
-            ->add('dimensionCadre')
+           
             ->add('cadre', EntityType::class, [
+                'required' => false,
+                'placeholder' => 'choix cadre',
+                
                 //choise from entity
-                'class'=> Cadre::class,
+                'class'=> Cadre::class,       
                 //User.name property visible
-                'choice_label' => 'nomcadre',
+                //'choice_label' => 'nomcadre',
+                'choice_label' => function (Cadre $cadre) {
+                   return $cadre->getNomcadre();
+                    //return sprintf('(%d) %s', $cadre->getId(), $cadre->getNomcadre());
+                },    
+                'choice_value' => function (Cadre $cadre = null) {
+                    return $cadre ? $cadre->getId() : '';
+                },
+                //'expanded' => true,
             ]) 
+            
+            ->add('dimensionCadre')
         ;
     }
 

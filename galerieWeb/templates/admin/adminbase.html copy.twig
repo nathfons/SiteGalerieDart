@@ -6,7 +6,11 @@
 {% block body %}
 <div>
 
-
+  
+<ul id="menu-content" class="menu-content collapse out">
+  <li><a href="{{ path('cadre_index') }}">{{ cadre }}</a></li>
+  <li><a href="{{ path('article_index') }}">{{ cadre }}</a></li>      
+</ul>
 
 </div>
 
@@ -26,7 +30,7 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span>{{ cadre }}
                                     </td>
                                 </tr>
                                 <tr>

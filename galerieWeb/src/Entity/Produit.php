@@ -48,6 +48,7 @@ class Produit
     
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Cadre", inversedBy="produits")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $cadre;
 
@@ -77,7 +78,7 @@ class Produit
     private $enVente;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true, options={"default":false})
      */
     private $enStock;
 
@@ -108,12 +109,13 @@ class Produit
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Produit", inversedBy="produits")
+     * @ORM\JoinColumn(nullable=true)
      */
     //id du Produit de l'oeuvre originale
     private $produitoriginal;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $dimensionCadre;
 
@@ -380,6 +382,7 @@ class Produit
 
         return $this;
     }
+
 
     public function getDimensionCadre(): ?string
     {

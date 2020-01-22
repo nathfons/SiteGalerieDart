@@ -101,4 +101,40 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('produit_index');
     }
+
+    /**
+     * @Route("/{id}/approve", name="produit_approve", methods={"APPROVE"})
+     */
+    public function approve(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
+    {
+        if ($this->isCsrfTokenValid('approve'.$produit->getId(), $request->request->get('_token'))) {
+            $produitId = $produit->getId();
+            $produitRepository->approveProduit($produitId);
+
+   
+        }
+
+        return $this->redirectToRoute('produit_index');
+    }
+
+    //update
+    public function update($id)
+{
+    $entityManager = $this->getDoctrine()->getManager();
+    $product = $entityManager->getRepository(Produit::class)->find($id);
+ 
+    if (!$product) {
+        throw $this->createNotFoundException(
+            'No product found for id '.$id
+        );
+    }
+ 
+    $product->setName('New product name!');
+    $entityManager->flush();
+ 
+    return $this->redirectToRoute('product_show', [
+        'id' => $product->getId()
+    ]);
+}
+    
 }
