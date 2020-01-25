@@ -39,7 +39,7 @@ class ArtisteController extends AbstractController
         $this->routeSelected="artistes_liste";
         $this->letterSelected=$letter;
         return $this->render('artiste/liste.html.twig', [
-            'artistes' => $artisteRepository->findAll(),
+            'artistes' => $artisteRepository->findByFirstLetter($letter),
             'routeSelected'=> $this->routeSelected,
             'letterSelected'=> $this->letterSelected
         ]);
