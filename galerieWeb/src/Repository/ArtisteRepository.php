@@ -40,7 +40,7 @@ class ArtisteRepository extends ServiceEntityRepository
         ->join('artiste.categories','categorie')
         ->andWhere('categorie.nom = :categorie')
         ->setParameter('categorie', $categorie)
-        ->andWhere('SUBSTRING(artiste.nom,0,1) = :lettre')
+        ->andWhere('SUBSTRING(artiste.nom,1,1) = :lettre')
         ->setParameter('lettre', $lettre)
         ->orderBy('artiste.dateCreationCompte', 'DESC')
         ->getQuery()
@@ -63,7 +63,7 @@ class ArtisteRepository extends ServiceEntityRepository
         ;
         }
         return $this->createQueryBuilder('artiste')
-        ->andWhere('SUBSTRING(artiste.nom,0,1) = :lettre')
+        ->andWhere('SUBSTRING(artiste.nom,1,1) = :lettre')
         ->setParameter('lettre', $lettre)
         ->orderBy('artiste.dateCreationCompte', 'DESC')
         ->getQuery()
@@ -103,7 +103,7 @@ class ArtisteRepository extends ServiceEntityRepository
         ;
         }
         return $this->createQueryBuilder('artiste')
-        ->andWhere('SUBSTRING(artiste.nom,0,1) = :lettre')
+        ->andWhere('SUBSTRING(artiste.nom,1,1) = :lettre')
         ->setParameter('lettre', $lettre)
         ->orderBy('artiste.dateCreationCompte', 'DESC')
         ->setMaxResults(10)
