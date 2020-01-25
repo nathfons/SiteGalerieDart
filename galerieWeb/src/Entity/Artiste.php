@@ -88,6 +88,11 @@ class Artiste
      */
     private $idUtilisateur;
 
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $categorie;
+
     public function __construct()
     {
         $this->idPhotographie = new ArrayCollection();
@@ -306,6 +311,18 @@ class Artiste
                 $produit->setArtiste(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategorie(): ?string
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(string $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
