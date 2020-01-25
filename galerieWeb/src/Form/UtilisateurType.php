@@ -20,7 +20,7 @@ class UtilisateurType extends AbstractType
                 'choices'  => [
                     'Admin' => "ROLE_ADMIN",
                     'Artiste' => "ROLE_ARTISTE",
-                    'Client' => "ROLE_MULTIPLE",
+                    'Client' => "ROLE_CLIENT",
                 
     ],
     'multiple' => true,

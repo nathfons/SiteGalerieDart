@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
 
-
 {% block header %}
 
  {% block titleMenu %}
- <div class="titleMain" align="center">GALERIE D ART</div>
+ <div class="titleMain" align="center"><h1>GALERIE D ART</h1></div>
  {% endblock %}
    <nav class="navbar navbar-expand-lg navbar-dark bg-primary menu">
 
@@ -22,7 +21,7 @@
 
 	<li class="nav-item active"> <a class="nav-link" href="{{ path('oeuvres_liste') }}">Oeuvres </a> </li>
 
-	<li class="nav-item"><a class="nav-link" href="{{ path('artistes_liste') }}"> Artistes </a></li>
+	<li class="nav-item"><a class="nav-link" href="{{ path('artistes_liste', {'letter': '*'}) }}"> Artistes </a></li>
 
 	<li class="nav-item"><a class="nav-link" href="{{ path('produits_liste') }}"> Boutique </a></li>
 
@@ -54,8 +53,6 @@
 {% block  footer  %}
 <div class=" bg-primary footer">Footer</div>
 {% endblock %}
-
-
 
 {% endblock %}
 

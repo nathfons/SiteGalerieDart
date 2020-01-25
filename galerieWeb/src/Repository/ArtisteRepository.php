@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Artiste;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use function Symfony\Component\String\u;
 
 /**
  * @method Artiste|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,20 +23,69 @@ class ArtisteRepository extends ServiceEntityRepository
     // /**
     //  * @return Artiste[] Returns an array of Artiste objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findByCategorieArtiste($categorie,$lettre)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+        if(u($lettre)->equalsTo('*')){
+            return $this->createQueryBuilder('artiste')
+            ->andWhere('artiste.categorie.nom = :categorie')
+            ->setParameter('categorie', $categorie)
+            ->orderBy('artiste.dateCreationCompte', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+        }
+        return $this->createQueryBuilder('artiste')
+        ->andWhere('artiste.category.nom = :categorie')
+        ->andWhere('SUBSTRING(artiste.nom,0,1) = :lettre')
+        ->setParameter('categorie', $categorie)
+        ->setParameter('lettre', $lettre)
+        ->orderBy('artiste.dateCreationCompte', 'DESC')
+        ->getQuery()
+        ->getResult()
+    ;
+      
+    }
+
+    // /**
+    //  * @return Artiste[] Returns an array of Artiste objects
+    //  */
+    
+    public function findByArtistesAlaune()
+    {
+        return $this->createQueryBuilder('artiste')
+            ->andWhere('artiste.alaune = :val')
+            ->setParameter('val', TRUE)
+            ->orderBy('artiste.dateCreationCompte', 'DESC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
+    
+// /**
+    //  * @return Artiste[] Returns an array of Artiste objects
+    //  */
+    
+    public function findNouveauxArtistes($lettre)
+    {
+        if(u($lettre)->equalsTo('*')){
+            return $this->createQueryBuilder('artiste')
+            ->orderBy('artiste.dateCreationCompte', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult()
+        ;
+        }
+        return $this->createQueryBuilder('artiste')
+        ->andWhere('SUBSTRING(artiste.nom,0,1) = :lettre')
+        ->setParameter('lettre', $lettre)
+        ->orderBy('artiste.dateCreationCompte', 'DESC')
+        ->setMaxResults(20)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
     /*
     public function findOneBySomeField($value): ?Artiste
     {
@@ -44,7 +94,7 @@ class ArtisteRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+        
     }
     */
 }

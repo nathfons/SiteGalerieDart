@@ -76,7 +76,7 @@ class Artiste
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PhotographieArtiste", mappedBy="artiste")
      */
-    private $idPhotographie;
+    private $photographies;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="artiste")
@@ -86,12 +86,22 @@ class Artiste
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
      */
-    private $idUtilisateur;
+    private $utilisateur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\CategorieArtiste")
+     */
+    private $categorie;
+
+    
+
+    
 
     public function __construct()
     {
         $this->idPhotographie = new ArrayCollection();
         $this->idProduit = new ArrayCollection();
+        $this->categorie = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -240,23 +250,23 @@ class Artiste
         return $this->idPhotographie;
     }
 
-    public function addIdPhotographie(PhotographieArtiste $idPhotographie): self
+    public function addPhotographies(PhotographieArtiste $photographie): self
     {
-        if (!$this->idPhotographie->contains($idPhotographie)) {
-            $this->idPhotographie[] = $idPhotographie;
-            $idPhotographie->setArtiste($this);
+        if (!$this->photographies->contains($photographie)) {
+            $this->Photographies[] = $photographie;
+            $photographie->setArtiste($this);
         }
 
         return $this;
     }
 
-    public function removeIdPhotographie(PhotographieArtiste $idPhotographie): self
+    public function removePhotographies(PhotographieArtiste $photographie): self
     {
-        if ($this->idPhotographie->contains($idPhotographie)) {
-            $this->idPhotographie->removeElement($idPhotographie);
+        if ($this->photographies->contains($idPhotographie)) {
+            $this->photographies->removeElement($idPhotographie);
             // set the owning side to null (unless already changed)
-            if ($idPhotographie->getArtiste() === $this) {
-                $idPhotographie->setArtiste(null);
+            if ($photographie->getArtiste() === $this) {
+                $photographie->setArtiste(null);
             }
         }
 
@@ -264,21 +274,21 @@ class Artiste
     }
 
     
-    public function getIdUtilisateur(): ?Utilisateur
+    public function getUtilisateur(): ?Utilisateur
     {
-        return $this->idUtilisateur;
+        return $this->utilisateur;
     }
 
-    public function setIdUtilisateur(?Utilisateur $idUtilisateur): self
+    public function setUtilisateur(?Utilisateur $utilisateur): self
     {
-        $this->idUtilisateur = $idUtilisateur;
+        $this->utilisateur = $utilisateur;
 
         
 
         return $this;
     }
 
-       /**
+    /**
      * @return Collection|Produit[]
      */
     public function getProduits(): Collection
@@ -293,7 +303,6 @@ class Artiste
             $produit->setArtiste($this);
         }
         
-
         return $this;
     }
 
@@ -309,4 +318,31 @@ class Artiste
 
         return $this;
     }
+
+    /**
+     * @return Collection|CategorieArtiste[]
+     */
+    public function getCategorie(): Collection
+    {
+        return $this->categorie;
+    }
+
+    public function addCategorie(CategorieArtiste $categorie): self
+    {
+        if (!$this->categorie->contains($categorie)) {
+            $this->categorie[] = $categorie;
+        }
+
+        return $this;
+    }
+
+    public function removeCategorie(CategorieArtiste $categorie): self
+    {
+        if ($this->categorie->contains($categorie)) {
+            $this->categorie->removeElement($categorie);
+        }
+
+        return $this;
+    }
+
 }
