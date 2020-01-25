@@ -68,7 +68,7 @@ class ArtisteFixtures extends Fixture
         $artiste->setApprouve(false);
         $artiste->setPhotographie($faker->word);//random pic url à mettre
         $artiste->setMiniature($faker->word);
-        $artiste->addCategorie($faker->randomElement($categoriesArtistes));
+        $artiste->addCategory($faker->randomElement($categoriesArtistes));
         $artiste->setCommission(20);
         $artiste->setAlaune(false);
         $artiste->setAlaune("");
