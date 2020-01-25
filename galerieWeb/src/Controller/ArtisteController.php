@@ -81,7 +81,7 @@ class ArtisteController extends AbstractController
         $this->routeSelected="sculpteurs_liste";
         $this->letterSelected=$letter;
         return $this->render('artiste/liste.html.twig', [
-            'artistes' => $artisteRepository->findAll(),
+            'artistes' => $artisteRepository->findByCategorieArtiste('Sculpteur',$letter),
             'routeSelected'=> $this->routeSelected,
             'letterSelected'=> $this->letterSelected
         ]);
@@ -95,7 +95,7 @@ class ArtisteController extends AbstractController
         $this->routeSelected="nouveaux_liste";
         $this->letterSelected=$letter;
         return $this->render('artiste/liste.html.twig', [
-            'artistes' => $artisteRepository->findAll(),
+            'artistes' => $artisteRepository->findNouveauxArtistes($letter),
             'routeSelected'=> $this->routeSelected,
             'letterSelected'=> $this->letterSelected
         ]);

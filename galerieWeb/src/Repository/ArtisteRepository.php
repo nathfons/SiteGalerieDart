@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Artiste;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use function Symfony\Component\String\u;
 
 /**
  * @method Artiste|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,21 +26,21 @@ class ArtisteRepository extends ServiceEntityRepository
     
     public function findByCategorieArtiste($categorie,$lettre)
     {
-        if($letter.equals('*')){
+        if(u($lettre)->equalsTo('*')){
             return $this->createQueryBuilder('artiste')
-            ->andWhere('artiste.category = :categorie')
+            ->andWhere('artiste.categorie.nom = :categorie')
             ->setParameter('categorie', $categorie)
-            ->orderBy('artiste.dateCreationCompte', 'DSC')
+            ->orderBy('artiste.dateCreationCompte', 'DESC')
             ->getQuery()
             ->getResult()
         ;
         }
         return $this->createQueryBuilder('artiste')
-        ->andWhere('artiste.category = :categorie')
+        ->andWhere('artiste.category.nom = :categorie')
         ->andWhere('SUBSTRING(artiste.nom,0,1) = :lettre')
         ->setParameter('categorie', $categorie)
         ->setParameter('lettre', $lettre)
-        ->orderBy('artiste.dateCreationCompte', 'DSC')
+        ->orderBy('artiste.dateCreationCompte', 'DESC')
         ->getQuery()
         ->getResult()
     ;
@@ -55,7 +56,7 @@ class ArtisteRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('artiste')
             ->andWhere('artiste.alaune = :val')
             ->setParameter('val', TRUE)
-            ->orderBy('artiste.dateCreationCompte', 'DSC')
+            ->orderBy('artiste.dateCreationCompte', 'DESC')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult()
@@ -68,9 +69,9 @@ class ArtisteRepository extends ServiceEntityRepository
     
     public function findNouveauxArtistes($lettre)
     {
-        if($letter.equals('*')){
+        if(u($lettre)->equalsTo('*')){
             return $this->createQueryBuilder('artiste')
-            ->orderBy('artiste.dateCreationCompte', 'DSC')
+            ->orderBy('artiste.dateCreationCompte', 'DESC')
             ->setMaxResults(20)
             ->getQuery()
             ->getResult()
@@ -79,7 +80,7 @@ class ArtisteRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('artiste')
         ->andWhere('SUBSTRING(artiste.nom,0,1) = :lettre')
         ->setParameter('lettre', $lettre)
-        ->orderBy('artiste.dateCreationCompte', 'DSC')
+        ->orderBy('artiste.dateCreationCompte', 'DESC')
         ->setMaxResults(20)
         ->getQuery()
         ->getResult()
