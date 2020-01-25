@@ -145,8 +145,26 @@ class ProduitController extends AbstractController
    
         }
 
-        return $this->redirectToRoute('produit_index');
+        return $this->redirectToRoute('admin_oeuvres');
     }
+
+    /**
+     * @Route("/{id}/stock", name="commander_stock", methods={"STOCK"})
+     */
+    public function commander_stock(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
+    {
+        if ($this->isCsrfTokenValid('commander_stock'.$produit->getId(), $request->request->get('_token'))) {
+            $produitId = $produit->getId();
+            $produitStock=$produit->getQuantiteStocks();
+
+            $produitRepository->commanderStock($produitId, $produitStock);
+
+   
+        }
+
+        return $this->redirectToRoute('admin_vente_produits');
+    }
+
 
     //update
     public function update($id)

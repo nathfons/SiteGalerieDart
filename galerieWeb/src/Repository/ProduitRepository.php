@@ -6,6 +6,7 @@ use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use App\Repository\EntityManager;
+use App\Repository\Join;
 
 /**
  * @method Produit|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,6 +21,7 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+    //les produits non approuvés
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */
@@ -28,6 +30,7 @@ class ProduitRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.approuve = :val')
+            ->andWhere('p.produitoriginal is null')
             ->setParameter('val', $value)
             ->orderBy('p.id', 'ASC')
             //->setMaxResults(10)
@@ -36,23 +39,69 @@ class ProduitRepository extends ServiceEntityRepository
         ;
     }
 
-    //findByOeuvresApprouve
+    //les oeuvres non approuvés
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */
     
-    public function findByOeuvresApprouve($value)
+    public function findByOeuvresApprouve()
     {
-        
+        //commission, prixHT
         return $this->createQueryBuilder('p')
+            ->select('p')
+            //->innerJoin('p.artiste', 'a') //, 'WITH', 'a.id = p.artiste_id'
             ->andWhere('p.approuve = :val')
-            ->setParameter('val', $value)
+            ->andWhere('p.produitoriginal is not null')
+            ->setParameter('val', "false")
             ->orderBy('p.id', 'ASC')
             //->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
+
+    //-------------
+
+        //les produits non approuvés
+    // /**
+    //  * @return Produit[] Returns an array of Produit objects
+    //  */
+    
+    public function findVenteProduits()
+    {
+        return $this->createQueryBuilder('p')
+            
+            ->andWhere('p.produitoriginal is null')
+            //->setParameter('val', $value)
+            ->orderBy('p.id', 'ASC')
+            //->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    //les oeuvres non approuvés
+    // /**
+    //  * @return Produit[] Returns an array of Produit objects
+    //  */
+    
+    public function findVenteOeuvres()
+    {
+        //commission, prixHT
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            
+            ->andWhere('p.produitoriginal is null')
+            //->setParameter('val', "false")
+            ->orderBy('p.id', 'ASC')
+            //->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    //-------------
+
 
     //approveProduit
     public function approveProduit($produitId)
@@ -60,6 +109,20 @@ class ProduitRepository extends ServiceEntityRepository
         $updateEtat = $this->createQueryBuilder('p')
             ->update(Produit::class, 'p')
             ->set('p.approuve', 'true')
+            ->where('p.id IN (?1)')
+            ->setParameter(1, $produitId)
+            //->setParameter(2, '2')
+            ->getQuery();
+            $updateEtat->execute();
+        ;
+    }
+
+    //commanderStock
+    public function commanderStock($produitId, $produitStock)
+    {
+        $updateEtat = $this->createQueryBuilder('p')
+            ->update(Produit::class, 'p')
+            ->set('p.quantiteStocks', $produitStock+2)
             ->where('p.id IN (?1)')
             ->setParameter(1, $produitId)
             //->setParameter(2, '2')

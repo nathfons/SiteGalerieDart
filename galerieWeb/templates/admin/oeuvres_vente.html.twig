@@ -1,0 +1,46 @@
+{% block contentPage %}
+
+
+<h1>Oeuvres vendus</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>       
+                <th>Nom Oeuvre</th>
+                <th>Categorie</th>
+                <th>Artiste</th>
+                <th>Quantité</th>           
+                <th>Prix unitaire HT</th>
+                <th>Total</th>
+                
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in oeuvresVente %}
+            <tr>
+                <td>{{ loop.index0 }}</td>
+                
+                <td>{{ produit.nomProduit }}</td>
+                <td>{{ produit.categorie.nomcategorie }}</td>
+                <td>{{ produit.artiste.nom }}</td>
+                <td>{{ produit.quantiteVendue }}</td>
+                <td>{{ produit.prixHT }}</td>
+                <td>{{ produit.prixHT * produit.quantiteVendue }}</td>
+                
+                <td>
+                    <a href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
+                    <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

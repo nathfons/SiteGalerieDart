@@ -1,0 +1,51 @@
+{% block contentPage %}
+
+
+<h1>Produits en attente d'approbation</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>       
+                <th>Nom Produit</th>
+                <th>Categorie</th>
+                <th>Artiste</th>
+                <th>Produit Original</th>               
+                <th>Commission</th>
+                <th>Prix unitaire HT</th>
+                <th>Prix de revient</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produitsNonApprouves %}
+            <tr>
+                <td>{{ loop.index0 }}</td>
+                
+                <td>{{ produit.nomProduit }}</td>
+                <td>{{ produit.categorie.nomcategorie }}</td>
+                <td>{{ produit.artiste.nom }}</td>
+                {% if produit.produitoriginal!= null %}
+                <td>{{ produit.produitoriginal.nomProduit }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                
+                <td>{{ produit.artiste.commission }}</td>
+                <td>{{ produit.prixHT }}</td>
+                <td>{{ produit.prixHT - produit.prixHT * produit.artiste.commission / 100 }}</td>
+                <td>
+                    <a href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
+                    {{ include('produit/_approve_form.html.twig') }}
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="19">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
