@@ -19,6 +19,7 @@ class ArtisteController extends AbstractController
     private $routeSelected="artistes_liste";
     private $letterSelected = "*";
 
+
     /**
      * @Route("/", name="artiste_index", methods={"GET"})
      */
@@ -27,7 +28,8 @@ class ArtisteController extends AbstractController
         return $this->render('artiste/index.html.twig', [
             'artistes' => $artisteRepository->findAll(),
             'routeSelected'=> $this->routeSelected,
-            'letterSelected'=> $this->letterSelected
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nos Artistes',
         ]);
     }
 
@@ -41,7 +43,9 @@ class ArtisteController extends AbstractController
         return $this->render('artiste/liste.html.twig', [
             'artistes' => $artisteRepository->findByFirstLetter($letter),
             'routeSelected'=> $this->routeSelected,
-            'letterSelected'=> $this->letterSelected
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nos Artistes',
+            'alaune' => false,
         ]);
     }
 
@@ -55,7 +59,9 @@ class ArtisteController extends AbstractController
         return $this->render('artiste/liste.html.twig', [
             'artistes' => $artisteRepository->findByCategorieArtiste('Peintre',$letter),
             'routeSelected'=> $this->routeSelected,
-            'letterSelected'=> $this->letterSelected
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nos Peintres',
+            'alaune' => false,
         ]);
     }
 
@@ -69,7 +75,9 @@ class ArtisteController extends AbstractController
         return $this->render('artiste/liste.html.twig', [
             'artistes' => $artisteRepository->findByCategorieArtiste('Photographe',$letter),
             'routeSelected'=> $this->routeSelected,
-            'letterSelected'=> $this->letterSelected
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nos Photographes',
+            'alaune' => false,
         ]);
     }
 
@@ -83,7 +91,9 @@ class ArtisteController extends AbstractController
         return $this->render('artiste/liste.html.twig', [
             'artistes' => $artisteRepository->findByCategorieArtiste('Sculpteur',$letter),
             'routeSelected'=> $this->routeSelected,
-            'letterSelected'=> $this->letterSelected
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nos Sculpteurs',
+            'alaune' => false,
         ]);
     }
 
@@ -97,7 +107,24 @@ class ArtisteController extends AbstractController
         return $this->render('artiste/liste.html.twig', [
             'artistes' => $artisteRepository->findNouveauxArtistes($letter),
             'routeSelected'=> $this->routeSelected,
-            'letterSelected'=> $this->letterSelected
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nouveaux Artistes',
+            'alaune' => false,
+        ]);
+    }
+
+    /**
+     * @Route("/alune", name="alaune_liste", methods={"GET"})
+     */
+    public function listeArtistesAlaune(ArtisteRepository $artisteRepository): Response
+    {
+        $this->routeSelected="alaune_liste";
+        return $this->render('artiste/liste.html.twig', [
+            'artistes' => $artisteRepository->findByArtistesAlaune(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Artistes A la Une',
+            'alaune' => true,
         ]);
     }
 
