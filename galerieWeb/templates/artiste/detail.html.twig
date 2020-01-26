@@ -4,12 +4,16 @@
 
 {% block contentPage %}
  <div class="bg-light p-3">
-        <h1>{{artiste.prenom}} {{artiste.nom}}</h1>
+        <h1 align="center">{{artiste.prenom}} {{artiste.nom}}</h1>
+     {% for categorie in artiste.categories %}
+    <h4 align="center">{{categorie.nom}} </h4></br>
+    {%endfor %}
     </div>
-
-    <div class="row">
-       <h1>Biographie </h1>
+<div class="content">
+    <div class="text">
+       <h2>Biographie </h2>
         <p>{{artiste.biography}} </p>
     </div>
+</div>
 
 {% endblock %}

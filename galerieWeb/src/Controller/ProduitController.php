@@ -147,7 +147,7 @@ class ProduitController extends AbstractController
             'produits' => $produitRepository->findAll(),
             'routeSelected'=> $this->routeSelected,
             'letterSelected'=> $this->letterSelected,
-            'titre' => 'Tous nos Articles à la Vente',
+            'titre' => 'Tous nos Articles',
             'InOeuvres' => false,
         ]);
     }
