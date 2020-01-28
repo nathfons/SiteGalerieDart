@@ -15,6 +15,9 @@ use App\Entity\Produit;
  */
 class AdminController extends AbstractController
 {
+    private $routeSelected="admin";
+    private $qte = 0;
+
     /**
      * @Route("/", name="admin")
      */
@@ -61,17 +64,22 @@ class AdminController extends AbstractController
         ]);
     }  
     /**
-     * @Route("/admin_vente_produits", name="admin_vente_produits")
+     * @Route("/admin_vente_produits/{qte}", name="admin_vente_produits", methods={"GET"})
      */
-    public function findProduitsVente(ProduitRepository $produitRepository): Response
+    public function findProduitsVente(ProduitRepository $produitRepository, $qte): Response
     {
+        $this->routeSelected="admin_vente_produits";
+        $this->qte=$qte;
+
         return $this->render('admin/admin_vente_produits.html.twig', [
             'produitsVente' => $produitRepository->findVenteProduits(),
+            'qte'=> $this->qte,
+            'routeSelected'=> $this->routeSelected,
         ]);
     }  
 
     /**
-     * @Route("/{id}/stock", name="commander_stock", methods={"STOCK"})
+     * @Route("/{id}/stock", name="commander_stock", methods={"GET"})
      */
     public function commander_stock(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
     {

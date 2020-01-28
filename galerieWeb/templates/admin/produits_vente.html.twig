@@ -30,7 +30,12 @@
                 <td>{{ produit.prixHT * produit.quantiteVendue }}</td>
                 <td>{{ produit.quantiteStocks }}</td>
                 <td>
-                    {{ include('produit/_commander_stock.html.twig', {'qte': 1}) }}
+                <form action="{{ path('admin_vente_produits') }}" method="GET"> 
+                    
+	                <input type="text" placeholder="qte" name="qte_cmd"> 
+	                <button type="submit">CMD</button>
+                </form>
+                   
 
                 </td>
             </tr>
