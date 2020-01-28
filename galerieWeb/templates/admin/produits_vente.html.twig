@@ -30,7 +30,7 @@
                 <td>{{ produit.prixHT * produit.quantiteVendue }}</td>
                 <td>{{ produit.quantiteStocks }}</td>
                 <td>
-                    {{ include('produit/_commander_stock.html.twig') }}
+                    {{ include('produit/_commander_stock.html.twig', {'qte': 1}) }}
 
                 </td>
             </tr>

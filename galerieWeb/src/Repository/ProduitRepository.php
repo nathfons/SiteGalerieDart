@@ -118,11 +118,11 @@ class ProduitRepository extends ServiceEntityRepository
     }
 
     //commanderStock
-    public function commanderStock($produitId, $produitStock)
+    public function commanderStock($produitId, $produitStock, $qte)
     {
         $updateEtat = $this->createQueryBuilder('p')
             ->update(Produit::class, 'p')
-            ->set('p.quantiteStocks', $produitStock+2)
+            ->set('p.quantiteStocks', $produitStock+$qte)
             ->where('p.id IN (?1)')
             ->setParameter(1, $produitId)
             //->setParameter(2, '2')

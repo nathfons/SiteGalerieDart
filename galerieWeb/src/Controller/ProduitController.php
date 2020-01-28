@@ -156,9 +156,9 @@ class ProduitController extends AbstractController
         if ($this->isCsrfTokenValid('commander_stock'.$produit->getId(), $request->request->get('_token'))) {
             $produitId = $produit->getId();
             $produitStock=$produit->getQuantiteStocks();
-
-            $produitRepository->commanderStock($produitId, $produitStock);
-
+            $qte=4;
+            $produitRepository->commanderStock($produitId, $produitStock, $qte);
+            //$this->qteSelected=$qte;
    
         }
 

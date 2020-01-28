@@ -7,6 +7,8 @@ use App\Repository\CadreRepository;
 use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Produit;
 
 /**
  * @Route("/admin")
@@ -67,4 +69,23 @@ class AdminController extends AbstractController
             'produitsVente' => $produitRepository->findVenteProduits(),
         ]);
     }  
+
+    /**
+     * @Route("/{id}/stock", name="commander_stock", methods={"STOCK"})
+     */
+    public function commander_stock(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
+    {
+        if ($this->isCsrfTokenValid('commander_stock'.$produit->getId(), $request->request->get('_token'))) {
+            $produitId = $produit->getId();
+            $produitStock=$produit->getQuantiteStocks();
+            $qte=4;
+            $qte = $request->request->get("input_qte");
+            $produitRepository->commanderStock($produitId, $produitStock, $qte);
+            //$this->qteSelected=$qte;
+   
+        }
+
+        return $this->redirectToRoute('admin_vente_produits');
+    }
+
 }
