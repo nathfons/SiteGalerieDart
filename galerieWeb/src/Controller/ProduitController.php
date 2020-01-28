@@ -15,6 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProduitController extends AbstractController
 {
+    private $routeSelected = 'oeuvres_liste';
+    private $letterSelected;
+    private $InOeuvres = false;
+
     /**
      * @Route("/", name="produit_index", methods={"GET"})
      */
@@ -26,25 +30,100 @@ class ProduitController extends AbstractController
     }
 
     /**
-     * @Route("/listeOeuvres", name="oeuvres_liste", methods={"GET"})
+     * @Route("/oeuvres/{letter}", name="oeuvres_liste", methods={"GET"})
      */
-    public function listeOeuvres(ProduitRepository $produitRepository): Response
+    public function listeOeuvres($letter,ProduitRepository $produitRepository): Response
     {
+        $this->routeSelected="oeuvres_liste";
+        $this->letterSelected=$letter;
+        $this->InOeuvres=true;
         return $this->render('produit/listeoeuvres.html.twig', [
             //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
             'oeuvres' => $produitRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Toutes nos Oeuvres',
+            'InOeuvres' => true,
+        ]);
+    }
+
+    
+
+    
+
+
+    /**
+     * @Route("/peintures/{letter}", name="peintures_liste", methods={"GET"})
+     */
+    public function listePeintures($letter,ProduitRepository $produitRepository): Response
+    {
+        $this->routeSelected="peintures_liste";
+        $this->letterSelected=$letter;
+        $this->InOeuvres=true;
+        return $this->render('produit/listeoeuvres.html.twig', [
+            //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
+            'oeuvres' => $produitRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nos Peintures',
+            'InOeuvres' => true,
         ]);
     }
 
     /**
-     * @Route("/listeProduits", name="produits_liste", methods={"GET"})
+     * @Route("/photographies/{letter}", name="photographies_liste", methods={"GET"})
      */
-    public function listeProduits(ProduitRepository $produitRepository): Response
+    public function listePhotographies($letter,ProduitRepository $produitRepository): Response
     {
-        return $this->render('produit/listeproduits.html.twig', [
-            'produits' => $produitRepository->findAllProduitsDeType('Produit'),
+        $this->routeSelected="photographies_liste";
+        $this->letterSelected=$letter;
+        $this->InOeuvres=true;
+        return $this->render('produit/listeoeuvres.html.twig', [
+            //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
+            'oeuvres' => $produitRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nos Photographies',
+            'InOeuvres' => true,
         ]);
     }
+
+    /**
+     * @Route("/sculptures/{letter}", name="sculptures_liste", methods={"GET"})
+     */
+    public function listeSculptures($letter,ProduitRepository $produitRepository): Response
+    {
+        $this->routeSelected="sculptures_liste";
+        $this->letterSelected=$letter;
+        $this->InOeuvres=true;
+        return $this->render('produit/listeoeuvres.html.twig', [
+            //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
+            'oeuvres' => $produitRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nos Sculptures',
+            'InOeuvres' => true,
+        ]);
+    }
+
+    /**
+     * @Route("/oeuvres/nouvelles/{letter}", name="nouvelles_oeuvres_liste", methods={"GET"})
+     */
+    public function listeNouvellesOeuvres($letter,ProduitRepository $produitRepository): Response
+    {
+        $this->routeSelected="nouvelles_oeuvres_liste";
+        $this->letterSelected=$letter;
+        $this->inOeuvres = true;
+        return $this->render('produit/listeoeuvres.html.twig', [
+            'oeuvres' => $produitRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nouveautés',
+            'InOeuvres' => true,
+        ]);
+    }
+
+    
 
     /**
      * @Route("/detailOeuvre/{id}", name="oeuvre_detail", methods={"GET"})
@@ -53,6 +132,95 @@ class ProduitController extends AbstractController
     {
         return $this->render('produit/detailOeuvre.html.twig', [
             'oeuvre' => $produitRepository->find($id),
+        ]);
+    }
+    
+    /**
+     * @Route("/produits/{letter}", name="produits_liste", methods={"GET"})
+     */
+    public function listeProduits($letter,ProduitRepository $produitRepository): Response
+    {
+        $this->routeSelected="produits_liste";
+        $this->letterSelected=$letter;
+        $this->InOeuvres=false;
+        return $this->render('produit/listeproduits.html.twig', [
+            'produits' => $produitRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Tous nos Articles',
+            'InOeuvres' => false,
+        ]);
+    }
+
+ /**
+     * @Route("/tshirts/{letter}", name="tshirts_liste", methods={"GET"})
+     */
+    public function listeTShirts($letter,ProduitRepository $produitRepository): Response
+    {
+        $this->routeSelected="tshirts_liste";
+        $this->letterSelected=$letter;
+        $this->InOeuvres=false;
+        return $this->render('produit/listeproduits.html.twig', [
+            //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
+            'oeuvres' => $produitRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nos T-Shirts',
+            'InOeuvres' => false,
+        ]);
+    }
+
+    /**
+     * @Route("/posters/{letter}", name="posters_liste", methods={"GET"})
+     */
+    public function listePosters($letter,ProduitRepository $produitRepository): Response
+    {
+        $this->routeSelected="posters_liste";
+        $this->letterSelected=$letter;
+        $this->InOeuvres=false;
+        return $this->render('produit/listeproduits.html.twig', [
+            //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
+            'oeuvres' => $produitRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nos Posters',
+            'InOeuvres' => false,
+        ]);
+    }
+
+    /**
+     * @Route("/cartespostales/{letter}", name="cartes_postales_liste", methods={"GET"})
+     */
+    public function listeCartesPostales($letter,ProduitRepository $produitRepository): Response
+    {
+        $this->routeSelected="cartes_postales_liste";
+        $this->letterSelected=$letter;
+        $this->InOeuvres=false;
+        return $this->render('produit/listeproduits.html.twig', [
+            //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
+            'oeuvres' => $produitRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nos Cartes Postales',
+            'InOeuvres' => false,
+        ]);
+    }
+
+    /**
+     * @Route("/nouveaux/{letter}", name="nouveaux_articles_liste", methods={"GET"})
+     */
+    public function listeNouveauxProduits($letter,ProduitRepository $produitRepository): Response
+    {
+        $this->routeSelected="nouveaux_articles_liste";
+        $this->letterSelected=$letter;
+        $this->InOeuvres=false;
+        return $this->render('produit/listeproduits.html.twig', [
+            //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
+            'oeuvres' => $produitRepository->findAll(),
+            'routeSelected'=> $this->routeSelected,
+            'letterSelected'=> $this->letterSelected,
+            'titre' => 'Nouveaux Articles à la Vente',
+            'InOeuvres' => false,
         ]);
     }
 

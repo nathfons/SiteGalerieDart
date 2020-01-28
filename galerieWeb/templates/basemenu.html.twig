@@ -19,11 +19,11 @@
 
 <ul class="navbar-nav">
 
-	<li class="nav-item active"> <a class="nav-link" href="{{ path('oeuvres_liste') }}">Oeuvres </a> </li>
+	<li class="nav-item active"> <a class="nav-link" href="{{ path('oeuvres_liste', {'letter': '*'}) }}">Oeuvres </a> </li>
 
 	<li class="nav-item"><a class="nav-link" href="{{ path('artistes_liste', {'letter': '*'}) }}"> Artistes </a></li>
 
-	<li class="nav-item"><a class="nav-link" href="{{ path('produits_liste') }}"> Boutique </a></li>
+	<li class="nav-item"><a class="nav-link" href="{{ path('produits_liste', {'letter': '*'}) }}"> Boutique </a></li>
 
 <li class="nav-item"><a class="nav-link" href="{{ path('panier') }}"> Panier </a></li>
 
@@ -50,9 +50,9 @@
 {% endblock %}
  {% block body %}
 {% block contentPage %}{% endblock %}
+
+{% endblock %}
+
 {% block  footer  %}
 <div class=" bg-primary footer">Footer</div>
 {% endblock %}
-
-{% endblock %}
-

@@ -28,7 +28,8 @@ class ArtisteRepository extends ServiceEntityRepository
     {
         if(u($lettre)->equalsTo('*')){
             return $this->createQueryBuilder('artiste')
-            ->andWhere('artiste.categorie.nom = :categorie')
+            ->join('artiste.categories','categorie')
+            ->andWhere('categorie.nom = :categorie')
             ->setParameter('categorie', $categorie)
             ->orderBy('artiste.dateCreationCompte', 'DESC')
             ->getQuery()
@@ -36,9 +37,33 @@ class ArtisteRepository extends ServiceEntityRepository
         ;
         }
         return $this->createQueryBuilder('artiste')
-        ->andWhere('artiste.category.nom = :categorie')
-        ->andWhere('SUBSTRING(artiste.nom,0,1) = :lettre')
+        ->join('artiste.categories','categorie')
+        ->andWhere('categorie.nom = :categorie')
         ->setParameter('categorie', $categorie)
+        ->andWhere('SUBSTRING(artiste.nom,1,1) = :lettre')
+        ->setParameter('lettre', $lettre)
+        ->orderBy('artiste.dateCreationCompte', 'DESC')
+        ->getQuery()
+        ->getResult()
+    ;
+      
+    }
+
+    // /**
+    //  * @return Artiste[] Returns an array of Artiste objects
+    //  */
+    
+    public function findByFirstLetter($lettre)
+    {
+        if(u($lettre)->equalsTo('*')){
+            return $this->createQueryBuilder('artiste')
+            ->orderBy('artiste.dateCreationCompte', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+        }
+        return $this->createQueryBuilder('artiste')
+        ->andWhere('SUBSTRING(artiste.nom,1,1) = :lettre')
         ->setParameter('lettre', $lettre)
         ->orderBy('artiste.dateCreationCompte', 'DESC')
         ->getQuery()
@@ -72,16 +97,16 @@ class ArtisteRepository extends ServiceEntityRepository
         if(u($lettre)->equalsTo('*')){
             return $this->createQueryBuilder('artiste')
             ->orderBy('artiste.dateCreationCompte', 'DESC')
-            ->setMaxResults(20)
+            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
         }
         return $this->createQueryBuilder('artiste')
-        ->andWhere('SUBSTRING(artiste.nom,0,1) = :lettre')
+        ->andWhere('SUBSTRING(artiste.nom,1,1) = :lettre')
         ->setParameter('lettre', $lettre)
         ->orderBy('artiste.dateCreationCompte', 'DESC')
-        ->setMaxResults(20)
+        ->setMaxResults(10)
         ->getQuery()
         ->getResult()
         ;

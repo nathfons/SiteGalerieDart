@@ -2,8 +2,9 @@
 
 {% block title %}Nos Artistes{% endblock %}
 
+{% block body %}
 {% block contentPage %}
-
+<div class="content">
     <div class="row">
         {% for artiste in artistes %}
             <div class="col-4 mt-4">
@@ -23,5 +24,7 @@
             </div>
         {% endfor %}
     </div>
+    </div>
 
+{% endblock %}
 {% endblock %}

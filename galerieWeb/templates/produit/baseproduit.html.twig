@@ -4,7 +4,11 @@
 {% block secondmenu %}
 
  <div class="bg-light p-3">
-        <h1 align="center">Nos Artistes</h1>
+ {%if InOeuvres == true %}
+        <h1 align="center">Nos Oeuvres</h1>
+        {% else %}
+         <h1 align="center">Nos Articles à la Vente</h1>
+        {% endif %}
     </div>
    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary menu" >
 
@@ -13,18 +17,29 @@
   <div class="collapse navbar-collapse" id="second_nav" align="center">
 
 <ul class="navbar-nav" >
+{%if InOeuvres != true %}
+       <li class="nav-item active"> <a class="nav-link" href="{{ path('nouveaux_articles_liste', {'letter': '*'})  }}">Nouveautés </a> </li>
 
-	<li class="nav-item active"> <a class="nav-link" href="{{ path('nouveaux_liste', {'letter': '*'})  }}">Nouveaux </a> </li>
+	<li class="nav-item active"> <a class="nav-link" href="{{ path('posters_liste', {'letter': '*'}) }}">Posters </a> </li>
 
-	<li class="nav-item active"> <a class="nav-link" href="{{ path('peintres_liste', {'letter': '*'}) }}">Peintres </a> </li>
+	<li class="nav-item"><a class="nav-link" href="{{ path('tshirts_liste', {'letter': '*'}) }}"> T-shirts </a></li>
 
-	<li class="nav-item"><a class="nav-link" href="{{ path('photographes_liste', {'letter': '*'}) }}"> Photographes </a></li>
+	<li class="nav-item"><a class="nav-link" href="{{ path('cartes_postales_liste', {'letter': '*'}) }}"> Cartes Postales </a></li>
 
-	<li class="nav-item"><a class="nav-link" href="{{ path('sculpteurs_liste', {'letter': '*'}) }}"> Sculpteurs </a></li>
+<li class="nav-item"><a class="nav-link" href="{{ path('produits_liste', {'letter': '*'}) }}"> Tous </a></li>
+        {% else %}
+        <li class="nav-item active"> <a class="nav-link" href="{{ path('nouvelles_oeuvres_liste', {'letter': '*'})  }}">Nouveautés </a> </li>
 
-<li class="nav-item"><a class="nav-link" href="{{ path('alaune_liste') }}"> A la Une </a></li>
+	<li class="nav-item active"> <a class="nav-link" href="{{ path('peintures_liste', {'letter': '*'}) }}">Peintures </a> </li>
 
-<li class="nav-item"><a class="nav-link" href="{{ path('artistes_liste', {'letter': '*'}) }}"> Tous </a></li>
+	<li class="nav-item"><a class="nav-link" href="{{ path('photographies_liste', {'letter': '*'}) }}"> Photographies </a></li>
+
+	<li class="nav-item"><a class="nav-link" href="{{ path('sculptures_liste', {'letter': '*'}) }}"> Sculptures </a></li>
+
+<li class="nav-item"><a class="nav-link" href="{{ path('oeuvres_liste', {'letter': '*'}) }}"> Toutes </a></li>
+        {% endif %}
+	
+
 </ul>
 
   </div> <!-- navbar-collapse.// -->
@@ -32,7 +47,6 @@
 </nav>
 {% endblock %}
 {% block alphabet %}
-{% if alaune != true %}
 <div class="alphabet" align = "center">
 <a class="letter" href="{{ path(routeSelected, {'letter': 'A'}) }}">A</a>
 <a class="letter" href="{{ path(routeSelected, {'letter': 'B'}) }}">B</a>
@@ -62,8 +76,6 @@
 <a class="letter" href="{{ path(routeSelected, {'letter': 'Z'}) }}">Z</a>
 <a class="letter" href="{{ path(routeSelected, {'letter': '*'}) }}">Tous</a>
 </div>
-
-{% endif %}
 {% endblock %}
 {% endblock %}
 

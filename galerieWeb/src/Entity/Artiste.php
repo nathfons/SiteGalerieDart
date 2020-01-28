@@ -91,7 +91,9 @@ class Artiste
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\CategorieArtiste")
      */
-    private $categorie;
+    private $categories;
+
+    
 
     
 
@@ -99,9 +101,9 @@ class Artiste
 
     public function __construct()
     {
-        $this->idPhotographie = new ArrayCollection();
-        $this->idProduit = new ArrayCollection();
-        $this->categorie = new ArrayCollection();
+        $this->photographies = new ArrayCollection();
+        $this->produits = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -245,12 +247,12 @@ class Artiste
     /**
      * @return Collection|PhotographieArtiste[]
      */
-    public function getIdPhotographie(): Collection
+    public function getPhotographies(): Collection
     {
-        return $this->idPhotographie;
+        return $this->photographies;
     }
 
-    public function addPhotographies(PhotographieArtiste $photographie): self
+    public function addPhotographie(PhotographieArtiste $photographie): self
     {
         if (!$this->photographies->contains($photographie)) {
             $this->Photographies[] = $photographie;
@@ -260,7 +262,7 @@ class Artiste
         return $this;
     }
 
-    public function removePhotographies(PhotographieArtiste $photographie): self
+    public function removePhotographie(PhotographieArtiste $photographie): self
     {
         if ($this->photographies->contains($idPhotographie)) {
             $this->photographies->removeElement($idPhotographie);
@@ -322,27 +324,31 @@ class Artiste
     /**
      * @return Collection|CategorieArtiste[]
      */
-    public function getCategorie(): Collection
+    public function getCategories(): Collection
     {
-        return $this->categorie;
+        return $this->categories;
     }
 
-    public function addCategorie(CategorieArtiste $categorie): self
+    public function addCategory(CategorieArtiste $category): self
     {
-        if (!$this->categorie->contains($categorie)) {
-            $this->categorie[] = $categorie;
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
         }
 
         return $this;
     }
 
-    public function removeCategorie(CategorieArtiste $categorie): self
+    public function removeCategory(CategorieArtiste $category): self
     {
-        if ($this->categorie->contains($categorie)) {
-            $this->categorie->removeElement($categorie);
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
         }
 
         return $this;
     }
+
+   
+
+   
 
 }

@@ -29,8 +29,17 @@
             margin-bottom:10px;
         }
         body{
-            margin-left:10px;
-            margin-right:10px;
+            margin-top:10px;
+            margin-bottom:10px;
+            margin-left:20px;
+            margin-right:20px;
+        }
+        .content{
+            margin-top:10px;
+            margin-bottom:40px;
+            margin-left:20px;
+            margin-right:20px;
+
         }
         .footer {
    position: fixed;
@@ -40,6 +49,7 @@
    background-color: red;
    color: white;
    text-align: center;
+            margin-top:40px;
 }
 </style>
 {% endblock %}
@@ -49,8 +59,8 @@
         {% block header %}{% endblock %}
         {% block secondheader %}{% endblock %}
         {% block  body  %}{% endblock %}
-        {% block javascripts %}{% endblock %}
         {% block  footer  %}{% endblock %}
+        {% block javascripts %}{% endblock %}
     </body>
     
 </html>
