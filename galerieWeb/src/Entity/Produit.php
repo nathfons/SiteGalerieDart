@@ -21,7 +21,7 @@ class Produit
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $typeProduit;
+    private $typeProduit;//OEUVRE OU ARTICLE_EN_VENTE
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -123,7 +123,7 @@ class Produit
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie" , inversedBy="produits")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $categorie;
+    private $categorie;//PEINTURE,SCULPTURE,PHOTO,POSTER,TSHIRT,LOT_CARTES_POSTALES
 
     public function __construct()
     {

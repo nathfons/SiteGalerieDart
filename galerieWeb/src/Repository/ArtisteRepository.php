@@ -20,9 +20,9 @@ class ArtisteRepository extends ServiceEntityRepository
         parent::__construct($registry, Artiste::class);
     }
 
-    // /**
-    //  * @return Artiste[] Returns an array of Artiste objects
-    //  */
+     /**
+      * @return Artiste[] Returns an array of Artiste objects
+      */
     
     public function findByCategorieArtiste($categorie,$lettre)
     {
@@ -49,9 +49,9 @@ class ArtisteRepository extends ServiceEntityRepository
       
     }
 
-    // /**
-    //  * @return Artiste[] Returns an array of Artiste objects
-    //  */
+     /**
+      * @return Artiste[] Returns an array of Artiste objects
+      */
     
     public function findByFirstLetter($lettre)
     {
@@ -72,9 +72,9 @@ class ArtisteRepository extends ServiceEntityRepository
       
     }
 
-    // /**
-    //  * @return Artiste[] Returns an array of Artiste objects
-    //  */
+     /**
+      * @return Artiste[] Returns an array of Artiste objects
+      */
     
     public function findByArtistesAlaune()
     {
