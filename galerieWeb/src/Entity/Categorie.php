@@ -28,7 +28,7 @@ class Categorie
         return $this->id;
     }
 
-         /**
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="categorie")
      */
     private $produits;
@@ -57,7 +57,7 @@ class Categorie
         return $this;
     }
 
-       /**
+    /**
      * @return Collection|Produit[]
      */
     public function getProduits(): Collection

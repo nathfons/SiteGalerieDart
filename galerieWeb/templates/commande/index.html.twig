@@ -9,21 +9,29 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Referencecommande</th>
-                <th>Etatcommande</th>
-                <th>Datecommande</th>
-                <th>Datelivraison</th>
+                <th>Reference de commande</th>
+                <th>Client</th>
+                <th>Adresse</th>
+                <th>Date de commande</th>
+                <th>Date de livraison</th>
+                <th>Type de livraison</th>
+                <th>Type de paiement</th>
+                
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
+        
         {% for commande in commandes %}
             <tr>
                 <td>{{ commande.id }}</td>
                 <td>{{ commande.referencecommande }}</td>
-                <td>{{ commande.etatcommande }}</td>
+                <td>{{ commande.getIdClient.nom  }}</td>
+                <td>{{ commande.getIdAdresse.ville }}</td>
                 <td>{{ commande.datecommande ? commande.datecommande|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ commande.datelivraison ? commande.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ commande.getIdTypelivraison.nomtypelivraison }}</td>
+                <td>{{ commande.getIdTypepaiement.nomtypepaiement }}</td>
                 <td>
                     <a href="{{ path('commande_show', {'id': commande.id}) }}">show</a>
                     <a href="{{ path('commande_edit', {'id': commande.id}) }}">edit</a>

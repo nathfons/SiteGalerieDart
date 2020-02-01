@@ -93,11 +93,6 @@ class Artiste
      */
     private $categories;
 
-    
-
-    
-
-    
 
     public function __construct()
     {
@@ -185,7 +180,6 @@ class Artiste
 
     public function getTextAlaune(): ?string
     {
-        
         return $this->textAlaune;
     }
 
@@ -201,7 +195,7 @@ class Artiste
         return $this->nom;
     }
 
-    public function setNom(?string $nom): self
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -213,7 +207,7 @@ class Artiste
         return $this->prenom;
     }
 
-    public function setPrenom(?string $prenom): self
+    public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
 
@@ -225,7 +219,7 @@ class Artiste
         return $this->telephone;
     }
 
-    public function setTelephone(?string $telephone): self
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
 
@@ -264,8 +258,8 @@ class Artiste
 
     public function removePhotographie(PhotographieArtiste $photographie): self
     {
-        if ($this->photographies->contains($idPhotographie)) {
-            $this->photographies->removeElement($idPhotographie);
+        if ($this->photographies->contains($photographie)) {
+            $this->photographies->removeElement($photographie);
             // set the owning side to null (unless already changed)
             if ($photographie->getArtiste() === $this) {
                 $photographie->setArtiste(null);
@@ -275,7 +269,6 @@ class Artiste
         return $this;
     }
 
-    
     public function getUtilisateur(): ?Utilisateur
     {
         return $this->utilisateur;
@@ -284,8 +277,6 @@ class Artiste
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
-
-        
 
         return $this;
     }
@@ -300,18 +291,18 @@ class Artiste
 
     public function addProduit(Produit $produit): self
     {
-        if (!$this->produit->contains($produit)) {
+        if (!$this->produits->contains($produit)) {
             $this->produits[] = $produit;
             $produit->setArtiste($this);
         }
-        
+
         return $this;
     }
 
     public function removeProduit(Produit $produit): self
     {
         if ($this->produits->contains($produit)) {
-            $this->cadres->removeElement($produit);
+            $this->produits->removeElement($produit);
             // set the owning side to null (unless already changed)
             if ($produit->getArtiste() === $this) {
                 $produit->setArtiste(null);
@@ -342,6 +333,29 @@ class Artiste
     {
         if ($this->categories->contains($category)) {
             $this->categories->removeElement($category);
+        }
+
+        return $this;
+    }
+
+    public function addPhotography(PhotographieArtiste $photography): self
+    {
+        if (!$this->photographies->contains($photography)) {
+            $this->photographies[] = $photography;
+            $photography->setArtiste($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhotography(PhotographieArtiste $photography): self
+    {
+        if ($this->photographies->contains($photography)) {
+            $this->photographies->removeElement($photography);
+            // set the owning side to null (unless already changed)
+            if ($photography->getArtiste() === $this) {
+                $photography->setArtiste(null);
+            }
         }
 
         return $this;

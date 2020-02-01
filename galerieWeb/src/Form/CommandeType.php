@@ -3,9 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Commande;
+use App\Entity\Client;
+use App\Entity\Typelivraison;
+use App\Entity\Typepaiement;
+use App\Entity\Adresse;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CommandeType extends AbstractType
 {
@@ -13,13 +19,66 @@ class CommandeType extends AbstractType
     {
         $builder
             ->add('referencecommande')
-            ->add('etatcommande')
+            
+            ->add('etatcommande',ChoiceType::class,[
+                'choices'  => [
+                    'commandé' => "commandé",
+                    'traitement' => "traitement",
+                    'livraison' => "livraison",
+                    'livré' => "livre",
+                
+                ],
+                'multiple' => false,
+                'required' => true,
+                //'placeholder' => 'commandé ',
+            ])
             ->add('datecommande')
             ->add('datelivraison')
-            ->add('id_adresse')
-            ->add('id_typelivraison')
-            ->add('id_typepaiement')
-            ->add('id_client')
+            
+            ->add('id_adresse', EntityType::class, [
+                //choise from entity
+                'class'=> Adresse::class,
+                //User.name property visible
+                'choice_label' => 'ville',
+                'placeholder' => 'obligatoire',               
+            ])       
+          
+            ->add('id_typelivraison', EntityType::class, [
+                //choise from entity
+                'class'=> Typelivraison::class,
+                //User.name property visible 
+                'placeholder' => 'obligatoire',
+                'choice_label' => function (Typelivraison $entity) {
+                    return $entity->getNomtypelivraison();
+                 },
+                 'choice_value' => function (Typelivraison $entity = null) {
+                     return $entity ? $entity->getId() : '';
+                 },                             
+            ])
+            ->add('id_typepaiement', EntityType::class, [
+                //choise from entity
+                'class'=> Typepaiement::class,
+                //User.name property visible
+                'placeholder' => 'obligatoire', 
+                'choice_label' => function (Typepaiement $entity) {
+                    return $entity->getNomTypepaiement();
+                 },
+                 'choice_value' => function (Typepaiement $entity = null) {
+                     return $entity ? $entity->getId() : '';
+                 },                            
+            ])
+            ->add('id_client', EntityType::class, [
+                //choise from entity
+                'class'=> Client::class,
+                //User.name property visible
+                'placeholder' => 'obligatoire', 
+                'choice_label' => function (Client $entity) {
+                    return $entity->getNom();
+                 },
+                 'choice_value' => function (Client $entity = null) {
+                     return $entity ? $entity->getId() : '';
+                 },              
+            ])
         ;
     }
 

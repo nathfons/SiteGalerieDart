@@ -72,6 +72,7 @@ class ProduitRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             
             ->andWhere('p.produitoriginal is null')
+            ->andWhere('p.quantiteVendue is not null')
             //->setParameter('val', $value)
             ->orderBy('p.id', 'ASC')
             //->setMaxResults(10)

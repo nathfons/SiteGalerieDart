@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdresseRepository")
@@ -15,6 +17,41 @@ class Adresse
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client" , inversedBy="adresses")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $id_client;
+
+    public function __construct()
+    {
+        $this->adresses = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="id_adresse")
+     */
+    private $commandes;
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commande->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setIdAdresse($this);
+        }
+        
+
+        return $this;
+    }
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -31,11 +68,7 @@ class Adresse
      */
     private $rueEtNumero;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\client")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $id_client;
+
 
     public function getId(): ?int
     {

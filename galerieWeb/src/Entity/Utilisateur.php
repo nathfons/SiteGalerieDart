@@ -40,7 +40,6 @@ class Utilisateur implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
-   
 
     public function getId(): ?int
     {
@@ -69,16 +68,9 @@ class Utilisateur implements UserInterface
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
+    public function getRoles(): ?array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
     public function setRoles(array $roles): self
@@ -88,12 +80,9 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -119,7 +108,7 @@ class Utilisateur implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-    
+
     public function getType(): ?TypeUtilisateur
     {
         return $this->type;

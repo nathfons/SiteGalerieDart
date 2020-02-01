@@ -17,6 +17,7 @@ class AdminController extends AbstractController
 {
     private $routeSelected="admin";
     private $qte = 0;
+    private $cmd = "no";
 
     /**
      * @Route("/", name="admin")
@@ -64,17 +65,20 @@ class AdminController extends AbstractController
         ]);
     }  
     /**
-     * @Route("/admin_vente_produits/{qte}", name="admin_vente_produits", methods={"GET"})
+     * @Route("/admin_vente_produits", name="admin_vente_produits")
      */
-    public function findProduitsVente(ProduitRepository $produitRepository, $qte): Response
+    public function findProduitsVente(ProduitRepository $produitRepository): Response
     {
-        $this->routeSelected="admin_vente_produits";
-        $this->qte=$qte;
+
+       
+        //$this->routeSelected="admin_vente_produits";
+        //$this->qte=$qte;
 
         return $this->render('admin/admin_vente_produits.html.twig', [
             'produitsVente' => $produitRepository->findVenteProduits(),
-            'qte'=> $this->qte,
-            'routeSelected'=> $this->routeSelected,
+            'qte'=> 4,//$this->qte,
+            'cmd'=> 'no',
+            //'routeSelected'=> $this->routeSelected,
         ]);
     }  
 

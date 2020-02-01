@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Typelivraison index{% endblock %}
+
+{% block body %}
+    <h1>Typelivraison index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nomtypelivraison</th>
+                <th>Prixlivraison</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typelivraison in typelivraisons %}
+            <tr>
+                <td>{{ typelivraison.id }}</td>
+                <td>{{ typelivraison.nomtypelivraison }}</td>
+                <td>{{ typelivraison.prixlivraison }}</td>
+                <td>
+                    <a href="{{ path('typelivraison_show', {'id': typelivraison.id}) }}">show</a>
+                    <a href="{{ path('typelivraison_edit', {'id': typelivraison.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('typelivraison_new') }}">Create new</a>
+{% endblock %}
