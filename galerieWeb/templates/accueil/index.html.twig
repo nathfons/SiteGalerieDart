@@ -8,9 +8,42 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h2>Artistes à la une </h2>
-    <h2>Newsletter </h2>
-    <h2>Produits Phares </h2>
+<div class="content">
+    <h2 align="center">Artistes à la une </h2>
+<div align="center" id="carouselArtistesControls" class="carousel slide" data-ride="carousel">
+  <div align="center" class="carousel-inner">
+  {% for artiste in artistes %}
+    <div align="center" class="carousel-item">
+                <div class="border border-dark rounded p-2 clearfix">
+                    <h2>
+                        {{ artiste.prenom }}
+                        -
+                        {{ artiste.nom }}
+                        
+                    </h2>
+                    <img align="center" class="img-fluid rounded" src="{{ artiste.photographie }}" alt="Image de {{ artiste.nom }}">
+
+                    <hr>
+                    <a href="{{ path('artiste_detail', {'id': artiste.id}) }}" class="btn btn-success float-right">
+                        Voir
+                    </a>
+                </div>
+
+            </div>
+        {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+        
+
+    <h2 align="center">Newsletter </h2>
+    <h2 align="center">Produits Phares </h2>
 </div>
 {% endblock %}

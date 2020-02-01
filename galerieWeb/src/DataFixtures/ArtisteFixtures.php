@@ -37,6 +37,9 @@ class ArtisteFixtures extends Fixture
     $categoriesArtistes[] = $categorie;
     $manager->persist($categorie);
     
+    $artisteAlaune = [];
+    $artisteAlaune[] =TRUE;
+    $artisteAlaune[] =FALSE;
     $type = new TypeUtilisateur();
     $type->setNomType("ADMIN");
     $manager->persist($type);
@@ -68,8 +71,8 @@ class ArtisteFixtures extends Fixture
         $artiste->setMiniature('http://lorempixel.com/200/200/');
         $artiste->addCategory($faker->randomElement($categoriesArtistes));
         $artiste->setCommission(20);
-        $artiste->setAlaune(false);
-        $artiste->setAlaune("");
+        $artiste->setAlaune($faker->randomElement($artisteAlaune));
+        $artiste->setTextAlaune($faker->text);
         $artiste->setTelephone("0671398765");
         $artiste->setDateCreationCompte($faker->dateTime($max = 'now', $timezone = null));
         $artiste->setUtilisateur($idUtilisateur);
