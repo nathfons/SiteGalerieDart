@@ -7,6 +7,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use App\Repository\EntityManager;
 use App\Repository\Join;
+use App\Constants\BDDconstants;
+use function Symfony\Component\String\u;
+
 
 /**
  * @method Produit|null find($id, $lockMode = null, $lockVersion = null)
@@ -143,4 +146,94 @@ class ProduitRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+     /**
+      * @return Produit[] Returns an array of Produit objects
+      */
+    public function findByFirstLetter($lettre,$isOeuvre)
+    {
+
+        $typeProduit = BDDconstants::TYPEPRODUIT_ArticlesEnVente;
+        if($isOeuvre == true){
+            $typeProduit = BDDconstants::TYPEPRODUIT_Oeuvre;
+        }
+        if(u($lettre)->equalsTo('*')){
+            return $this->createQueryBuilder('produit')
+            ->andWhere('produit.typeProduit = :type')
+            ->setParameter('type', $typeProduit)
+            ->orderBy('produit.dateCreation', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+        }
+        return $this->createQueryBuilder('produit')
+            ->andWhere('produit.typeProduit = :type')
+            ->setParameter('type', $typeProduit)
+        ->join('produit.artiste','artiste')
+        ->andWhere('SUBSTRING(artiste.nom,1,1) = :lettre')
+        ->setParameter('lettre', $lettre)
+        ->orderBy('produit.dateCreation', 'DESC')
+        ->getQuery()
+        ->getResult()
+    ;
+      
+    }
+
+     /**
+      * @return Produit[] Returns an array of Artiste objects
+      */
+    
+    public function findByCategorieProduit($categorie,$lettre,$isOeuvre)
+    {
+
+        $typeProduit = BDDconstants::TYPEPRODUIT_ArticlesEnVente;
+        if($isOeuvre == true){
+            $typeProduit = BDDconstants::TYPEPRODUIT_Oeuvre;
+        }
+        if(u($lettre)->equalsTo('*')){
+            return $this->createQueryBuilder('produit')
+            ->join('produit.categorie','categorie')
+            ->andWhere('categorie.nomcategorie = :categorie')
+            ->setParameter('categorie', $categorie)
+            ->andWhere('produit.typeProduit = :type')
+            ->setParameter('type', $typeProduit)
+            ->orderBy('produit.dateCreation', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+        }
+        return $this->createQueryBuilder('produit')
+        ->join('produit.categorie','categorie')
+        ->andWhere('categorie.nomcategorie = :categorie')
+        ->setParameter('categorie', $categorie)
+            ->andWhere('produit.typeProduit = :type')
+            ->setParameter('type', $typeProduit)
+        ->join('produit.artiste','artise')
+        ->andWhere('SUBSTRING(artiste.nom,1,1) = :lettre')
+        ->setParameter('lettre', $lettre)
+        ->orderBy('produit.dateCreation', 'DESC')
+        ->getQuery()
+        ->getResult()
+    ;
+    }
+
+     /**
+      * @return Produit[] Returns an array of Artiste objects
+      */
+    public function findMostSold()
+    {
+        $typeProduit = BDDconstants::TYPEPRODUIT_ArticlesEnVente;
+        
+            return $this->createQueryBuilder('produit')
+            ->andWhere('produit.enVente = :enVente')
+            ->andWhere('produit.typeProduit = :typeProduit')
+            ->setParameter('typeProduit', $typeProduit)
+            ->setParameter('enVente', TRUE)
+            ->orderBy('produit.quantiteVendue', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

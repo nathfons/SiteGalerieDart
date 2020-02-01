@@ -36,8 +36,10 @@ class ArtisteFixtures extends Fixture
     $categorie->setNom("Peintre");
     $categoriesArtistes[] = $categorie;
     $manager->persist($categorie);
-
     
+    $artisteAlaune = [];
+    $artisteAlaune[] =TRUE;
+    $artisteAlaune[] =FALSE;
     $type = new TypeUtilisateur();
     $type->setNomType("ADMIN");
     $manager->persist($type);
@@ -47,7 +49,6 @@ class ArtisteFixtures extends Fixture
     $typeArtiste = new TypeUtilisateur();
     $typeArtiste->setNomType("ARTISTE");
     $idType=$manager->persist($typeArtiste);
-
     $faker = Faker\Factory::create();
     
     for($j=1;$j<=20;$j++){
@@ -66,12 +67,12 @@ class ArtisteFixtures extends Fixture
         $artiste->setPrenom($faker->firstName);
         $artiste->setBiography($faker->text);
         $artiste->setApprouve(false);
-        $artiste->setPhotographie($faker->word);//random pic url à mettre
-        $artiste->setMiniature($faker->word);
+        $artiste->setPhotographie('http://lorempixel.com/1200/500/');//random pic url à mettre
+        $artiste->setMiniature('http://lorempixel.com/200/200/');
         $artiste->addCategory($faker->randomElement($categoriesArtistes));
         $artiste->setCommission(20);
-        $artiste->setAlaune(false);
-        $artiste->setAlaune("");
+        $artiste->setAlaune($faker->randomElement($artisteAlaune));
+        $artiste->setTextAlaune($faker->text);
         $artiste->setTelephone("0671398765");
         $artiste->setDateCreationCompte($faker->dateTime($max = 'now', $timezone = null));
         $artiste->setUtilisateur($idUtilisateur);
