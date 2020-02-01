@@ -1,10 +1,16 @@
 <?php
+namespace App\Constants;
 
-define("CATEGORIE_Tshirt","TSHIRT");
-define("CATEGORIE_Peinture","PEINTURE");
-define("CATEGORIE_Sculpture","SCULPTURE");
-define("CATEGORIE_Photographie","PHOTOGRAPHIE");
-define("CATEGORIE_Poster","POSTER");
-define("CATEGORIE_CartesPostales","CARTES_POSTALES");
-define("TYPEPRODUIT_ArticlesEnVente","ARTICLE_EN_VENTE");
-define("TYPEPRODUIT_Oeuvre","OEUVRE");
+class BDDconstants{
+
+
+const CATEGORIE_Tshirt = "TSHIRT";
+const CATEGORIE_Peinture="PEINTURE";
+const CATEGORIE_Sculpture="SCULPTURE";
+const CATEGORIE_Photographie="PHOTOGRAPHIE";
+const CATEGORIE_Poster="POSTER";
+const CATEGORIE_CartesPostales="CARTES_POSTALES";
+const TYPEPRODUIT_ArticlesEnVente="ARTICLE_EN_VENTE";
+const TYPEPRODUIT_Oeuvre="OEUVRE";
+
+}

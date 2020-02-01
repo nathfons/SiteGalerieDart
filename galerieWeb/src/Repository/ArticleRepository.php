@@ -25,7 +25,7 @@ class ArticleRepository extends ServiceEntityRepository
     public function findMostRecents()
     {
         return $this->createQueryBuilder('article')
-            ->andWhere('article.bublie = :publie')
+            ->andWhere('article.publie = :publie')
             ->setParameter('publie', true)
             ->orderBy('article.datePublication', 'DESC')
             ->setMaxResults(10)

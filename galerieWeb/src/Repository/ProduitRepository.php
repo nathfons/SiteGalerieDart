@@ -147,10 +147,9 @@ class ProduitRepository extends ServiceEntityRepository
     */
 
 
-    // /**
-    //  * @return Produit[] Returns an array of Produit objects
-    //  */
-    
+     /**
+      * @return Produit[] Returns an array of Produit objects
+      */
     public function findByFirstLetter($lettre,$isOeuvre)
     {
 
@@ -170,7 +169,7 @@ class ProduitRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('produit')
             ->andWhere('produit.typeProduit = :type')
             ->setParameter('type', $typeProduit)
-        ->join('produit.artiste','artise')
+        ->join('produit.artiste','artiste')
         ->andWhere('SUBSTRING(artiste.nom,1,1) = :lettre')
         ->setParameter('lettre', $lettre)
         ->orderBy('produit.dateCreation', 'DESC')
@@ -180,9 +179,9 @@ class ProduitRepository extends ServiceEntityRepository
       
     }
 
-    // /**
-    //  * @return Artiste[] Returns an array of Artiste objects
-    //  */
+     /**
+      * @return Produit[] Returns an array of Artiste objects
+      */
     
     public function findByCategorieProduit($categorie,$lettre,$isOeuvre)
     {
@@ -218,16 +217,17 @@ class ProduitRepository extends ServiceEntityRepository
     ;
     }
 
-    // /**
-    //  * @return Artiste[] Returns an array of Artiste objects
-    //  */
-    
+     /**
+      * @return Produit[] Returns an array of Artiste objects
+      */
     public function findMostSold()
     {
         $typeProduit = BDDconstants::TYPEPRODUIT_ArticlesEnVente;
         
             return $this->createQueryBuilder('produit')
             ->andWhere('produit.enVente = :enVente')
+            ->andWhere('produit.typeProduit = :typeProduit')
+            ->setParameter('typeProduit', $typeProduit)
             ->setParameter('enVente', TRUE)
             ->orderBy('produit.quantiteVendue', 'DESC')
             ->setMaxResults(20)
