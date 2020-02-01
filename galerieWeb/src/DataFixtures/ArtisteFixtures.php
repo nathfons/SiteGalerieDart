@@ -36,7 +36,6 @@ class ArtisteFixtures extends Fixture
     $categorie->setNom("Peintre");
     $categoriesArtistes[] = $categorie;
     $manager->persist($categorie);
-
     
     $type = new TypeUtilisateur();
     $type->setNomType("ADMIN");
@@ -47,7 +46,6 @@ class ArtisteFixtures extends Fixture
     $typeArtiste = new TypeUtilisateur();
     $typeArtiste->setNomType("ARTISTE");
     $idType=$manager->persist($typeArtiste);
-
     $faker = Faker\Factory::create();
     
     for($j=1;$j<=20;$j++){
@@ -66,8 +64,8 @@ class ArtisteFixtures extends Fixture
         $artiste->setPrenom($faker->firstName);
         $artiste->setBiography($faker->text);
         $artiste->setApprouve(false);
-        $artiste->setPhotographie($faker->word);//random pic url à mettre
-        $artiste->setMiniature($faker->word);
+        $artiste->setPhotographie('http://lorempixel.com/1200/500/');//random pic url à mettre
+        $artiste->setMiniature('http://lorempixel.com/200/200/');
         $artiste->addCategory($faker->randomElement($categoriesArtistes));
         $artiste->setCommission(20);
         $artiste->setAlaune(false);

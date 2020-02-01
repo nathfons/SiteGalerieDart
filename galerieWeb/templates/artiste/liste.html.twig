@@ -10,11 +10,13 @@
             <div class="col-4 mt-4">
                 <div class="border border-dark rounded p-2 clearfix">
                     <h2>
-                        {{ artiste.nom }}
-                        -
                         {{ artiste.prenom }}
+                        -
+                        {{ artiste.nom }}
                         
                     </h2>
+                    <img align="center" class="img-fluid rounded" src="{{ artiste.miniature }}" alt="Image de {{ artiste.nom }}">
+
                     <hr>
                     <a href="{{ path('artiste_detail', {'id': artiste.id}) }}" class="btn btn-success float-right">
                         Voir
