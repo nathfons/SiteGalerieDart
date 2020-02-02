@@ -34,6 +34,11 @@ class Couleur
      */
     private $nomcouleur;
 
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $codeHexadecimal;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +95,18 @@ class Couleur
                 $cadre->setCouleur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCodeHexadecimal(): ?string
+    {
+        return $this->codeHexadecimal;
+    }
+
+    public function setCodeHexadecimal(?string $codeHexadecimal): self
+    {
+        $this->codeHexadecimal = $codeHexadecimal;
 
         return $this;
     }
