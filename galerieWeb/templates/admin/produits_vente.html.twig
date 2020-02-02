@@ -29,10 +29,20 @@
                 <td>{{ produit.prixHT }}</td>
                 <td>{{ produit.prixHT * produit.quantiteVendue }}</td>
                 <td>{{ produit.quantiteStocks }}</td>
+                {% if cmd == "yes" %}
                 <td>
-                    {{ include('produit/_commander_stock.html.twig') }}
+                <form > 
+                    
+	                <input type="text" placeholder="qte" name="qte_cmd" > 
+	                <button type="submit">CMD</button>
+                </form>
+                   
 
                 </td>
+               
+                {% else %}
+                <td></td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>

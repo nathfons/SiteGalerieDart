@@ -22,7 +22,7 @@ class ArtisteType extends AbstractType
             ->add('approuve')
             ->add('photographie')
             ->add('miniature')
-            ->add('categorie', EntityType::class, [
+            ->add('categories', EntityType::class, [
                 //choise from entity
                 'required' => true,
                 'placeholder' => 'Catégorie',
@@ -39,11 +39,13 @@ class ArtisteType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('dateCreationCompte')
-            ->add('idUtilisateur', EntityType::class, [
+            ->add('utilisateur', EntityType::class, [
                 //choise from entity
                 'class'=> Utilisateur::class,
                 //User.name property visible
                 'choice_label' => 'email',
+                'required' => true,
+                'placeholder' => 'Choix artiste',
             ])
         ;
     }

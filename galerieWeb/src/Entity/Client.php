@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Entity\Utilisateur;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
@@ -16,6 +18,54 @@ class Client
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Adresse", mappedBy="id_client")
+     */
+    private $adresses;
+
+    /**
+     * @return Collection|Adresse[]
+     */
+    public function getAdresse(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdresse(Adresse $adresse): self
+    {
+        if (!$this->adresse->contains($adresse)) {
+            $this->adresses[] = $adresse;
+            $adresse->setIdClient($this);
+        }
+        
+
+        return $this;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="id_client")
+     */
+    private $commandes;
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setIdClient($this);
+        }
+
+        return $this;
+    }
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -38,14 +88,15 @@ class Client
     private $dateCreationCompte;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", mappedBy="idArtiste", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
      */
     private $utilisateur;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", mappedBy="idClient", cascade={"persist", "remove"})
-     */
-    private $idUtilisateur;
+    public function __construct()
+    {
+        $this->adresses = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -100,6 +151,7 @@ class Client
         return $this;
     }
 
+    
     public function getUtilisateur(): ?Utilisateur
     {
         return $this->utilisateur;
@@ -109,28 +161,48 @@ class Client
     {
         $this->utilisateur = $utilisateur;
 
-        // set (or unset) the owning side of the relation if necessary
-        $newIdArtiste = null === $utilisateur ? null : $this;
-        if ($utilisateur->getIdArtiste() !== $newIdArtiste) {
-            $utilisateur->setIdArtiste($newIdArtiste);
+        return $this;
+    }
+
+    /**
+     * @return Collection|Adresse[]
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdress(Adresse $adress): self
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses[] = $adress;
+            $adress->setIdClient($this);
         }
 
         return $this;
     }
 
-    public function getIdUtilisateur(): ?Utilisateur
+    public function removeAdress(Adresse $adress): self
     {
-        return $this->idUtilisateur;
+        if ($this->adresses->contains($adress)) {
+            $this->adresses->removeElement($adress);
+            // set the owning side to null (unless already changed)
+            if ($adress->getIdClient() === $this) {
+                $adress->setIdClient(null);
+            }
+        }
+
+        return $this;
     }
 
-    public function setIdUtilisateur(?Utilisateur $idUtilisateur): self
+    public function removeCommande(Commande $commande): self
     {
-        $this->idUtilisateur = $idUtilisateur;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newIdClient = null === $idUtilisateur ? null : $this;
-        if ($idUtilisateur->getIdClient() !== $newIdClient) {
-            $idUtilisateur->setIdClient($newIdClient);
+        if ($this->commandes->contains($commande)) {
+            $this->commandes->removeElement($commande);
+            // set the owning side to null (unless already changed)
+            if ($commande->getIdClient() === $this) {
+                $commande->setIdClient(null);
+            }
         }
 
         return $this;

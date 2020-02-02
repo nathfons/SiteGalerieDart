@@ -7,12 +7,18 @@ use App\Repository\CadreRepository;
 use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Produit;
 
 /**
  * @Route("/admin")
  */
 class AdminController extends AbstractController
 {
+    private $routeSelected="admin";
+    private $qte = 0;
+    private $cmd = "no";
+
     /**
      * @Route("/", name="admin")
      */
@@ -63,8 +69,35 @@ class AdminController extends AbstractController
      */
     public function findProduitsVente(ProduitRepository $produitRepository): Response
     {
+
+       
+        //$this->routeSelected="admin_vente_produits";
+        //$this->qte=$qte;
+
         return $this->render('admin/admin_vente_produits.html.twig', [
             'produitsVente' => $produitRepository->findVenteProduits(),
+            'qte'=> 4,//$this->qte,
+            'cmd'=> 'no',
+            //'routeSelected'=> $this->routeSelected,
         ]);
     }  
+
+    /**
+     * @Route("/{id}/stock", name="commander_stock", methods={"GET"})
+     */
+    public function commander_stock(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
+    {
+        if ($this->isCsrfTokenValid('commander_stock'.$produit->getId(), $request->request->get('_token'))) {
+            $produitId = $produit->getId();
+            $produitStock=$produit->getQuantiteStocks();
+            $qte=4;
+            $qte = $request->request->get("input_qte");
+            $produitRepository->commanderStock($produitId, $produitStock, $qte);
+            //$this->qteSelected=$qte;
+   
+        }
+
+        return $this->redirectToRoute('admin_vente_produits');
+    }
+
 }

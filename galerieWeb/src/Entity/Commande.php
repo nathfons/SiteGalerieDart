@@ -37,26 +37,26 @@ class Commande
     private $datelivraison;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\adresse")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Adresse", inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $id_adresse;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\typelivraison")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Typelivraison", inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $id_typelivraison;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\typepaiement")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Typepaiement", inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $id_typepaiement;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\client")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $id_client;
 

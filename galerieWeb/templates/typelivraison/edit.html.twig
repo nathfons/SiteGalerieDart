@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Typelivraison{% endblock %}
+
+{% block body %}
+    <h1>Edit Typelivraison</h1>
+
+    {{ include('typelivraison/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('typelivraison_index') }}">back to list</a>
+
+    {{ include('typelivraison/_delete_form.html.twig') }}
+{% endblock %}
