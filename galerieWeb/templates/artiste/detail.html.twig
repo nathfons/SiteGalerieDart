@@ -9,7 +9,7 @@
     <h4 align="center">{{categorie.nom}} </h4></br>
 
     {%endfor %}
-         <img align="center" class="img-fluid rounded" src="{{ artiste.photographie }}" alt="Image de {{ artiste.nom }}">
+         <img align="center" class="img-fluid rounded" src="{{asset(artiste.photographie)  }}" alt="Image de {{ artiste.nom }}">
 
     </div>
 <div class="content">

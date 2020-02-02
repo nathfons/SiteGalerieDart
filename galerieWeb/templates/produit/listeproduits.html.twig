@@ -17,6 +17,8 @@
                         {{ produit.prixHT }}
                         €
                     </h2>
+                <img align="center" class="img-fluid rounded" src="{{ asset(produit.miniature) }}" alt="Image de {{ produit.nomProduit }}">
+
                     <hr>
                     <a href="{{ path('produit_detail', {'id': produit.id}) }}" class="btn btn-success float-right">
                         Voir

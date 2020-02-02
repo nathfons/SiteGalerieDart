@@ -21,7 +21,7 @@
                         {{ artiste.nom }}
                         
                     </h2>
-                    <img align="center" class="img-fluid rounded" src="{{ artiste.photographie }}" alt="Image de {{ artiste.nom }}">
+                    <img align="center" class="img-fluid rounded" src="{{asset(artiste.photographie)}}" alt="Image de {{ artiste.nom }}">
 
                     <hr>
                     <a href="{{ path('artiste_detail', {'id': artiste.id}) }}" class="btn btn-success float-right">
@@ -45,5 +45,32 @@
 
     <h2 align="center">Newsletter </h2>
     <h2 align="center">Produits Phares </h2>
+     <div class="content">
+    <div class="row">
+        {% for produit in produits %}
+            <div class="col-4 mt-4">
+                <div class="border border-dark rounded p-2 clearfix">
+                    <h2>
+                        {{ produit.nomProduit }}
+                        -
+                        {{ produit.prixHT }}
+                        €
+                    </h2>
+                <img align="center" class="img-fluid rounded" src="{{ asset(produit.miniature) }}" alt="Image de {{ produit.nomProduit }}">
+
+                    <hr>
+                    <a href="{{ path('produit_detail', {'id': produit.id}) }}" class="btn btn-success float-right">
+                        Voir
+                    </a>
+                    <a href="{{ path('panierAdd', {'id': produit.id}) }}" class="btn btn-success float-right">
+                        <i class="fas fa-shopping-cart mr-1"></i>
+                        Ajouter
+                    </a>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+</div>
 </div>
 {% endblock %}
