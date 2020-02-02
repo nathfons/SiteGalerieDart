@@ -9,6 +9,7 @@ use App\Entity\TypeUtilisateur;
 use App\Entity\Utilisateur;
 use App\Entity\CategorieArtiste;
 use App\Entity\Artiste;
+use App\Entity\Produit;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
@@ -36,6 +37,10 @@ class ArtisteFixtures extends Fixture
     $categorie->setNom("Peintre");
     $categoriesArtistes[] = $categorie;
     $manager->persist($categorie);
+
+    $peinturesMini=[];
+    $peinturesMini[]="";
+    $peintures=[];
     
     $artisteAlaune = [];
     $artisteAlaune[] =TRUE;
@@ -45,7 +50,7 @@ class ArtisteFixtures extends Fixture
     $manager->persist($type);
     $type = new TypeUtilisateur();
     $type->setNomType("CLIENT");
-    $manager->persist($type);
+    //$manager->persist($type);//DEJA CREE DANS UTILISATEUR
     $typeArtiste = new TypeUtilisateur();
     $typeArtiste->setNomType("ARTISTE");
     $idType=$manager->persist($typeArtiste);
@@ -76,7 +81,15 @@ class ArtisteFixtures extends Fixture
         $artiste->setTelephone("0671398765");
         $artiste->setDateCreationCompte($faker->dateTime($max = 'now', $timezone = null));
         $artiste->setUtilisateur($idUtilisateur);
+
+        for($k=1;$k<=10;$k++){
+            $oeuvre = new Produit();
+
+
+        }
         $manager->persist($artiste);
+
+        
     }
 
     $manager->flush();

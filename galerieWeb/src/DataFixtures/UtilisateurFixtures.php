@@ -24,7 +24,7 @@ class UtilisateurFixtures extends Fixture
         $utilisateur = new Utilisateur();
         $utilisateur->setEmail ( "toto@gmail.com");
         $type = new TypeUtilisateur();
-        $type->setNomType("Client");
+        $type->setNomType("CLIENT");
         $utilisateur->setType($type) ;
         $plainPassword = 'toto';
         $encoded = $this->encoder->encodePassword($utilisateur, $plainPassword);
@@ -37,16 +37,6 @@ class UtilisateurFixtures extends Fixture
         $plainPassword = 'titi';
         $encoded = $this->encoder->encodePassword($utilisateur, $plainPassword);
         $utilisateur->setPassword($encoded);
-        $manager->persist($utilisateur);
-        $utilisateur = new Utilisateur();
-        $utilisateur->setEmail ( "giacometti@gmail.com");
-        $type = new TypeUtilisateur();
-        $type->setNomType("ARTISTE");
-        $utilisateur->setType($type) ;
-        $plainPassword = 'giacometti';
-        $encoded = $this->encoder->encodePassword($utilisateur, $plainPassword);
-        $utilisateur->setPassword($encoded);
-        $manager->persist($type);
         $manager->persist($utilisateur);
         $manager->flush();
     }
