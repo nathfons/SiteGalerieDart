@@ -316,7 +316,7 @@ class ProduitController extends AbstractController
         return $this->redirectToRoute('admin_oeuvres');
     }
 
-    
+
 
     //update
     public function update($id)

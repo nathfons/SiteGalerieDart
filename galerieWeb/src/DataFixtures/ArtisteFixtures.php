@@ -75,7 +75,7 @@ class ArtisteFixtures extends Fixture
         $artiste->setTextAlaune($faker->text);
         $artiste->setTelephone("0671398765");
         $artiste->setDateCreationCompte($faker->dateTime($max = 'now', $timezone = null));
-        $artiste->setUtilisateur($idUtilisateur);
+        $artiste->setUtilisateur($utilisateur);
         $manager->persist($artiste);
     }
 
