@@ -1,6 +1,6 @@
 {% extends 'basemenu.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
+{% block title %}Galerie d'Art{% endblock %}
 
 {% block contentPage %}
 <style>
@@ -10,11 +10,24 @@
 
 <div class="content">
     <h2 align="center">Artistes à la une </h2>
-<div align="center" id="carouselArtistesControls" class="carousel slide" data-ride="carousel">
-  <div align="center" class="carousel-inner">
-  {% for artiste in artistes %}
+ 
+    </div>
+    <div class="content">
+<div id="myCarousel" class="carousel slide content" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+    
+    {% for artiste in artistes %}
+      <li data-target="#myCarousel" data-slide-to="artiste.id" class="active"></li>
+      {% endfor %}
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner ">
     <div align="center" class="carousel-item">
-                <div class="border border-dark rounded p-2 clearfix">
+    
+    {% for artiste in artistes %}
+      <div class="item active">
                     <h2>
                         {{ artiste.prenom }}
                         -
@@ -29,18 +42,23 @@
                     </a>
                 </div>
 
-            </div>
         {% endfor %}
+            </div>
+     </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="{{ path('detail_commande') }}" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="{{ path('detail_commande') }}" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+
+
+
         
 
     <h2 align="center">Newsletter </h2>

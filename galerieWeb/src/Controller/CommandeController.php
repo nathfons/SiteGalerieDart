@@ -27,6 +27,17 @@ class CommandeController extends AbstractController
     }
 
     /**
+     * @Route("/detail", name="commande_detail", methods={"GET"})
+     */
+    public function detail(CommandeRepository $commandeRepository): Response
+    {
+        return $this->render('commande/index.html.twig', [
+            'commandes' => $commandeRepository->findAll(),
+            //dump( $commandeRepository->findAll()),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="commande_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
