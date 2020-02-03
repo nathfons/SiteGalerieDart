@@ -18,6 +18,8 @@
                         {{ oeuvre.prixHT }}
                         €
                     </h2>
+               <img align="center" class="img-fluid rounded" src="{{ asset(oeuvre.miniature) }}" alt="Image de {{ oeuvre.nomProduit }}">
+
                     <hr>
                     <a href="{{ path('oeuvre_detail', {'id': oeuvre.id}) }}" class="btn btn-success float-right">
                         <i class="fas fa-shopping-cart mr-1"></i>

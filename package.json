@@ -1,0 +1,9 @@
+{
+  "name": "nath",
+  "version": "1.0.0",
+  "description": "my name is",
+  "main": "index.js",
+  "repository": "https://github.com/nathfons/SiteGalerieDart.git",
+  "author": "Nathalie <nathalie.fons@gmail.com>",
+  "license": "MIT"
+}

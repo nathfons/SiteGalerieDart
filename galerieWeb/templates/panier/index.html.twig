@@ -35,6 +35,16 @@
         </tr>
         </tfoot>
         </table>
+         {% if app.user %}
+        
+        <a href="{{ path('commande_detail') }}" class="btn btn-success float-right">
+                        Valider mon panier
+                    </a>
+        {% else %}
+        <a href="/login" class="btn btn-success float-right">
+                        Valider mon panier
+                    </a>
+        {% endif %}
     {% else  %}
     <p>Le panier est vide.</p>
     {% endif  %}

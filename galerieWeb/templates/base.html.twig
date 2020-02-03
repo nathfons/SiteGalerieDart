@@ -19,40 +19,9 @@
         <title>{% block title %}Welcome to Galerie d'Art!{% endblock %}</title>
         
         {% block stylesheets %}
-        <style>
-        .menu{
-            margin-left:10px;
-            margin-right:10px;
-        }
-        .titleMain{
-            margin-top:10px;
-            margin-bottom:10px;
-        }
-        body{
-            margin-top:10px;
-            margin-bottom:10px;
-            margin-left:20px;
-            margin-right:20px;
-        }
-        .content{
-            margin-top:10px;
-            margin-bottom:40px;
-            margin-left:20px;
-            margin-right:20px;
+                <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
 
-        }
-        .footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: red;
-   color: white;
-   text-align: center;
-            margin-top:40px;
-}
-</style>
-{% endblock %}
+        {% endblock %}
 
     </head>
     <body >
