@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Commande;
 use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
+use App\Repository\ClientRepository;
+use App\Service\Panier\PanierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,11 +31,16 @@ class CommandeController extends AbstractController
     /**
      * @Route("/detail", name="commande_detail", methods={"GET"})
      */
-    public function detail(CommandeRepository $commandeRepository): Response
+    public function detail(ClientRepository $clientRepository,CommandeRepository $commandeRepository,PanierService $service): Response
     {
-        return $this->render('commande/index.html.twig', [
-            'commandes' => $commandeRepository->findAll(),
-            //dump( $commandeRepository->findAll()),
+        $panierAvecDonnees = $service->getFullPanier();
+        $total = $service->getTotal();
+        $id=0;
+
+        return $this->render('commande/detail.html.twig', [
+            'client' => $clientRepository->find($id),
+            'achats' => $panierAvecDonnees,
+            'total' => $total
         ]);
     }
 
