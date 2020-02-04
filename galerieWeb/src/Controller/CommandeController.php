@@ -6,6 +6,7 @@ use App\Entity\Commande;
 use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
 use App\Repository\ClientRepository;
+use App\Service\Commande\CommandeService;
 use App\Service\Panier\PanierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,16 +32,37 @@ class CommandeController extends AbstractController
     /**
      * @Route("/detail", name="commande_detail", methods={"GET"})
      */
-    public function detail(ClientRepository $clientRepository,CommandeRepository $commandeRepository,PanierService $service): Response
+    public function detail(Request $request,ClientRepository $clientRepository,CommandeRepository $commandeRepository,PanierService $servicePanier,CommandeService $serviceCommande): Response
     {
-        $panierAvecDonnees = $service->getFullPanier();
-        $total = $service->getTotal();
-        $id=0;
+        $panierAvecDonnees = $servicePanier->getFullPanier();
+        $total = $servicePanier->getTotal();
+        $user=$serviceCommande->getUser();
+        $client = null;
+
+        $commande = new Commande();// A COMPLETER
+        $this->getDoctrine()->getManager()->persist($commande);
+
+        if($user != null){
+            $client = $clientRepository->findOneByUserId($user->getId());
+        }
+        
+        $form = $this->createForm(CommandeType::class, $commande);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('commande_index');
+        }
+
+    
 
         return $this->render('commande/detail.html.twig', [
-            'client' => $clientRepository->find($id),
+            'commande' => $commande,
+            'client' => $client,
             'achats' => $panierAvecDonnees,
-            'total' => $total
+            'total' => $total,
+            'form' => $form->createView(),
         ]);
     }
 

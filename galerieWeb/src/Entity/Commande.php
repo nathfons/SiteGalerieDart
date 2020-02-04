@@ -24,7 +24,7 @@ class Commande
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $etatcommande;
+    private $etatcommande;//
 
     /**
      * @ORM\Column(type="datetime")

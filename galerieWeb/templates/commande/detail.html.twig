@@ -3,5 +3,10 @@
 {% block title %}Ma Commande{% endblock %}
 
 {% block contentPage %}
-   
+     <h1>Edit Commande</h1>
+
+    {{ include('commande/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('commande_index') }}">back to list</a>
+
 {% endblock %}

@@ -53,6 +53,7 @@ class PanierService{
         return $panierAvecDonnees;
     }
 
+
     public function getTotal(): float {
         $total = 0;
         $panierAvecDonnees = $this->getFullPanier();

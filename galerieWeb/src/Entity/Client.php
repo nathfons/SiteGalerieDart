@@ -92,6 +92,8 @@ class Client
      */
     private $utilisateur;
 
+   
+
     public function __construct()
     {
         $this->adresses = new ArrayCollection();
@@ -207,4 +209,6 @@ class Client
 
         return $this;
     }
+
+   
 }
