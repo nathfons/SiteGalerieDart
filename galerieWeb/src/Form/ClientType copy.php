@@ -28,7 +28,7 @@ class ClientType extends AbstractType
                 'required' => true,
                 'placeholder' => 'Choix client',
             ])
-            
+            /**
             ->add('adresse', EntityType::class, [
                 //choise from entity
                 'class'=> Adresse::class,
@@ -37,7 +37,16 @@ class ClientType extends AbstractType
                 'placeholder' => 'Choix adresse',
                 'choice_label' =>'ville',
                                        
-            ]) 
+            ]) */
+            ->add('adresses', CollectionType::class, array(
+                'entry_type'   => AdresseType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'entry_options' => [
+                    'attr' => ['class' => Adresse::class],
+                ],
+              ))
         ;
     }
 

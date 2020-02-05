@@ -11,7 +11,7 @@ use App\Entity\Utilisateur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class ClientType extends AbstractType
+class ClientType2 extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,24 +20,15 @@ class ClientType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('dateCreationCompte')
-            ->add('utilisateur', EntityType::class, [
-                //choise from entity
-                'class'=> Utilisateur::class,
-                //User.name property visible
-                'choice_label' => 'email',
-                'required' => true,
-                'placeholder' => 'Choix client',
-            ])
-            
-            ->add('adresse', EntityType::class, [
-                //choise from entity
-                'class'=> Adresse::class,
-                //User.name property visible
-                'required' => true,
-                'placeholder' => 'Choix adresse',
-                'choice_label' =>'ville',
-                                       
-            ]) 
+            ->add('adresses', CollectionType::class, array(
+                'entry_type'   => AdresseType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'entry_options' => [
+                    'attr' => ['class' => Adresse::class],
+                ],
+              ))
         ;
     }
 
