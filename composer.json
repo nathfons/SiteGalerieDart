@@ -1,4 +1,6 @@
-{
+{ 
+    "name":"Galerie",
+    "description":"Galerie d art",
     "type": "project",
     "license": "proprietary",
     "require": {
