@@ -31,7 +31,7 @@
                 <td>{{ produit.quantiteStocks }}</td>
                 {% if cmd == "yes" %}
                 <td>
-                <form > 
+                <form action ="{{ path('commander_stock', {id:produit.id}) }}" method="POST"> 
                     
 	                <input type="text" placeholder="qte" name="qte_cmd" > 
 	                <button type="submit">CMD</button>

@@ -82,20 +82,31 @@ class AdminController extends AbstractController
         ]);
     }  
 
-    /**
-     * @Route("/{id}/stock", name="commander_stock", methods={"GET"})
+        /**
+     * @Route("/stock/{id}", name="commander_stock", methods={"GET", "POST"})
      */
     public function commander_stock(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
     {
-        if ($this->isCsrfTokenValid('commander_stock'.$produit->getId(), $request->request->get('_token'))) {
-            $produitId = $produit->getId();
+        //dans template
+        //action="{{ path('commander_stock') }}" method="POST"
+
+       // $requete = $this->get('request');
+         // je vérifie si elle est de type POSt 
+        //if($requete->getMethod() == 'POST')
+        //{ 
+        //    $pass = $_POST['adresse']; //////Comme PHP
+        //    $adr = $_POST['pass'];   // COMME PHP
+       // } 
+
+      // dd($produit->getId());
+            $produitId=$produit->getId();
             $produitStock=$produit->getQuantiteStocks();
-            $qte=4;
-            $qte = $request->request->get("input_qte");
+            $qte = $request->get("qte_cmd");
             $produitRepository->commanderStock($produitId, $produitStock, $qte);
             //$this->qteSelected=$qte;
-   
-        }
+           
+            //->set('p.quantiteStocks', $produitStock+$qte)
+       
 
         return $this->redirectToRoute('admin_vente_produits');
     }
