@@ -89,7 +89,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": "~7.3.*"
+                "php": "~7.1.*"
             },
             "conflict": {
                 "doctrine/common": ">2.2,<2.4"
@@ -171,7 +171,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3.*"
+                "php": "^7.1.*"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^6.0",
@@ -249,7 +249,7 @@
                 "doctrine/lexer": "^1.0",
                 "doctrine/persistence": "^1.1",
                 "doctrine/reflection": "^1.0",
-                "php": "^7.3.*"
+                "php": "^7.1.*"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^1.0",
