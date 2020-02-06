@@ -14,17 +14,10 @@ class AdresseType2 extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('ville')
-            ->add('codePostal')
-            ->add('rueEtNumero')
-            ->add('id_client', EntityType::class, [
-                //choise from entity
-                'class'=> Client::class,
-                //User.name property visible
-                'choice_label' => 'nom',
-                'placeholder' => 'obligatoire',               
-            ])
-        ;
+        ->add('ville')
+        ->add('codePostal')
+        ->add('rueEtNumero')
+    ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

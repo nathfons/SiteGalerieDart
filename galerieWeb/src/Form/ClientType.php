@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Utilisateur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ClientType extends AbstractType
 {
@@ -28,16 +27,19 @@ class ClientType extends AbstractType
                 'required' => true,
                 'placeholder' => 'Choix client',
             ])
-            
             ->add('adresse', EntityType::class, [
                 //choise from entity
                 'class'=> Adresse::class,
                 //User.name property visible
                 'required' => true,
                 'placeholder' => 'Choix adresse',
-                'choice_label' =>'ville',
-                                       
-            ]) 
+                'choice_label' => function (Adresse $entity) {
+                    return $entity->getVille();
+                 },
+                 'choice_value' => function (Adresse $entity = null) {
+                     return $entity ? $entity->getId() : '';
+                 },                             
+            ])
         ;
     }
 

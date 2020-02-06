@@ -21,7 +21,7 @@ class ClientType2 extends AbstractType
             ->add('telephone')
             ->add('dateCreationCompte')
             ->add('adresses', CollectionType::class, array(
-                'entry_type'   => AdresseType::class,
+                'entry_type'   => AdresseType2::class,
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'prototype' => true,
