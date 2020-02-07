@@ -192,22 +192,17 @@ class AdminController extends AbstractController
             $formArtiste = $this->createForm(ArtisteType2::class, $artiste);
             $formArtiste->handleRequest($request);
             $forms[$artiste->getId()] = $formArtiste->createView();
-
-            
-            
+      
             if($index == $numItems){
-              
-               
-                
+             
             }
             
         }
         
         if ($formArtiste->isSubmitted() && $formArtiste->isValid()) {
-            dump($request->get('alaune'));
-            $this->getDoctrine()->getManager()->flush();
+            //dump($request->get('alaune'));
+            $this->getDoctrine()->getManager()->flush();     
         }   
-
 
         return $this->render('admin/admin_artistes_alaune.html.twig', [
            
