@@ -18,8 +18,7 @@ class CommandeType1 extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('id_client', ClientType2::class    
-        )
+        ->add('id_client', ClientType2::class)
            
             ->add('id_adresse', EntityType::class, [
                 //choise from entity
