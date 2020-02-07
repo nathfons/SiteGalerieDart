@@ -45,4 +45,4 @@ security:
      - { path: ^/produit, roles: IS_AUTHENTICATED_ANONYMOUSLY }
      - { path: ^/artiste, roles: IS_AUTHENTICATED_ANONYMOUSLY }
      - { path: ^/commande, roles: ROLE_USER }
-     - { path: ^/admin, roles: ROLE_ADMIN }
+     - { path: ^/admin, roles: ROLE_ADMIN  }
