@@ -10,6 +10,9 @@ security:
             entity:
                 class: App\Entity\Utilisateur
                 property: email
+
+        role_hierarchy:
+                 ROLE_ADMIN:       ROLE_USER
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -35,10 +38,11 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
      #- { path: ^/profile, roles: ROLE_USER }
-     - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
      - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-     - { path: ^/accueil$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-     - { path: ^/produit$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-     - { path: ^/artiste$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+     - { path: ^/accueil, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+     - { path: ^/panier, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+     - { path: ^/produit, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+     - { path: ^/artiste, roles: IS_AUTHENTICATED_ANONYMOUSLY }
      - { path: ^/commande, roles: ROLE_USER }
-     - { path: ^/admin, roles: ROLE_ADMIN }
+     - { path: ^/admin, roles: ROLE_ADMIN  }
