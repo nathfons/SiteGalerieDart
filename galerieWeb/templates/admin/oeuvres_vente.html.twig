@@ -7,34 +7,35 @@
         <thead>
             <tr>
                 <th>No</th>       
-                <th>Nom Oeuvre</th>
+                <th>Nom Produit</th>
                 <th>Categorie</th>
                 <th>Artiste</th>
-                <th>Quantité</th>           
-                <th>Prix unitaire HT</th>
+                <th>Client</th>           
+                <th>Quantité vendue</th>
                 <th>Total</th>
+                <th>En vente</th>
+               
                 
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for produit in oeuvresVente %}
-            <tr>
-                <td>{{ loop.index0 }}</td>
-                
-                <td>{{ produit.nomProduit }}</td>
-                <td>{{ produit.categorie.nomcategorie }}</td>
-                <td>{{ produit.artiste.nom }}</td>
-                <td>{{ produit.quantiteVendue }}</td>
-                <td>{{ produit.prixHT }}</td>
-                <td>{{ produit.prixHT * produit.quantiteVendue }}</td>
-                
-                <td>
-                    <a href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
 
-                </td>
-            </tr>
+        {% for produit in articlesVente %}
+         
+            {% if produit.getIdProduit.getProduitoriginal is null  %}
+                <tr>
+                    <td>{{ loop.index0+1 }}</td>
+                    
+                    <td>{{ produit.getIdProduit.nomProduit }}</td>
+                    <td>{{ produit.getIdProduit.categorie.nomcategorie }}</td>
+                    <td>{{ produit.getIdProduit.artiste.nom }}</td>
+                    <td>{{ produit.getIdCommande.getIdClient.getNom }}</td>
+                    <td>{{ produit.quantiteProduit }}</td>
+                    <td>{{ produit.prixUnite * produit.quantiteProduit }}</td>
+                    <td>{{ produit.getIdProduit.enVente ? "Oui" : "Non" }}</td>
+                    
+                </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="8">no records found</td>

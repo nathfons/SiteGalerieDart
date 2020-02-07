@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\CommandeRepository;
+use App\Repository\ProduitRepository;
+use App\Repository\LigneCommandeRepository;
 
 /**
  * @Route("/artiste")
@@ -140,6 +143,7 @@ class ArtisteController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/new", name="artiste_new", methods={"GET","POST"})
      */
@@ -204,6 +208,24 @@ class ArtisteController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('artiste_index');
+        return $this->redirectToRoute('admin_artistes');
     }
+
+    /**
+     * @Route("/{id}/approve", name="artiste_approve", methods={"APPROVE"})
+     */
+    public function approve(Request $request, Artiste $artiste, ArtisteRepository $artisteRepository): Response
+    {
+        if ($this->isCsrfTokenValid('approve'.$artiste->getId(), $request->request->get('_token'))) {
+            $artisteId = $artiste->getId();
+            $artisteRepository->approveArtiste($artisteId);
+        }
+
+        return $this->redirectToRoute('admin_artistes');
+    }
+
+     
+
+ 
+
 }

@@ -10,40 +10,44 @@
                 <th>Nom Produit</th>
                 <th>Categorie</th>
                 <th>Artiste</th>
-                <th>Quantité</th>           
-                <th>Prix unitaire HT</th>
+                <th>Client</th>           
+                <th>Quantité vendue</th>
                 <th>Total</th>
+                <th>En vente</th>
                 <th>Stock</th>
-                <th>actions</th>
+                <th>Commander</th>
             </tr>
         </thead>
         <tbody>
-        {% for produit in produitsVente %}
+        {% for produit in articlesVente %}
+        {% if produit.getIdProduit.getProduitoriginal is not null  %}
             <tr>
-                <td>{{ loop.index0 }}</td>
+                <td>{{ loop.index0+1 }}</td>
                 
-                <td>{{ produit.nomProduit }}</td>
-                <td>{{ produit.categorie.nomcategorie }}</td>
-                <td>{{ produit.artiste.nom }}</td>
-                <td>{{ produit.quantiteVendue }}</td>
-                <td>{{ produit.prixHT }}</td>
-                <td>{{ produit.prixHT * produit.quantiteVendue }}</td>
-                <td>{{ produit.quantiteStocks }}</td>
-                {% if cmd == "yes" %}
-                <td>
-                <form action ="{{ path('commander_stock', {id:produit.id}) }}" method="POST"> 
+                <td>{{ produit.getIdProduit.nomProduit }} </td>
+                <td>{{ produit.getIdProduit.categorie.nomcategorie }}</td>
+                <td>{{ produit.getIdProduit.artiste.nom }}</td>
+                <td>{{ produit.getIdCommande.getIdClient.getNom }}</td>
+                <td>{{ produit.quantiteProduit }}</td>
+                <td>{{ produit.prixUnite * produit.quantiteProduit }}</td>
+                <td>{{ produit.getIdProduit.enVente ? "Oui" : "Non" }}</td>
+                <td>{{ produit.getIdProduit.quantiteStocks }}</td>
+                    {% if produit.getIdProduit.enVente == "Oui"  and cmd == "yes" %}
+                    <td>
+                    <form action ="{{ path('commander_stock', {'id':produit.getIdProduit.id}) }}" method="POST"> 
+                        
+                        <input type="text" placeholder="qte" name="qte_cmd" > 
+                        <button type="submit">CMD</button>
+                    </form>
                     
-	                <input type="text" placeholder="qte" name="qte_cmd" > 
-	                <button type="submit">CMD</button>
-                </form>
-                   
 
-                </td>
-               
-                {% else %}
-                <td></td>
-                {% endif %}
-            </tr>
+                    </td>
+                
+                    {% else %}
+                    <td></td>
+                    {% endif %}
+                </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="8">no records found</td>

@@ -33,7 +33,7 @@ class ProduitRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.approuve = :val')
-            ->andWhere('p.produitoriginal is null')
+            ->andWhere('p.produitoriginal is not null')
             ->setParameter('val', $value)
             ->orderBy('p.id', 'ASC')
             //->setMaxResults(10)
@@ -52,9 +52,8 @@ class ProduitRepository extends ServiceEntityRepository
         //commission, prixHT
         return $this->createQueryBuilder('p')
             ->select('p')
-            //->innerJoin('p.artiste', 'a') //, 'WITH', 'a.id = p.artiste_id'
             ->andWhere('p.approuve = :val')
-            ->andWhere('p.produitoriginal is not null')
+            ->andWhere('p.produitoriginal is null')
             ->setParameter('val', "false")
             ->orderBy('p.id', 'ASC')
             //->setMaxResults(10)
@@ -63,46 +62,113 @@ class ProduitRepository extends ServiceEntityRepository
         ;
     }
 
+    public function nbOeuvresApprouve()
+      {
+          return $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->andWhere('p.approuve = :val')
+            ->andWhere('p.produitoriginal is null')
+            ->setParameter('val', "false")
+            ->getQuery()
+            ->getSingleScalarResult()
+            
+          ;
+      }
+
+      public function nbProduitsApprouve()
+      {
+          return $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->andWhere('p.approuve = :val')
+            ->andWhere('p.produitoriginal is not null')
+            ->setParameter('val', "true")
+            ->getQuery()
+            ->getSingleScalarResult()
+            
+          ;
+      }
+
     //-------------
 
-        //les produits non approuvés
+    //stock des produits en vente
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */
     
-    public function findVenteProduits()
+    public function stockProduits_enVente()
     {
         return $this->createQueryBuilder('p')
             
-            ->andWhere('p.produitoriginal is null')
-            ->andWhere('p.quantiteVendue is not null')
-            //->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
+            ->andWhere('p.produitoriginal is not null')
+            ->andWhere('p.enVente = :val')
+            ->setParameter('val', TRUE)
+            ->orderBy('p.quantiteStocks', 'ASC')
             //->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
 
-    //les oeuvres non approuvés
+    //stock des produits suspendus ou épuisés
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */
     
-    public function findVenteOeuvres()
+    public function stockProduits()
     {
-        //commission, prixHT
         return $this->createQueryBuilder('p')
-            ->select('p')
             
-            ->andWhere('p.produitoriginal is null')
-            //->setParameter('val', "false")
-            ->orderBy('p.id', 'ASC')
+            ->andWhere('p.produitoriginal is not null')
+            ->andWhere('p.enVente = :val')
+            
+            ->setParameter('val', FALSE)
+            ->orderBy('p.quantiteStocks', 'ASC')
             //->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
+
+        //stock des produits en vente
+    // /**
+    //  * @return Oeuvres[] Returns an array of Produit objects
+    //  */
+    
+    public function stockOeuvres_enVente()
+    {
+        return $this->createQueryBuilder('p')
+            
+            ->andWhere('p.produitoriginal is null')
+            ->andWhere('p.enVente = :val')
+            ->setParameter('val', TRUE)
+            ->orderBy('p.quantiteStocks', 'ASC')
+            //->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    //stock des produits suspendus ou épuisés
+    // /**
+    //  * @return Oeuvres[] Returns an array of Produit objects
+    //  */
+    
+    public function stockOeuvres()
+    {
+        return $this->createQueryBuilder('p')
+            
+            ->andWhere('p.produitoriginal is null')
+            ->andWhere('p.enVente = :val')
+            
+            ->setParameter('val', FALSE)
+            ->orderBy('p.quantiteStocks', 'ASC')
+            //->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    
 
     //-------------
 

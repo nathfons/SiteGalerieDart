@@ -1,39 +1,43 @@
 {% block contentPage %}
-    <h1>Oeuvres en attente d'approbation</h1>
+
+
+<h1>Etat de stock des Oeuvres</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>No</th> 
+                <th>No</th>       
                 <th>Nom Oeuvre</th>
                 <th>Categorie</th>
                 <th>Artiste</th>
-                <th>Commission</th>
+                <th>Quantité vendue</th>           
                 <th>Prix unitaire HT</th>
-                <th>Prix de revient</th>
+                <th>Total</th>
+                
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for produit in oeuvresNonApprouves %}
+        {% for produit in oeuvresStock %}
             <tr>
                 <td>{{ loop.index0+1 }}</td>
+                
                 <td>{{ produit.nomProduit }}</td>
                 <td>{{ produit.categorie.nomcategorie }}</td>
                 <td>{{ produit.artiste.nom }}</td>
-                <td>{{ produit.artiste.commission }}</td>
+                <td>{{ produit.quantiteVendue }}</td>
                 <td>{{ produit.prixHT }}</td>
-                <td>{{ produit.prixHT - produit.prixHT * produit.artiste.commission / 100 }}</td>
+                <td>{{ produit.prixHT * produit.quantiteVendue }}</td>
+                
                 <td>
                     <a href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
-                    
-                    {{ include('produit/_approve_form.html.twig') }}
+                    <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
 
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="19">no records found</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

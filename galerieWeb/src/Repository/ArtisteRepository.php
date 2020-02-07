@@ -111,6 +111,79 @@ class ArtisteRepository extends ServiceEntityRepository
         ->getResult()
         ;
     }
+
+    /**
+      * @return Artiste[] Returns an array of Artiste objects
+      */
+    
+      public function findArtistesPublies()
+      {
+          return $this->createQueryBuilder('artiste')
+              ->andWhere('artiste.approuve = :val')
+              ->setParameter('val', TRUE)
+              ->orderBy('artiste.dateCreationCompte', 'DESC')
+              //->setMaxResults(3)
+              ->getQuery()
+              ->getResult()
+          ;
+      }
+
+      /**
+      * @return Artiste[] Returns an array of Artiste objects
+      */
+    
+      public function findArtistesNouveaux()
+      {
+          return $this->createQueryBuilder('artiste')
+              ->andWhere('artiste.approuve = :val')
+              ->setParameter('val', FALSE)
+              ->orderBy('artiste.dateCreationCompte', 'DESC')
+              //->setMaxResults(3)
+              ->getQuery()
+              ->getResult()
+          ;
+      }
+
+    //approveArtiste
+    public function approveArtiste($artisteId)
+    {
+    $updateEtat = $this->createQueryBuilder('p')
+        ->update(Artiste::class, 'p')
+        ->set('p.approuve', 'true')
+        ->where('p.id IN (?1)')
+        ->setParameter(1, $artisteId)
+        //->setParameter(2, '2')
+        ->getQuery();
+        $updateEtat->execute();
+    ;
+}
+
+    //findCntNewArtistes
+    public function findCntNewArtistes()
+      {
+          return $this->createQueryBuilder('artiste')
+          ->select('COUNT(artiste.id)')
+              ->andWhere('artiste.approuve = :val')
+              ->setParameter('val', FALSE)
+              
+              //->setMaxResults(3)
+              ->getQuery()
+              ->getSingleScalarResult()
+              //->getResult()
+          ;
+      }
+
+    //nombre Artistes
+    public function cntArtistes()
+    {
+        return $this->createQueryBuilder('artiste')
+        ->select('COUNT(artiste.id)')  
+            ->getQuery()
+            ->getSingleScalarResult()
+            //->getResult()
+        ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Artiste
     {

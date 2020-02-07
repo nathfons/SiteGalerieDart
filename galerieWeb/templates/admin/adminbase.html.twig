@@ -39,26 +39,21 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Changer Password</a>
-                                        <span class="label label-info">5</span>
+                                        <a href="{{ path('admin_stock_produits') }}">Gérer le stock</a>
+                                        
                                     </td>
                                 </tr>
+                                
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Gérer les reductions</a> 
-                                        <span class="label label-warning">15 %</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Gérer les articles</a>
-                                        <span class="label label-warning">1 week</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Commandes en cours</a>
-                                        <span class="label label-info">15</span>
+                                        <a href="{{ path('admin_commandes') }}">Commandes en cours</a>
+                                        {% if nbCommandesEnCours > 0 %}
+                                        <span class="label label-warning">{{nbCommandesEnCours}} NEW</span>
+                                       
+                                       {% else %}
+                                        {% endif %}
+                                      
+                                        
                                     </td>
                                 </tr>
                             </table>
@@ -79,16 +74,30 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-flash text-success"></span>
+                                       
                                         <a href="{{ path('admin_oeuvres') }}">Oeuvres</a>
-                                        <span class="label label-success">5</span>
+                                        
+                                        
+                                        {% if nbOeuvresApprouve > 0 %}
+                                        <span class="label label-success">{{nbOeuvresApprouve}}</span>
+                                         <span class="glyphicon glyphicon-flash text-success"></span>
+                                       {% else %}
+                                       <span class="label label-info">{{ 0 }}</span>
+                                        {% endif %}
+                                        
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-flash text-success"></span>
+                                        
                                         <a href="{{ path('admin_produits') }}">Produits</a>
-                                        <span class="label label-info">0</span>
+                                        
+                                        {% if nbProduitsApprouve > 0 %}
+                                        <span class="label label-success">{{nbProduitsApprouve}}</span>
+                                         <span class="glyphicon glyphicon-flash text-success"></span>
+                                       {% else %}
+                                       <span class="label label-info">{{ 0 }}</span>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 
@@ -110,23 +119,21 @@
                                 <tr>
                                     <td>
                                         
-                                        <a href="http://www.jquery2dotnet.com">Artistes</a>
-                                        <span class="label label-warning">NEW</span>
+                                        <a href="{{ path('admin_artistes') }}">Artistes</a>
+                                       
+                                        {% if new_artistes > 0 %}
+                                        <span class="label label-warning">{{new_artistes}} NEW</span>
+                                       {% else %}
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         
-                                        <a href="http://www.jquery2dotnet.com">Artistes à la une</a>
+                                        <a href="{{ path('admin_artistes_alaune') }}">Artistes à la une</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-trash text-danger"></span>
-                                        <a href="http://www.jquery2dotnet.com" class="text-danger">
-                                            Delete Account</a>
-                                    </td>
-                                </tr>
+                                
                             </table>
                         </div>
                     </div>
@@ -142,33 +149,25 @@
                     <div id="collapseFour" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
-                                <tr>
+                                
                                     <td>
-                                        <span class="glyphicon glyphicon-usd"></span>
-                                        <a href="{{ path('admin_vente_oeuvres') }}">Vente Oeuvres</a> 
-                                        <span class="label label-success">$ 320</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-usd"></span>
-                                        <a href="{{ path('admin_vente_produits') }}">Vente Produits</a>
-                                        <span class="label label-info">$ 0</span>
+                                         <span class="glyphicon glyphicon-euro"></span>
+                                        <a href="{{ path('admin_ventes') }}">Ventes</a>
+                                        {% if sommeVentes > 0 %}
+                                        <span class="label label-success">{{sommeVentes}}</span>
+                                       {% else %}
+                                       <span class="label label-info">{{ 0 }}</span>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-user"></span>
-                                        <a href="http://www.jquery2dotnet.com">Customers</a>
+                                        <a href="">Clients</a>
                                     </td>
                                 </tr>
                                 
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-shopping-cart"></span>
-                                        <a href="http://www.jquery2dotnet.com">Sales Dashboard</a>
-                                    </td>
-                                </tr>
+                               
                             </table>
                         </div>
                     </div>

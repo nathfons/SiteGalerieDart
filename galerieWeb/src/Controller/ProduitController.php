@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Entity\Artiste;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
+use App\Repository\ArtisteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -316,6 +318,7 @@ class ProduitController extends AbstractController
         return $this->redirectToRoute('admin_oeuvres');
     }
 
+    
 
 
     //update

@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('artiste_approve', {'id': artiste.id}) }}" onsubmit="return confirm('Voulez-vous publier cet artiste?');">
+    <input type="hidden" name="_method" value="APPROVE">
+    <input type="hidden" name="_token" value="{{ csrf_token('approve' ~ artiste.id) }}">
+    <span class="glyphicon glyphicon-thumbs-up text-success"></span>
+    <button class="btn">Approuver</button>
+</form>

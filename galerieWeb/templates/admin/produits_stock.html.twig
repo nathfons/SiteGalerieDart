@@ -1,0 +1,55 @@
+{% block contentPage %}
+
+
+<h1>Etat de stock des Produits suspendus ou épuisés</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>       
+                <th>Nom Produit</th>
+                <th>Categorie</th>
+                <th>Artiste</th>
+                <th>Quantité vendue</th>           
+                <th>Prix unitaire HT</th>
+                <th>Total des ventes</th>
+                <th>Stock</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in stockProduits %}
+            <tr>
+                <td>{{ loop.index0+1 }}</td>
+                
+                <td>{{ produit.nomProduit }}</td>
+                <td>{{ produit.categorie.nomcategorie }}</td>
+                <td>{{ produit.artiste.nom }}</td>
+                <td>{{ produit.quantiteVendue }}</td>
+                <td>{{ produit.prixHT }}</td>
+                <td>{{ produit.prixHT * produit.quantiteVendue }}</td>
+                <td>{{ produit.quantiteStocks }}</td>
+                {% if cmd == "yes" %}
+                <td>
+                <form action ="{{ path('commander_stock', {'id':produit.id}) }}" method="POST"> 
+                    
+	                <input type="text" placeholder="qte" name="qte_cmd" > 
+	                <button type="submit">CMD</button>
+                </form>
+                   
+
+                </td>
+               
+                {% else %}
+                <td></td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

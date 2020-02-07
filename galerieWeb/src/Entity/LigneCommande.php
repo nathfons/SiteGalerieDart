@@ -17,13 +17,13 @@ class LigneCommande
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\produit")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Produit")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idProduit;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\commande")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commande")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCommande;

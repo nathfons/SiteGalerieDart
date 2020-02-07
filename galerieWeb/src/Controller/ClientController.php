@@ -24,7 +24,7 @@ class ClientController extends AbstractController
         return $this->render('client/index.html.twig', [
             'clients' => $clientRepository->findAll(),
             'adressesClients' => $adresseRepository->findAllAdresses(),
-            dump( $clientRepository->findAll()),
+            //dump( $clientRepository->findAll()),
         ]);
     }
 

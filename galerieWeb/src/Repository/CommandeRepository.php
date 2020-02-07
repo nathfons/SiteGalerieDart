@@ -47,4 +47,85 @@ class CommandeRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    //findAllCommandesEncours
+     /**
+      * @return Commandes[] Returns an array of Artiste objects
+      */
+    
+      public function allCommandesEncours()
+      {
+          return $this->createQueryBuilder('commande')
+              ->andWhere('commande.etatcommande = :val')
+              ->setParameter('val', 'enCours')
+              ->orderBy('commande.datecommande', 'DESC')
+              //->setMaxResults(3)
+              ->getQuery()
+              ->getResult()
+          ;
+      }
+
+      /**
+      * @return CommandesLivraison[] Returns an array of Artiste objects
+      */
+    
+      public function allCommandesLivraison()
+      {
+          return $this->createQueryBuilder('commande')
+              ->andWhere('commande.etatcommande = :val')
+              ->setParameter('val', 'livraison')
+              ->orderBy('commande.datecommande', 'DESC')
+              //->setMaxResults(3)
+              ->getQuery()
+              ->getResult()
+          ;
+      }
+
+       /**
+      * @return CommandesRetournees[] Returns an array of Artiste objects
+      */
+    
+      public function allCommandesRetournees()
+      {
+          return $this->createQueryBuilder('commande')
+              ->andWhere('commande.etatcommande = :val')
+              ->setParameter('val', 'retournee')
+              ->orderBy('commande.datecommande', 'DESC')
+              //->setMaxResults(3)
+              ->getQuery()
+              ->getResult()
+          ;
+      }
+
+       /**
+      * @return CommandesLivrees[] Returns an array of Artiste objects
+      */
+    
+      public function allCommandesLivrees()
+      {
+          return $this->createQueryBuilder('commande')
+              ->andWhere('commande.etatcommande = :val')
+              ->setParameter('val', 'livré')
+              ->orderBy('commande.datecommande', 'DESC')
+              //->setMaxResults(3)
+              ->getQuery()
+              ->getResult()
+          ;
+      }
+    
+    //findNbCommandesEncours
+    public function nbCommandesEncours()
+      {
+          return $this->createQueryBuilder('commande')
+          ->select('COUNT(commande.id)')
+              ->andWhere('commande.etatcommande = :val')
+              ->setParameter('val', 'enCours')
+              ->orderBy('commande.datecommande', 'DESC')
+              //->setMaxResults(3)
+              ->getQuery()
+              ->getSingleScalarResult()
+              //->getResult()
+          ;
+      }
+      
 }

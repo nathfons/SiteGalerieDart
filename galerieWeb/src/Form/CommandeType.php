@@ -22,15 +22,14 @@ class CommandeType extends AbstractType
             
             ->add('etatcommande',ChoiceType::class,[
                 'choices'  => [
-                    'commandé' => "commandé",
-                    'traitement' => "traitement",
+                    'commandée' => "enCours",   
                     'livraison' => "livraison",
-                    'livré' => "livre",
-                
+                    'livrée' => "livree",
+                    'retournée' => "retournee",
                 ],
                 'multiple' => false,
                 'required' => true,
-                //'placeholder' => 'commandé ',
+                
             ])
             ->add('datecommande')
             ->add('datelivraison')

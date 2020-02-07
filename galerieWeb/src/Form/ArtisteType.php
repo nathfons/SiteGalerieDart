@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ArtisteType extends AbstractType
 {
@@ -33,7 +34,11 @@ class ArtisteType extends AbstractType
                 
             ])
             ->add('commission')
-            ->add('alaune')
+            ->add('alaune', CheckboxType::class, [
+                
+                'required' => false,
+            ])
+            
             ->add('textAlaune', TextareaType::class)
             ->add('nom')
             ->add('prenom')

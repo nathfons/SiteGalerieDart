@@ -20,7 +20,7 @@
         <tbody>
         {% for produit in produitsNonApprouves %}
             <tr>
-                <td>{{ loop.index0 }}</td>
+                <td>{{ loop.index0+1 }}</td>
                 
                 <td>{{ produit.nomProduit }}</td>
                 <td>{{ produit.categorie.nomcategorie }}</td>

@@ -1,0 +1,8 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block partadmin %}
+
+{{ include('admin/produits_stock_enVente.html.twig', {'cmd': 'yes'}) }}
+{{ include('admin/produits_stock.html.twig', {'cmd': 'yes'}) }}
+
+{% endblock %}

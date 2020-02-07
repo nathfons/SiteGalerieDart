@@ -19,6 +19,21 @@ class LigneCommandeRepository extends ServiceEntityRepository
         parent::__construct($registry, LigneCommande::class);
     }
 
+    //somme de ventes la dernière semaine
+    public function sommeVentes()
+      {
+          return $this->createQueryBuilder('lc')
+          ->select('SUM(lc.quantiteProduit * lc.prixUnite)')
+          
+              //->setMaxResults(3)
+              ->getQuery()
+              ->getSingleScalarResult()
+              //->getResult()
+          ;
+      }
+
+    
+
     // /**
     //  * @return LigneCommande[] Returns an array of LigneCommande objects
     //  */
@@ -47,4 +62,7 @@ class LigneCommandeRepository extends ServiceEntityRepository
         ;
     }
     */
+
+   
+
 }

@@ -1,0 +1,57 @@
+
+{% block contentPage %}
+<h1>Commandes livrées</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>       
+                <th>Référence commande</th>
+                <th>Date commande</th>
+                <th>Date livraison</th>
+                <th>Adresse</th>          
+                <th>Type livraison</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+       
+       
+        
+        {% for commande in allCommandesLivrees %}
+                    
+              
+            <tr>
+                <td>{{ loop.index0+1 }}</td>
+                
+                <td>{{commande.referencecommande}}</td>
+                <td>{{commande.datecommande ? commande.datecommande|date('Y-m-d') : ''}}</td>
+                <td>{{commande.datelivraison ? commande.datelivraison|date('Y-m-d') : ''}}</td>
+                <td>{{commande.getIdAdresse.ville}}</td>
+                <td>{{commande.getIdTypelivraison.nomTypelivraison}}</td>
+                
+                <td>
+                    <a href="{{ path('commande_show', {'id': commande.id}) }}">show</a>
+                    
+                    
+                                        
+                     {{ include('commande/_delete_form.html.twig') }} 
+                                        
+                    
+
+                </td>
+            </tr>
+
+             
+       
+
+
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
