@@ -82,7 +82,7 @@ class ArtisteRepository extends ServiceEntityRepository
             ->andWhere('artiste.alaune = :val')
             ->setParameter('val', TRUE)
             ->orderBy('artiste.dateCreationCompte', 'DESC')
-            ->setMaxResults(3)
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult()
         ;

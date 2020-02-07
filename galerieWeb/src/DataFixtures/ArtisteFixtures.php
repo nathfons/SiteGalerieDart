@@ -47,7 +47,7 @@ class ArtisteFixtures extends Fixture
     $manager->persist($categorie);
 
     $categoriesOeuvres=[];
-    $categorieSculpture= new Categorie();
+    $categorieSculpture = new Categorie();
     $categorieSculpture->setNomcategorie(BDDconstants::CATEGORIE_Sculpture);
     $categoriesOeuvres[] = $categorieSculpture;
     $manager->persist($categorieSculpture);
@@ -166,7 +166,7 @@ class ArtisteFixtures extends Fixture
         $plainPassword = 'artiste';
         $encoded = $this->encoder->encodePassword($utilisateur, $plainPassword);
         $utilisateur->setPassword($encoded);
-        $idUtilisateur = $manager->persist($utilisateur);
+         $manager->persist($utilisateur);
         
         
         $artiste = new Artiste(); 
@@ -182,7 +182,8 @@ class ArtisteFixtures extends Fixture
         $artiste->setTextAlaune($faker->text);
         $artiste->setTelephone("0671398765");
         $artiste->setDateCreationCompte($faker->dateTime($max = 'now', $timezone = null));
-        $artiste->setUtilisateur($idUtilisateur);
+        $artiste->setUtilisateur($utilisateur);
+        
         $manager->persist($artiste);
 
         for($k=1;$k<=10;$k++){

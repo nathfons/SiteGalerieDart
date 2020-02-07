@@ -65,7 +65,7 @@ class ProduitController extends AbstractController
         $this->InOeuvres=true;
         return $this->render('produit/listeoeuvres.html.twig', [
             //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
-            'oeuvres' => $produitRepository->findByFirstLetter(BDDconstants::CATEGORIE_Peinture,$letter,$this->InOeuvres),
+            'oeuvres' => $produitRepository->findByCategorieProduit(BDDconstants::CATEGORIE_Peinture,$letter,$this->InOeuvres),
             'routeSelected'=> $this->routeSelected,
             'letterSelected'=> $this->letterSelected,
             'titre' => 'Nos Peintures',
@@ -83,7 +83,7 @@ class ProduitController extends AbstractController
         $this->InOeuvres=true;
         return $this->render('produit/listeoeuvres.html.twig', [
             //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
-            'oeuvres' => $produitRepository->findByFirstLetter(BDDconstants::CATEGORIE_Photographie,$letter,$this->InOeuvres),
+            'oeuvres' => $produitRepository->findByCategorieProduit(BDDconstants::CATEGORIE_Photographie,$letter,$this->InOeuvres),
             'routeSelected'=> $this->routeSelected,
             'letterSelected'=> $this->letterSelected,
             'titre' => 'Nos Photographies',
@@ -101,7 +101,7 @@ class ProduitController extends AbstractController
         $this->InOeuvres=true;
         return $this->render('produit/listeoeuvres.html.twig', [
             //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
-            'oeuvres' => $produitRepository->findByFirstLetter(BDDconstants::CATEGORIE_Sculpture,$letter,$this->InOeuvres),
+            'oeuvres' => $produitRepository->findByCategorieProduit(BDDconstants::CATEGORIE_Sculpture,$letter,$this->InOeuvres),
             'routeSelected'=> $this->routeSelected,
             'letterSelected'=> $this->letterSelected,
             'titre' => 'Nos Sculptures',
@@ -164,7 +164,7 @@ class ProduitController extends AbstractController
         $this->letterSelected=$letter;
         $this->InOeuvres=false;
         return $this->render('produit/listeproduits.html.twig', [
-            'produits' => $produitRepository->findByFirstLetter(BDDconstants::CATEGORIE_Tshirt,$letter,$this->InOeuvres),
+            'produits' => $produitRepository->findByCategorieProduit(BDDconstants::CATEGORIE_Tshirt,$letter,$this->InOeuvres),
             'routeSelected'=> $this->routeSelected,
             'letterSelected'=> $this->letterSelected,
             'titre' => 'Nos T-Shirts',
@@ -182,7 +182,7 @@ class ProduitController extends AbstractController
         $this->InOeuvres=false;
         return $this->render('produit/listeproduits.html.twig', [
             //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
-            'produits' => $produitRepository->findByFirstLetter(BDDconstants::CATEGORIE_Poster,$letter,$this->InOeuvres),
+            'produits' => $produitRepository->findByCategorieProduit(BDDconstants::CATEGORIE_Poster,$letter,$this->InOeuvres),
             'routeSelected'=> $this->routeSelected,
             'letterSelected'=> $this->letterSelected,
             'titre' => 'Nos Posters',
@@ -200,7 +200,7 @@ class ProduitController extends AbstractController
         $this->InOeuvres=false;
         return $this->render('produit/listeproduits.html.twig', [
             //'oeuvres' => $produitRepository->findAllProduitsDeType('Oeuvre'),
-            'produits' => $produitRepository->findByFirstLetter(BDDconstants::CATEGORIE_CartesPostales,$letter,$this->InOeuvres),
+            'produits' => $produitRepository->findByCategorieProduit(BDDconstants::CATEGORIE_CartesPostales,$letter,$this->InOeuvres),
             'routeSelected'=> $this->routeSelected,
             'letterSelected'=> $this->letterSelected,
             'titre' => 'Nos Cartes Postales',

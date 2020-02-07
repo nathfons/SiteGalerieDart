@@ -7,8 +7,7 @@
                 <th>No</th>       
                 <th>Artiste</th>
                 <th>Photo</th>
-                <th>Téléphone</th>
-                <th>Date création compte</th>          
+                       
                 <th>A la une</th>
                 <th>actions</th>
             </tr>
@@ -21,8 +20,8 @@
                 
                 <td>{{artiste.prenom}} {{artiste.nom}}</td>
                 <td><img align="center" class="img-fluid rounded" src="{{asset(artiste.miniature)  }}" alt="Image de {{ artiste.nom }}"></td>
-                <td>{{ artiste.telephone }}</td>
-                <td>{{ artiste.dateCreationCompte ? artiste.dateCreationCompte|date('Y-m-d') : '' }}</td>
+                
+                
                 <td>{{ artiste.alaune ? 'Yes' : 'No' }}</td>
                 <td>
                    
@@ -34,7 +33,7 @@
 
                 </td>
             </tr>
-            <button class="btn">Mettre à jour</button>
+           
             
         {% else %}
             <tr>
@@ -43,5 +42,5 @@
         {% endfor %}
         </tbody>
     </table>
-
+ <button class="btn">Mettre à jour</button>
 {% endblock %}

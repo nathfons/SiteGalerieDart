@@ -24,7 +24,7 @@ class Commande
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $etatcommande;
+    private $etatcommande;//
 
     /**
      * @ORM\Column(type="datetime")
@@ -59,6 +59,8 @@ class Commande
      * @ORM\JoinColumn(nullable=true)
      */
     private $id_client;
+
+    
 
     public function getId(): ?int
     {
