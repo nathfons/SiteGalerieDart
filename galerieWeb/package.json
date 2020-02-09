@@ -6,7 +6,7 @@
         "vue": "^2.6.11",
         "vue-loader": "15.x",
         "vue-template-compiler": "^2.6.11",
-        "webpack-notifier": "^1.8.0"
+        "webpack-notifier": "1.6.0"
     },
     "license": "UNLICENSED",
     "private": true,

@@ -27,7 +27,7 @@
                 <td>{{ commande.id }}</td>
                 <td>{{ commande.referencecommande }}</td>
                 <td>{{ commande.getIdClient.nom  }}</td>
-                <td>{{ commande.getIdAdresse.ville }}</td>
+                <td>{{ commande.getIdAdresse ? commande.getIdAdresse.ville }}</td>
                 <td>{{ commande.datecommande ? commande.datecommande|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ commande.datelivraison ? commande.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ commande.getIdTypelivraison.nomtypelivraison }}</td>
