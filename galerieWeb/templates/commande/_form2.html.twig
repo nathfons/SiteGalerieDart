@@ -1,17 +1,43 @@
 
+{% block javascripts2 %}
+            {{ encore_entry_script_tags('add-collection-widget') }}
+
+            <!-- Renders add-collection-widget.js & a webpack runtime.js file
+                <script src="/build/runtime.js"></script>
+                <script src="/build/add-collection-widget.js"></script> -->
+        {% endblock %}
+
 {{ form_start(form) }}
-<h3>Client</h3>
-<div class="client">
+ <h3>Mes données personnelles</h3>
     {{ form_row(form.id_client.nom) }}
     {{ form_row(form.id_client.prenom) }}
     {{ form_row(form.id_client.telephone) }}
-    <input type="adresse"
-    id="form_adresses___name__"
-    name="form[adresses][__name__]"
-    value="">
-</div>
+    
+    <h3>Mes adresses</h3>
+   
+<ul id="adresse-fields-list"
+        data-prototype="{{ form_widget(form.id_client.adresses.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ form.id_client.adresses|length }}">
+    {% for adresseField in form.id_client.adresses %}
+        <li>
+            {{ form_errors(adresseField) }}
+            {{ form_widget(adresseField) }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <button type="button"
+        class="add-another-collection-widget"
+        data-list-selector="#adresse-fields-list">Ajouter une adresse</button>
+    </br>
+    <button type="submit">Mettre à jour Adresse</button>
+    </br>
+    <h3>Ma commande</h3>
+    
     {{ form_row(form.id_adresse) }}
     {{ form_row(form.id_typelivraison) }}
     {{ form_row(form.id_typepaiement) }}
     <button class="btn">{{ button_label|default('Valider') }}</button>
+    </div>
 {{ form_end(form) }}

@@ -18,21 +18,26 @@ class CommandeType1 extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('id_client', ClientType2::class)
+            ->add('id_client', ClientType2::class, [
+                //choise from entity
+                'label' => "Mes données personnelles: ", 
+                ])       
            
             ->add('id_adresse', EntityType::class, [
                 //choise from entity
+                'label' => "Adresse: ",
                 'class'=> Adresse::class,
                 //User.name property visible
                 'choice_label' => 'ville',
-                'placeholder' => 'obligatoire',      
+                'placeholder' => 'Choisir une adresse de livraison',      
             ])       
           
             ->add('id_typelivraison', EntityType::class, [
                 //choise from entity
+                'label' => "Type de livraison: ",
                 'class'=> Typelivraison::class,
                 //User.name property visible 
-                'placeholder' => 'obligatoire',
+                'placeholder' => 'Choisir un type de livraison',
                 'choice_label' => function (Typelivraison $entity) {
                     return $entity->getNomtypelivraison();
                  },
@@ -42,9 +47,10 @@ class CommandeType1 extends AbstractType
             ])
             ->add('id_typepaiement', EntityType::class, [
                 //choise from entity
+                'label' => "Type de paiement: ",
                 'class' => Typepaiement::class,
                 //User.name property visible
-                'placeholder' => 'obligatoire', 
+                'placeholder' => 'Choisir un type de paiement', 
                 'choice_label' => function (Typepaiement $entity) {
                     return $entity->getNomTypepaiement();
                  },

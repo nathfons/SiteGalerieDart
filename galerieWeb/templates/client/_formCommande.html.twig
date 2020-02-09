@@ -1,0 +1,30 @@
+{{ form_start(formClient) }}
+   <div class="client content">
+{{user.email}}
+    <h3>Mes données personnelles</h3>
+    {{ form_row(formClient.nom) }}
+    {{ form_row(formClient.prenom) }}
+    {{ form_row(formClient.telephone) }}
+    
+    <h3>Mes adresses</h3>
+   
+<ul id="adresse-fields-list"
+        data-prototype="{{ form_widget(formClient.adresses.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ formClient.adresses|length }}">
+    {% for adresseField in formClient.adresses %}
+        <li>
+            {{ form_errors(adresseField) }}
+            {{ form_widget(adresseField) }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <button type="button"
+        class="add-another-collection-widget"
+        data-list-selector="#adresse-fields-list">Ajouter une adresse</button>
+    </br>
+ 
+    
+    <button class="btn">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(formClient) }}
