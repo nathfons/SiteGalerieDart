@@ -83,20 +83,32 @@ class CommandeController extends AbstractController
         $form = $this->createForm(CommandeType1::class, $commande);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        
+       
+            if ($form->isSubmitted() && $form->isValid()) {
            
-            $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
-            foreach($client->getAdresses() as $adresse){
-                $adresse->setIdClient($client);
-            }
-            $commande->setIdClient($client);
-            $this->getDoctrine()->getManager()->flush();
-                    ///ajouter idclient à adresses ajoutees
-            return $this->redirectToRoute('commande_index');
-            
-        }
+                $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
+                foreach($client->getAdresses() as $adresse){
+                    $adresse->setIdClient($client);
+                    $this->getDoctrine()->getManager()->flush($adresse);
+                }
+                $commande->setIdClient($client);
 
-    
+                $commandeForm = $form->getData();
+                if($commandeForm->getIdAdresse()!=null){
+
+
+                            $this->getDoctrine()->getManager()->flush();
+                            return $this->redirectToRoute('commande_index');
+
+                        }else{
+                            
+                            $this->getDoctrine()->getManager()->flush($client);
+                        }
+                
+            }
+           
+           
 
         return $this->render('commande/detail.html.twig', [
             'commande' => $commande,

@@ -8,36 +8,14 @@
         {% endblock %}
 
 {{ form_start(form) }}
- <h3>Mes données personnelles</h3>
-    {{ form_row(form.id_client.nom) }}
-    {{ form_row(form.id_client.prenom) }}
-    {{ form_row(form.id_client.telephone) }}
-    
-    <h3>Mes adresses</h3>
-   
-<ul id="adresse-fields-list"
-        data-prototype="{{ form_widget(form.id_client.adresses.vars.prototype)|e }}"
-        data-widget-tags="{{ '<li></li>'|e }}"
-        data-widget-counter="{{ form.id_client.adresses|length }}">
-    {% for adresseField in form.id_client.adresses %}
-        <li>
-            {{ form_errors(adresseField) }}
-            {{ form_widget(adresseField) }}
-        </li>
-    {% endfor %}
-    </ul>
 
-    <button type="button"
-        class="add-another-collection-widget"
-        data-list-selector="#adresse-fields-list">Ajouter une adresse</button>
-    </br>
-    <button type="submit">Mettre à jour Adresse</button>
-    </br>
+     {{ include('client/_formCommande.html.twig', {'button_label': 'Valider'}) }}
+
     <h3>Ma commande</h3>
     
     {{ form_row(form.id_adresse) }}
     {{ form_row(form.id_typelivraison) }}
     {{ form_row(form.id_typepaiement) }}
-    <button class="btn">{{ button_label|default('Valider') }}</button>
+    <button class="btn" name="commandeBtn">{{ button_label|default('Valider') }}</button>
     </div>
 {{ form_end(form) }}

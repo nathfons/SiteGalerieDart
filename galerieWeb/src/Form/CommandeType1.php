@@ -21,15 +21,17 @@ class CommandeType1 extends AbstractType
             ->add('id_client', ClientType2::class, [
                 //choise from entity
                 'label' => "Mes données personnelles: ", 
-                ])       
+                ])      
+                
            
             ->add('id_adresse', EntityType::class, [
                 //choise from entity
                 'label' => "Adresse: ",
-                'class'=> Adresse::class,
+                'class' => Adresse::class,
                 //User.name property visible
                 'choice_label' => 'ville',
-                'placeholder' => 'Choisir une adresse de livraison',      
+                'placeholder' => 'Choisir une adresse de livraison',     
+                'required' => false
             ])       
           
             ->add('id_typelivraison', EntityType::class, [
@@ -43,7 +45,7 @@ class CommandeType1 extends AbstractType
                  },
                  'choice_value' => function (Typelivraison $entity = null) {
                      return $entity ? $entity->getId() : '';
-                 },                             
+                 },                            
             ])
             ->add('id_typepaiement', EntityType::class, [
                 //choise from entity
@@ -56,8 +58,10 @@ class CommandeType1 extends AbstractType
                  },
                  'choice_value' => function (Typepaiement $entity = null) {
                      return $entity ? $entity->getId() : '';
-                 },                            
+                 },                             
             ])
+            
+    
         ;
     }
 

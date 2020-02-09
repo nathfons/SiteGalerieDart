@@ -1,7 +1,15 @@
-{{ form_start(form.id_client) }}
-   <div class="client content">
-{{user.email}}
-    <h3>Mes données personnelles</h3>
+
+{% block javascripts2 %}
+            {{ encore_entry_script_tags('add-collection-widget') }}
+
+            <!-- Renders add-collection-widget.js & a webpack runtime.js file
+                <script src="/build/runtime.js"></script>
+                <script src="/build/add-collection-widget.js"></script> -->
+        {% endblock %}
+
+{{ form_start(form) }}
+
+ <h3>Mes données personnelles</h3>
     {{ form_row(form.id_client.nom) }}
     {{ form_row(form.id_client.prenom) }}
     {{ form_row(form.id_client.telephone) }}
@@ -24,6 +32,12 @@
         class="add-another-collection-widget"
         data-list-selector="#adresse-fields-list">Ajouter une adresse</button>
     </br>
+    </br>
+    <h3>Ma commande</h3>
     
-    <button class="submit" >{{ button_label|default('Sauvegarder') }}</button>
-{{ form_end(form.id_client) }}
+    {{ form_row(form.id_adresse) }}
+    {{ form_row(form.id_typelivraison) }}
+    {{ form_row(form.id_typepaiement) }}
+    <button class="submit">{{ button_label|default('Valider') }}</button>
+    </div>
+{{ form_end(form) }}
