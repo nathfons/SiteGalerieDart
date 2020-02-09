@@ -20,7 +20,7 @@ class Client
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Adresse", mappedBy="id_client")
+     * @ORM\OneToMany(targetEntity="App\Entity\Adresse", mappedBy="id_client", cascade={"persist", "remove"})
      */
     private $adresses;
 

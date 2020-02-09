@@ -1,17 +1,21 @@
 
+{% block javascripts2 %}
+            {{ encore_entry_script_tags('add-collection-widget') }}
+
+            <!-- Renders add-collection-widget.js & a webpack runtime.js file
+                <script src="/build/runtime.js"></script>
+                <script src="/build/add-collection-widget.js"></script> -->
+        {% endblock %}
+
 {{ form_start(form) }}
-<h3>Client</h3>
-<div class="client">
-    {{ form_row(form.id_client.nom) }}
-    {{ form_row(form.id_client.prenom) }}
-    {{ form_row(form.id_client.telephone) }}
-    <input type="adresse"
-    id="form_adresses___name__"
-    name="form[adresses][__name__]"
-    value="">
-</div>
+
+     {{ include('client/_formCommande.html.twig', {'button_label': 'Valider'}) }}
+
+    <h3>Ma commande</h3>
+    
     {{ form_row(form.id_adresse) }}
     {{ form_row(form.id_typelivraison) }}
     {{ form_row(form.id_typepaiement) }}
-    <button class="btn">{{ button_label|default('Valider') }}</button>
+    <button class="btn" name="commandeBtn">{{ button_label|default('Valider') }}</button>
+    </div>
 {{ form_end(form) }}

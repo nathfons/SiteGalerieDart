@@ -8,6 +8,7 @@ use App\Constants\BDDconstants;
 use App\Form\CommandeType;
 use App\Form\CommandeType1;
 use App\Form\ClientType;
+use App\Form\ClientType2;
 use App\Repository\CommandeRepository;
 use App\Repository\ClientRepository;
 use App\Service\Commande\CommandeService;
@@ -34,7 +35,7 @@ class CommandeController extends AbstractController
     }
 
     /**
-     * @Route("/detail", name="commande_detail", methods={"GET"})
+     * @Route("/detail", name="commande_detail", methods={"GET","POST"})
      */
     public function detail(Request $request,ClientRepository $clientRepository,CommandeRepository $commandeRepository,PanierService $servicePanier,CommandeService $serviceCommande): Response
     {
@@ -52,10 +53,11 @@ class CommandeController extends AbstractController
             if($client == null){
                 $client = new Client();
                 $client->setUtilisateur($user);
+                $client->setDateCreationCompte($date);
                 $this->getDoctrine()->getManager()->persist($client);
             }
             else{
-                $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
+               
             }
             $commande->setIdClient($client);
             $commande->setDatecommande($date);
@@ -63,27 +65,59 @@ class CommandeController extends AbstractController
         }
 
         //$formClient = $this->createForm(ClientType2::class, $client);
+        /*
+        $formClient = $this->createForm(ClientType2::class, $client);
+        $formClient->handleRequest($request);
 
-       
         
+
+        if ($formClient->isSubmitted() && $formClient->isValid()) {
+            $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
+            foreach($client->getAdresses() as $adresse){
+                $adresse->setIdClient($client);
+            }
+            $this->getDoctrine()->getManager()->flush();
+        }
+        */
+    
         $form = $this->createForm(CommandeType1::class, $commande);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() && $formClient->isSubmitted() && $formClient->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-            $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
-                    ///ajouter idclient à adresses ajoutees
-            return $this->redirectToRoute('commande_index');
-        }
+        
+       
+            if ($form->isSubmitted() && $form->isValid()) {
+           
+                $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
+                foreach($client->getAdresses() as $adresse){
+                    $adresse->setIdClient($client);
+                    $this->getDoctrine()->getManager()->flush($adresse);
+                }
+                $commande->setIdClient($client);
 
-    
+                $commandeForm = $form->getData();
+                if($commandeForm->getIdAdresse()!=null){
+
+
+                            $this->getDoctrine()->getManager()->flush();
+                            return $this->redirectToRoute('commande_index');
+
+                        }else{
+                            
+                            $this->getDoctrine()->getManager()->flush($client);
+                        }
+                
+            }
+           
+           
 
         return $this->render('commande/detail.html.twig', [
             'commande' => $commande,
             'client' => $client,
+            'user' => $user,
             'achats' => $panierAvecDonnees,
             'total' => $total,
             'form' => $form->createView(),
+            //'formClient' => $formClient->createView(),
         ]);
     }
 
