@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+<h3>Artiste à la une</h3>
+<div class="admin">
+
+//DANS CONTROLLER FAIRE UNE LISTE DE FORMS de ArtisteAlauneType clé de artiste.id
+{% for artiste in artistes %}
+        <li>
+            {{ artiste.nom }}
+                {{ form_row(forms[artiste.id]) }}
+
+        </li>
+    {% endfor %}
+    
+</div>
+   
+    <button class="btn">{{ button_label|default('Choisir') }}</button>
+{{ form_end(form) }}
