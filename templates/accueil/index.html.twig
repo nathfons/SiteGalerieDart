@@ -20,10 +20,10 @@
     {% for artiste in artistes %}
     
         {% if  loop.index0  == 0 %}
-            <li data-target="#myCarousel" data-slide-to="{{ loop.index0 }}"  class="active"  ></li>
+            <li data-target="#myCarousel" data-slide-to="{{ loop.index }}"  class="active"  ></li>
       {% else %}
 
-            <li data-target="#myCarousel" data-slide-to="{{ loop.index0 }} " ></li>
+            <li data-target="#myCarousel" data-slide-to="{{ loop.index }} " ></li>
       {% endif %}
       {% endfor %}
     </ol>
