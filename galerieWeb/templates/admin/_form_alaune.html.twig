@@ -1,4 +1,6 @@
 {# render the start tag and change the submission method #}
 {{ form_start(form, {'method': 'GET'}) }}
 {{ form_row(form.alaune) }}
+                <a href={{path=admin_artistes_alaune},{id...}}>Mettre à jour</a>
+
 {{ form_end(form) }}
