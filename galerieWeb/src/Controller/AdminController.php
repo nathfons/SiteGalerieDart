@@ -180,6 +180,7 @@ class AdminController extends AbstractController
     
     /**
      * @Route("/admin_artistes_alaune", name="admin_artistes_alaune")
+     * @Route("/admin_artistes_alaune/{id}/{alaune}", name="admin_artistes_alaune_update")
      */
     public function findArtistesAlaune(ProduitRepository $produitRepository,Request $request, CommandeRepository $commandeRepository, LigneCommandeRepository $ligneCommandeRepository, ArtisteRepository $artisteRepository): Response
     {
@@ -201,7 +202,11 @@ class AdminController extends AbstractController
         
         if ($formArtiste->isSubmitted() && $formArtiste->isValid()) {
             //dump($request->get('alaune'));
-            $this->getDoctrine()->getManager()->flush();     
+            if(($request->request->get('id')!=null)&&($request->request->get('alaune')!=null)){
+                $artistes->get($request->request->get('id'))-setAlaune($request->request->get('alaune'));
+                $this->getDoctrine()->getManager()->flush($artistes->get($request->request->get('id')));     
+
+            }
         }   
 
         return $this->render('admin/admin_artistes_alaune.html.twig', [

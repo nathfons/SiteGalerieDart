@@ -3,10 +3,12 @@
 <div class="admin">
 
 //DANS CONTROLLER FAIRE UNE LISTE DE FORMS de ArtisteAlauneType clé de artiste.id
+//dans controller mettre une route avec parametre {id} et sans id pour la meme fonction
 {% for artiste in artistes %}
         <li>
             {{ artiste.nom }}
                 {{ form_row(forms[artiste.id]) }}
+                <a href={{path=admin_artistes_alaune},{id...}}>Mettre à jour</a>
 
         </li>
     {% endfor %}
