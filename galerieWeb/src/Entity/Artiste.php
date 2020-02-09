@@ -99,6 +99,7 @@ class Artiste
         $this->photographies = new ArrayCollection();
         $this->produits = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -363,6 +364,6 @@ class Artiste
 
    
 
-   
+    
 
 }

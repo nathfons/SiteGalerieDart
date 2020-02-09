@@ -6,6 +6,7 @@ use App\Entity\Artiste;
 use App\Entity\Utilisateur;
 use App\Entity\CategorieArtiste;
 use Doctrine\DBAL\Types\TextType;
+use App\Form\ArtisteType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -22,12 +23,13 @@ class ArtistesListType extends AbstractType
         $builder
             
             ->add('artistes', CollectionType::class, array(
-                'entry_type'   => Artiste::class,
-                'allow_add'    => false,
-                'allow_delete' => false,
+                'entry_type'   => ArtisteType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
                 'prototype' => true,
-                'entry_options' => ['label' => false],
-                
+                'entry_options' => ['label' => false,
+                    'attr' => ['class' => Artiste::class],
+                ],
               ))
         ;
     }

@@ -7,10 +7,19 @@ use App\Entity\ArtistesList;
 use App\Form\ArtistesListType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Route("/artisteslist")
+ */
 
 class ArtistesListController extends AbstractController
 {
-    public function new(Request $request)
+
+    /**
+     * @Route("/artistes_alaune", name="artistes_alaune")
+     */
+    public function alaune(Request $request)
     {
         $artistesList = new ArtistesList();
 
@@ -27,11 +36,15 @@ class ArtistesListController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // ... maybe do some form processing, like saving the Task and Tag objects
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('artistes_alaune');
         }
 
-        return $this->render('/artistes/new.html.twig', [
+        return $this->render('artisteslist/alaune.html.twig', [
+            'artistes' =>$artistesList,
             'form' => $form->createView(),
         ]);
     }
 }
+

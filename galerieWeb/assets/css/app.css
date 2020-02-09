@@ -3,6 +3,11 @@ body {
     background-color: #f2f2f2;
 }
 
+.admin {
+   
+    font-size: 10px;
+}
+
 .primary{
     background-color: #ffcc00;
 
