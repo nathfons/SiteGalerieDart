@@ -18,8 +18,10 @@ class PanierService{
     }
     
     public function add(int $id){
+        $produit = $this->repositoryProduit->find($id);
+        $type= $produit->getTypeProduit();
         $panier = $this->session->get("panier",[]);
-        if(!empty($panier[$id])){
+        if(!empty($panier[$id])&&(u($type)->equalsTo(BDDconstants::TYPEPRODUIT_ArticlesEnVente))){
             $panier[$id]=$panier[$id]+1;
         }
         else{

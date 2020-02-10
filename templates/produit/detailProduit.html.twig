@@ -5,9 +5,12 @@
 {% block contentPage %}
 <div class="content">
  <div class="bg-light p-3">
-        <h1>{{produit.nomProduit}} </h1>
+        <h1>{{produit.nomProduit}} - {{produit.prixHT}} </h1>
                          <img align="center" class="img-fluid rounded" src="{{asset(produit.photographie)  }}" alt="Image de {{ produit.nomProduit }}">
-
+ <a href="{{ path('panierAdd', {'id': produit.id}) }}" class="btn btn-success float-right">
+                        <i class="fas fa-shopping-cart mr-1"></i>
+                        Ajouter
+                    </a>
     </div>
 
     <div >

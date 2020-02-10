@@ -43,7 +43,10 @@ class CommandeController extends AbstractController
         $total = $servicePanier->getTotal();
         $user=$serviceCommande->getUser();
         $client = null;
-        $commande = new Commande();// A COMPLETER
+        $commande= $serviceCommande->getCommande();
+        if($commande==null){
+            $commande = new Commande();// A COMPLETER
+        }
         $this->getDoctrine()->getManager()->persist($commande);
         //$date =  DateTime::CreateFromFormat("Y-m-d-s");
         $date = new \DateTime("now");
@@ -99,10 +102,10 @@ class CommandeController extends AbstractController
 
 
                             $this->getDoctrine()->getManager()->flush();
-                            return $this->redirectToRoute('commande_index');
+                            return $this->redirectToRoute('commande_paiement');
 
                         }else{
-                            
+                            $serviceCommande->addCommande($commande);
                             $this->getDoctrine()->getManager()->flush($client);
                         }
                 
@@ -121,6 +124,20 @@ class CommandeController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/paiement", name="commande_paiement", methods={"GET","POST"})
+     */
+    public function paiement(Request $request,ClientRepository $clientRepository,CommandeRepository $commandeRepository,PanierService $servicePanier,CommandeService $serviceCommande): Response
+    {
+        return $this->render('commande/paiement.html.twig', [
+            'commande' => $commande,
+            'achats' => $panierAvecDonnees,
+            'total' => $total,
+            'form' => $form->createView(),
+            //'formClient' => $formClient->createView(),
+        ]);
+    }
     /**
      * @Route("/new", name="commande_new", methods={"GET","POST"})
      */

@@ -50,10 +50,6 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    
-
-    
-
 
     /**
      * @Route("/peintures/{letter}", name="peintures_liste", methods={"GET"})
