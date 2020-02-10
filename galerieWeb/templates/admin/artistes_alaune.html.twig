@@ -1,5 +1,5 @@
 {% block contentPage %}
-    <h1>Choix d'artiste à la une</h1>
+    <h3>Choix d'artiste à la une</h3>
 
      <table class="table">
         <thead>
@@ -21,17 +21,18 @@
                 <td>{{artiste.prenom}} {{artiste.nom}}</td>
                 <td><img align="center" class="img-fluid rounded" src="{{asset(artiste.miniature)  }}" alt="Image de {{ artiste.nom }}"></td>
                 
-                
-                <td>{{ artiste.alaune ? 'Yes' : 'No' }}</td>
-                <td>
-                   
-            {{ form_start(forms[artiste.id], {'method': 'GET'}) }}
-                    {{ form_widget(forms[artiste.id]) }}
-    
-                        
-            {{ form_end(forms[artiste.id]) }}
+                <td>{{artiste.alaune ? 'Yes' : 'No'}}</td>
+               
+                 <td>
+                <form action ="{{ path('approuver_alaune') }}" method="POST"> 
+                    
+	                <input type="checkbox" name="approuver_alaune_name" value = {{artiste.id}}_{{artiste.alaune}}> 
+	                <button type="submit">APROUVER</button>
+                </form>
+                </td>   
 
-                </td>
+                
+               
             </tr>
            
             
@@ -42,5 +43,10 @@
         {% endfor %}
         </tbody>
     </table>
- <button class="btn">Mettre à jour</button>
+
+    <form method="post" action="{{ path('effacer_alaune') }}" onsubmit="return confirm('Voulez-vous effacer toutes les selections?');">
+    <span class="glyphicon glyphicon-refresh text-danger"></span>
+    <button class="btn">Effacer la selection</button>
+</form>
+
 {% endblock %}

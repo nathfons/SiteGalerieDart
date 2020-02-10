@@ -94,22 +94,18 @@ class AdminController extends AbstractController
      */
     public function findProduitsVente(ProduitRepository $produitRepository, CommandeRepository $commandeRepository, ArtisteRepository $artisteRepository, LigneCommandeRepository $ligneCommandeRepository): Response
     {
-
-       //dump($produitRepository->findAll());
-        
-       //$this->routeSelected="admin_vente_produits";
-        //$this->qte=$qte;
-
-        return $this->render('admin/admin_vente_produits.html.twig', [
+       //dump($produitRepository->findAll()); 
+      
+        return $this->render('admin/admin_ventes.html.twig', [
             'produitsVente' => $ligneCommandeRepository->findAll(),
+            'articlesVente' => $ligneCommandeRepository->findAll(),
             'new_artistes' => $artisteRepository->findCntNewArtistes(),
             'nbCommandesEnCours' => $commandeRepository->nbCommandesEnCours(),
             'nbOeuvresApprouve' => $produitRepository->nbOeuvresApprouve(),
             'nbProduitsApprouve' => $produitRepository->nbProduitsApprouve(),
             'sommeVentes' => $ligneCommandeRepository->sommeVentes(),
             'cmd'=> 'no',
-            
-            //'routeSelected'=> $this->routeSelected,
+
         ]);
     }  
 
@@ -154,8 +150,59 @@ class AdminController extends AbstractController
             $entityManager->persist($produit);
             $entityManager->flush();
             
-        return $this->redirectToRoute('admin_vente_produits');
+        return $this->redirectToRoute('admin_stock_produits');
     }
+
+    /**
+     * @Route("/artistes", name="approuver_alaune", methods={"POST"})
+     */
+    public function approuver_alaune(Request $request, ArtisteRepository $artisteRepository): Response
+    {
+            
+            //dd($request->request->get("approuver_alaune_name"));
+            //$produitId=$produit->getId();
+          //  $artiste_id_result = $request->get("id");
+
+            $approuver_alaune_name = $request->request->get("approuver_alaune_name");
+
+            if($approuver_alaune_name != null){
+
+           
+            $artiste_id_result=str_split($approuver_alaune_name)[0];
+            $artiste_alaune_result=str_split($approuver_alaune_name)[2];
+
+           if($artiste_alaune_result == "1") $artiste_alaune_result="true" ;
+           //dd($artiste_alaune_result);
+           //dd(str_split($approuver_alaune_name)[2]);
+            //$artisteRepository->setAlaune($artiste_alaune_result);
+          $artisteRepository->setAlauneResult($artiste_id_result, $artiste_alaune_result);
+                     
+           // $entityManager = $this->getDoctrine()->getManager();
+           // $entityManager->persist($artiste);
+           // $entityManager->flush();
+            
+        return $this->redirectToRoute('admin_artistes_alaune');
+
+        }
+
+    }
+
+    /**
+     * @Route("/artistes", name="effacer_alaune", methods={"POST"})
+     */
+    public function effacer_alaune(Request $request, ArtisteRepository $artisteRepository)
+    {
+            
+  
+        
+          $artisteRepository->effacerAlauneResult();
+                     
+
+            
+        return $this->redirectToRoute('admin_artistes_alaune');
+
+    }
+
 
     /**
      * @Route("/admin_artistes", name="admin_artistes")

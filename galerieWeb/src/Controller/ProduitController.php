@@ -315,7 +315,7 @@ class ProduitController extends AbstractController
    
         }
 
-        return $this->redirectToRoute('admin_oeuvres');
+        return $this->redirectToRoute('admin_produits');
     }
 
     

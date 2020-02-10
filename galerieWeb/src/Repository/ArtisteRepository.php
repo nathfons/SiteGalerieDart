@@ -158,6 +158,32 @@ class ArtisteRepository extends ServiceEntityRepository
     ;
 }
 
+//setAlauneResult($artiste_id_result, $alaune_result)
+public function setAlauneResult($artiste_id_result, $alaune_result)
+{
+    $updateEtat = $this->createQueryBuilder('p')
+        ->update(Artiste::class, 'p')
+        
+        ->andWhere('p.id = :val')
+        ->setParameter('val', $artiste_id_result)
+        ->set('p.alaune', $alaune_result)
+        ->getQuery();
+        $updateEtat->execute();
+    ;
+}
+
+//effacerAlauneResult
+public function effacerAlauneResult()
+{
+    $updateEtat = $this->createQueryBuilder('p')
+        ->update(Artiste::class, 'p')
+
+        ->set('p.alaune', FALSE)
+        ->getQuery();
+        $updateEtat->execute();
+    ;
+}
+
     //findCntNewArtistes
     public function findCntNewArtistes()
       {

@@ -1,7 +1,7 @@
 {% block contentPage %}
 
 
-<h1>Produits vendus</h1>
+<h3>Produits vendus</h3>
 
     <table class="table">
         <thead>
@@ -15,7 +15,11 @@
                 <th>Total</th>
                 <th>En vente</th>
                 <th>Stock</th>
+                 {% if cmd == "yes" %}
                 <th>Commander</th>
+                 {% else %}
+                    <th></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
