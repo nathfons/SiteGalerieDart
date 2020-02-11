@@ -38,11 +38,11 @@ class CommandeService{
         return $this->repositoryCommande->find($idCommande);
     }
 
-    public function setCommande(int $id): ?Commande{
+    public function setCommande(int $id): boolean{
 
         $this->session->set("commande",$id);
 
-        return $this->repositoryCommande->find($idCommande);
+        return TRUE;
     }
 
 }

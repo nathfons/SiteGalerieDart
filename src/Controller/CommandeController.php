@@ -100,6 +100,7 @@ class CommandeController extends AbstractController
                 foreach($client->getAdresses() as $adresse){
                     $adresse->setIdClient($client);
                     $this->getDoctrine()->getManager()->flush($adresse);
+                    $this->getDoctrine()->getManager()->flush($client);
                 }
                 $commande->setIdClient($client);
 
@@ -111,8 +112,10 @@ class CommandeController extends AbstractController
                             return $this->redirectToRoute('commande_paiement');
 
                         }else{
-                            $serviceCommande->addCommande($commande);
+                            //Ajouter warning erreur pour utilisateur - adresse pas renseignée
+                            $serviceCommande->setCommande($commande->getId());
                             $this->getDoctrine()->getManager()->flush($client);
+                            $this->getDoctrine()->getManager()->flush($commande);
                         }
                 
             }
