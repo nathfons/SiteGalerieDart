@@ -22,16 +22,19 @@
                 <td><img align="center" class="img-fluid rounded" src="{{asset(artiste.miniature)  }}" alt="Image de {{ artiste.nom }}"></td>
                 
                 <td>{{artiste.alaune ? 'Yes' : 'No'}}</td>
+                
                
+               {% if artiste.alaune!= '1' %}
                  <td>
                 <form action ="{{ path('approuver_alaune') }}" method="POST"> 
                     
-	                <input type="checkbox" name="approuver_alaune_name" value = {{artiste.id}}_{{artiste.alaune}}> 
+	                <input type="checkbox" name="approuver_alaune_name" value = {{artiste.id}}> 
 	                <button type="submit">APROUVER</button>
                 </form>
                 </td>   
-
-                
+                {% else %}
+                <td></td>
+                {% endif %}
                
             </tr>
            
@@ -44,9 +47,7 @@
         </tbody>
     </table>
 
-    <form method="post" action="{{ path('effacer_alaune') }}" onsubmit="return confirm('Voulez-vous effacer toutes les selections?');">
-    <span class="glyphicon glyphicon-refresh text-danger"></span>
-    <button class="btn">Effacer la selection</button>
+   
 </form>
 
 {% endblock %}

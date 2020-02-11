@@ -158,29 +158,19 @@ class AdminController extends AbstractController
      */
     public function approuver_alaune(Request $request, ArtisteRepository $artisteRepository): Response
     {
-            
             //dd($request->request->get("approuver_alaune_name"));
-            //$produitId=$produit->getId();
+            //if GET
           //  $artiste_id_result = $request->get("id");
 
-            $approuver_alaune_name = $request->request->get("approuver_alaune_name");
-
-            if($approuver_alaune_name != null){
-
-           
+            $approuver_alaune_name = $request->request->get("approuver_alaune_name"); 
             $artiste_id_result=str_split($approuver_alaune_name)[0];
-            $artiste_alaune_result=str_split($approuver_alaune_name)[2];
-
-           if($artiste_alaune_result == "1") $artiste_alaune_result="true" ;
-           //dd($artiste_alaune_result);
-           //dd(str_split($approuver_alaune_name)[2]);
+            //$artiste_alaune_result=str_split($approuver_alaune_name)[2];  
             //$artisteRepository->setAlaune($artiste_alaune_result);
-          $artisteRepository->setAlauneResult($artiste_id_result, $artiste_alaune_result);
-                     
            // $entityManager = $this->getDoctrine()->getManager();
            // $entityManager->persist($artiste);
            // $entityManager->flush();
-            
+           $artisteRepository->setAlauneResult($artiste_id_result);
+
         return $this->redirectToRoute('admin_artistes_alaune');
 
         }
@@ -233,7 +223,7 @@ class AdminController extends AbstractController
         //dd($artisteRepository->findArtistesNouveaux());//findArtistesPublies
         //$routeSelected = "admin_artistes";
         $artistes = $artisteRepository->findAll();
-        $forms =  new OrderedHashMap();
+        //$forms =  new OrderedHashMap();
         $numItems = $artisteRepository->cntArtistes();
         foreach($artistes as $index =>$artiste){
             $formArtiste = $this->createForm(ArtisteType2::class, $artiste);
@@ -260,7 +250,7 @@ class AdminController extends AbstractController
             'nbProduitsApprouve' => $produitRepository->nbProduitsApprouve(),
             'sommeVentes' => $ligneCommandeRepository->sommeVentes(),
             //'routeSelected'=> $this->routeSelected,9
-            'forms' =>$forms ,
+            //'forms' =>$forms ,
 
         ]);
     }

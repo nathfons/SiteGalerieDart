@@ -158,15 +158,25 @@ class ArtisteRepository extends ServiceEntityRepository
     ;
 }
 
-//setAlauneResult($artiste_id_result, $alaune_result)
-public function setAlauneResult($artiste_id_result, $alaune_result)
+//setAlauneResult($artiste_id_result)
+public function setAlauneResult($artiste_id_result)
 {
     $updateEtat = $this->createQueryBuilder('p')
         ->update(Artiste::class, 'p')
+        ->set('p.alaune', '0') //$alaune_result
+        //->where('p.id IN (?1)')
+        //->setParameter(1, '1')
         
-        ->andWhere('p.id = :val')
-        ->setParameter('val', $artiste_id_result)
-        ->set('p.alaune', $alaune_result)
+        ->getQuery();
+        $updateEtat->execute();
+    ;
+
+    $updateEtat = $this->createQueryBuilder('p')
+        ->update(Artiste::class, 'p')
+        ->set('p.alaune', '1') //$alaune_result
+        ->where('p.id IN (?1)')
+        ->setParameter(1, $artiste_id_result)
+        
         ->getQuery();
         $updateEtat->execute();
     ;
@@ -178,7 +188,7 @@ public function effacerAlauneResult()
     $updateEtat = $this->createQueryBuilder('p')
         ->update(Artiste::class, 'p')
 
-        ->set('p.alaune', FALSE)
+        ->set('p.alaune', '0')
         ->getQuery();
         $updateEtat->execute();
     ;
