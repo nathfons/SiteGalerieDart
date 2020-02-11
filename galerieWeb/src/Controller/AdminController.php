@@ -162,7 +162,8 @@ class AdminController extends AbstractController
             //if GET
           //  $artiste_id_result = $request->get("id");
 
-            $approuver_alaune_name = $request->request->get("approuver_alaune_name"); 
+            $approuver_alaune_name = $request->request->get("approuver_alaune_name");
+            if($approuver_alaune_name != null){    
             $artiste_id_result=str_split($approuver_alaune_name)[0];
             //$artiste_alaune_result=str_split($approuver_alaune_name)[2];  
             //$artisteRepository->setAlaune($artiste_alaune_result);
