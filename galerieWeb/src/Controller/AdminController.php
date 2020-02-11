@@ -15,14 +15,8 @@ use App\Entity\Artiste;
 use App\Form\ArtisteType;
 use App\Form\ArtisteType2;
 use Symfony\Component\Form\Util\OrderedHashMap;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
-
 
 /**
- * Require ROLE_ADMIN for *every* controller method in this class.
- *
- * @IsGranted("ROLE_ADMIN")
  * @Route("/admin")
  */
 class AdminController extends AbstractController
@@ -79,7 +73,6 @@ class AdminController extends AbstractController
             'sommeVentes' => $ligneCommandeRepository->sommeVentes(),
         ]);
     }  
-
     /**
      * @Route("/admin_ventes", name="admin_ventes")
      */
@@ -101,22 +94,18 @@ class AdminController extends AbstractController
      */
     public function findProduitsVente(ProduitRepository $produitRepository, CommandeRepository $commandeRepository, ArtisteRepository $artisteRepository, LigneCommandeRepository $ligneCommandeRepository): Response
     {
-
-       //dump($produitRepository->findAll());
-        
-       //$this->routeSelected="admin_vente_produits";
-        //$this->qte=$qte;
-
-        return $this->render('admin/admin_vente_produits.html.twig', [
+       //dump($produitRepository->findAll()); 
+      
+        return $this->render('admin/admin_ventes.html.twig', [
             'produitsVente' => $ligneCommandeRepository->findAll(),
+            'articlesVente' => $ligneCommandeRepository->findAll(),
             'new_artistes' => $artisteRepository->findCntNewArtistes(),
             'nbCommandesEnCours' => $commandeRepository->nbCommandesEnCours(),
             'nbOeuvresApprouve' => $produitRepository->nbOeuvresApprouve(),
             'nbProduitsApprouve' => $produitRepository->nbProduitsApprouve(),
             'sommeVentes' => $ligneCommandeRepository->sommeVentes(),
             'cmd'=> 'no',
-            
-            //'routeSelected'=> $this->routeSelected,
+
         ]);
     }  
 
@@ -161,8 +150,49 @@ class AdminController extends AbstractController
             $entityManager->persist($produit);
             $entityManager->flush();
             
-        return $this->redirectToRoute('admin_vente_produits');
+        return $this->redirectToRoute('admin_stock_produits');
     }
+
+    /**
+     * @Route("/artistes", name="approuver_alaune", methods={"POST"})
+     */
+    public function approuver_alaune(Request $request, ArtisteRepository $artisteRepository): Response
+    {
+            //dd($request->request->get("approuver_alaune_name"));
+            //if GET
+          //  $artiste_id_result = $request->get("id");
+
+            $approuver_alaune_name = $request->request->get("approuver_alaune_name"); 
+            $artiste_id_result=str_split($approuver_alaune_name)[0];
+            //$artiste_alaune_result=str_split($approuver_alaune_name)[2];  
+            //$artisteRepository->setAlaune($artiste_alaune_result);
+           // $entityManager = $this->getDoctrine()->getManager();
+           // $entityManager->persist($artiste);
+           // $entityManager->flush();
+           $artisteRepository->setAlauneResult($artiste_id_result);
+
+        return $this->redirectToRoute('admin_artistes_alaune');
+
+        }
+
+    }
+
+    /**
+     * @Route("/artistes", name="effacer_alaune", methods={"POST"})
+     */
+    public function effacer_alaune(Request $request, ArtisteRepository $artisteRepository)
+    {
+            
+  
+        
+          $artisteRepository->effacerAlauneResult();
+                     
+
+            
+        return $this->redirectToRoute('admin_artistes_alaune');
+
+    }
+
 
     /**
      * @Route("/admin_artistes", name="admin_artistes")
@@ -187,14 +217,13 @@ class AdminController extends AbstractController
     
     /**
      * @Route("/admin_artistes_alaune", name="admin_artistes_alaune")
-     * @Route("/admin_artistes_alaune/{id}/{alaune}", name="admin_artistes_alaune_update")
      */
     public function findArtistesAlaune(ProduitRepository $produitRepository,Request $request, CommandeRepository $commandeRepository, LigneCommandeRepository $ligneCommandeRepository, ArtisteRepository $artisteRepository): Response
     {
         //dd($artisteRepository->findArtistesNouveaux());//findArtistesPublies
         //$routeSelected = "admin_artistes";
         $artistes = $artisteRepository->findAll();
-        $forms =  new OrderedHashMap();
+        //$forms =  new OrderedHashMap();
         $numItems = $artisteRepository->cntArtistes();
         foreach($artistes as $index =>$artiste){
             $formArtiste = $this->createForm(ArtisteType2::class, $artiste);
@@ -209,11 +238,7 @@ class AdminController extends AbstractController
         
         if ($formArtiste->isSubmitted() && $formArtiste->isValid()) {
             //dump($request->get('alaune'));
-            if(($request->request->get('id')!=null)&&($request->request->get('alaune')!=null)){
-                $artistes->get($request->request->get('id'))-setAlaune($request->request->get('alaune'));
-                $this->getDoctrine()->getManager()->flush($artistes->get($request->request->get('id')));     
-
-            }
+            $this->getDoctrine()->getManager()->flush();     
         }   
 
         return $this->render('admin/admin_artistes_alaune.html.twig', [
@@ -225,7 +250,7 @@ class AdminController extends AbstractController
             'nbProduitsApprouve' => $produitRepository->nbProduitsApprouve(),
             'sommeVentes' => $ligneCommandeRepository->sommeVentes(),
             //'routeSelected'=> $this->routeSelected,9
-            'forms' =>$forms ,
+            //'forms' =>$forms ,
 
         ]);
     }
