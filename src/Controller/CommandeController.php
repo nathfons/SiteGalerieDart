@@ -99,8 +99,8 @@ class CommandeController extends AbstractController
                 $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
                 foreach($client->getAdresses() as $adresse){
                     $adresse->setIdClient($client);
+                    $this->getDoctrine()->getManager()->persist($adresse);
                     $this->getDoctrine()->getManager()->flush($adresse);
-                    $this->getDoctrine()->getManager()->flush($client);
                 }
                 $commande->setIdClient($client);
 
@@ -115,7 +115,6 @@ class CommandeController extends AbstractController
                             //Ajouter warning erreur pour utilisateur - adresse pas renseignée
                             $serviceCommande->setCommande($commande->getId());
                             $this->getDoctrine()->getManager()->flush($client);
-                            $this->getDoctrine()->getManager()->flush($commande);
                         }
                 
             }
