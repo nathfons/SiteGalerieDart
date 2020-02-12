@@ -98,9 +98,9 @@ class CommandeController extends AbstractController
                 $this->commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
 
            
-                //foreach($client->getAdresses() as $adresse){
-                   // $adresse->setIdClient($client);
-                //}
+                foreach($client->getAdresses() as $adresse){
+                    $adresse->setIdClient($client);
+                }
                 //$this->getDoctrine()->getManager()->persist($this->commande);
                //if( $this->commande->getIdAdresse()!=null){
                             $this->getDoctrine()->getManager()->flush();
