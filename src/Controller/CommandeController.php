@@ -104,8 +104,7 @@ class CommandeController extends AbstractController
                 }
                 $commande->setIdClient($client);
 
-                $commandeForm = $form->getData();
-                if($commandeForm->getIdAdresse()!=null){
+                if( $commande->getIdAdresse()!=null){
 
 
                             $this->getDoctrine()->getManager()->flush();
