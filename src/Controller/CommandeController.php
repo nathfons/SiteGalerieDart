@@ -101,7 +101,7 @@ class CommandeController extends AbstractController
                 foreach($client->getAdresses() as $adresse){
                     $adresse->setIdClient($client);
                 }
-                //$this->getDoctrine()->getManager()->persist($this->commande);
+                $this->getDoctrine()->getManager()->persist($this->commande);
                //if( $this->commande->getIdAdresse()!=null){
                             $this->getDoctrine()->getManager()->flush();
                             return $this->redirectToRoute('commande_index');
