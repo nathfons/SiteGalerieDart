@@ -97,7 +97,6 @@ class CommandeController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
 
-                dd($form->getData());
            
                 foreach($client->getAdresses() as $adresse){
                     $adresse->setIdClient($client);
@@ -107,13 +106,9 @@ class CommandeController extends AbstractController
                 $commande->setIdClient($client);
                 $this->getDoctrine()->getManager()->persist($client);
                 $this->getDoctrine()->getManager()->persist($commande);
-                dd($commande);
                 if( $commande->getIdAdresse()!=null){
-                    dd($commande->getIdAdresse());
-
                             $this->getDoctrine()->getManager()->flush();
                             return $this->redirectToRoute('commande_paiement');
-
                         }else{
                             //Ajouter warning erreur pour utilisateur - adresse pas renseignée
                             $serviceCommande->setCommande($commande);
