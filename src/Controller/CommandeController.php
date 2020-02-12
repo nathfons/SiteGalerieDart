@@ -131,7 +131,7 @@ class CommandeController extends AbstractController
     public function paiement(Request $request,ClientRepository $clientRepository,CommandeRepository $commandeRepository,PanierService $servicePanier,CommandeService $serviceCommande): Response
     {
         $commande = new Commande();
-        $form = $this->createForm(CommandeType2::class, $commande);
+        $form = $this->createForm(CommandeType1::class, $commande);
         $form->handleRequest($request);
         return $this->render('commande/paiement.html.twig', [
             'form' => $form->createView(),
