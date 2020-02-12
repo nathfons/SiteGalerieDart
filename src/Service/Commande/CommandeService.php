@@ -33,14 +33,13 @@ class CommandeService{
 
     public function getCommande(): ?Commande{
 
-        $idCommande=$this->session->get("commande",-1);
-        if($idCommande == -1){return null;}
-        return $this->repositoryCommande->find($idCommande);
+        $commande=$this->session->get("commande",null);
+        return $commande;
     }
 
-    public function setCommande(int $id): boolean{
+    public function setCommande( $commande): boolean{
 
-        $this->session->set("commande",$id);
+        $this->session->set("commande",$commande);
 
         return TRUE;
     }

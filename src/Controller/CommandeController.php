@@ -116,7 +116,7 @@ class CommandeController extends AbstractController
 
                         }else{
                             //Ajouter warning erreur pour utilisateur - adresse pas renseignée
-                            $serviceCommande->setCommande($commande->getId());
+                            $serviceCommande->setCommande($commande);
                             $this->getDoctrine()->getManager()->flush($client);
                         }
                 
