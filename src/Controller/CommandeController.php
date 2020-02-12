@@ -95,6 +95,8 @@ class CommandeController extends AbstractController
         
        
             if ($form->isSubmitted() && $form->isValid()) {
+
+                dd($form->getData());
            
                 $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
                 foreach($client->getAdresses() as $adresse){
@@ -103,9 +105,9 @@ class CommandeController extends AbstractController
                     $this->getDoctrine()->getManager()->flush($adresse);
                 }
                 $commande->setIdClient($client);
-
+                dd($commande);
                 if( $commande->getIdAdresse()!=null){
-
+                    dd($commande->getIdAdresse());
 
                             $this->getDoctrine()->getManager()->flush();
                             return $this->redirectToRoute('commande_paiement');
