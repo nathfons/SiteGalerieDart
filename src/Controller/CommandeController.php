@@ -105,6 +105,8 @@ class CommandeController extends AbstractController
                     $this->getDoctrine()->getManager()->flush($adresse);
                 }
                 $commande->setIdClient($client);
+                $this->getDoctrine()->getManager()->persist($client);
+                $this->getDoctrine()->getManager()->persist($commande);
                 dd($commande);
                 if( $commande->getIdAdresse()!=null){
                     dd($commande->getIdAdresse());
