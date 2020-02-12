@@ -108,7 +108,7 @@ class CommandeController extends AbstractController
                 if( $this->commande->getIdAdresse()!=null){*/
                             $this->getDoctrine()->getManager()->flush();
                             $this->commande=null;
-                            return $this->redirectToRoute('commande_paiement');
+                            return $this->redirectToRoute('commande_index');
                        /* }else{
                             //Ajouter warning erreur pour utilisateur - adresse pas renseignée
                         }*/
