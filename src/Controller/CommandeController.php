@@ -98,25 +98,23 @@ class CommandeController extends AbstractController
                 $this->commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
 
            
-                foreach($client->getAdresses() as $adresse){
-                    $adresse->setIdClient($client);
-                }
-                $commande->setIdClient($client);
-                $this->getDoctrine()->getManager()->persist($this->commande);
-               if( $this->commande->getIdAdresse()!=null){
+                //foreach($client->getAdresses() as $adresse){
+                   // $adresse->setIdClient($client);
+                //}
+                //$this->getDoctrine()->getManager()->persist($this->commande);
+               //if( $this->commande->getIdAdresse()!=null){
                             $this->getDoctrine()->getManager()->flush();
-                            $this->commande=null;
                             return $this->redirectToRoute('commande_paiement');
-                        }else{
+                      //  }else{
                             //Ajouter warning erreur pour utilisateur - adresse pas renseignée
-                        }
+                       // }
                 
             }
            
            
 
         return $this->render('commande/detail.html.twig', [
-            'commande' => $commande,
+            'commande' => $this->commande,
             'client' => $client,
             'user' => $user,
             'achats' => $panierAvecDonnees,
@@ -132,9 +130,10 @@ class CommandeController extends AbstractController
      */
     public function paiement(Request $request,ClientRepository $clientRepository,CommandeRepository $commandeRepository,PanierService $servicePanier,CommandeService $serviceCommande): Response
     {
-        $form = $this->createForm(PaiementType::class, $this->commande);
+        $form = $this->createForm(CommandeType2::class, $this->commande);
         $form->handleRequest($request);
         return $this->render('commande/paiement.html.twig', [
+            'commande' => $this->commande,
             'form' => $form->createView(),
             //'formClient' => $formClient->createView(),
         ]);
