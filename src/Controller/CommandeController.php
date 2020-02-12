@@ -100,10 +100,8 @@ class CommandeController extends AbstractController
            
                 foreach($client->getAdresses() as $adresse){
                     $adresse->setIdClient($client);
-                    $this->getDoctrine()->getManager()->persist($adresse);
                 }
                 $commande->setIdClient($client);
-                $this->getDoctrine()->getManager()->persist($client);
                 $this->getDoctrine()->getManager()->persist($this->commande);
                 if( $this->commande->getIdAdresse()!=null){
                             $this->getDoctrine()->getManager()->flush();
@@ -111,7 +109,6 @@ class CommandeController extends AbstractController
                             return $this->redirectToRoute('commande_index');
                         }else{
                             //Ajouter warning erreur pour utilisateur - adresse pas renseignée
-                            $this->getDoctrine()->getManager()->flush($client);
                         }
                 
             }
