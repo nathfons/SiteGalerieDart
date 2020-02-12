@@ -95,10 +95,10 @@ class CommandeController extends AbstractController
         
        
             if ($form->isSubmitted() && $form->isValid()) {
+                $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
 
                 dd($form->getData());
            
-                $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
                 foreach($client->getAdresses() as $adresse){
                     $adresse->setIdClient($client);
                     $this->getDoctrine()->getManager()->persist($adresse);
