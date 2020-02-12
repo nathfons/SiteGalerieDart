@@ -29,6 +29,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  */
 class CommandeController extends AbstractController
 {
+    private $commande = null;
     /**
      * @Route("/", name="commande_index", methods={"GET"})
      */
@@ -49,11 +50,10 @@ class CommandeController extends AbstractController
         $total = $servicePanier->getTotal();
         $user=$serviceCommande->getUser();
         $client = null;
-        $commande= $serviceCommande->getCommande();
-        if($commande==null){
-            $commande = new Commande();// A COMPLETER
+        if($this->commande==null){
+            $this->commande = new Commande();// A COMPLETER
         }
-        $this->getDoctrine()->getManager()->persist($commande);
+        $this->getDoctrine()->getManager()->persist($this->commande);
         //$date =  DateTime::CreateFromFormat("Y-m-d-s");
         $date = new \DateTime("now");
         if($user != null){
@@ -68,9 +68,9 @@ class CommandeController extends AbstractController
             else{
                
             }
-            $commande->setIdClient($client);
-            $commande->setDatecommande($date);
-            $commande->setEtatcommande(BDDconstants::COMMANDE_attente);
+            $this->commande->setIdClient($client);
+            $this->commande->setDatecommande($date);
+            $this->commande->setEtatcommande(BDDconstants::COMMANDE_attente);
         }
 
         //$formClient = $this->createForm(ClientType2::class, $client);
@@ -89,13 +89,13 @@ class CommandeController extends AbstractController
         }
         */
     
-        $form = $this->createForm(CommandeType1::class, $commande);
+        $form = $this->createForm(CommandeType1::class, $this->commande);
         $form->handleRequest($request);
 
         
        
             if ($form->isSubmitted() && $form->isValid()) {
-                $commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
+                $this->commande->setReferencecommande('REF-C'.$date->format("Y-m-d\TH:i:sP").$client->getNom());
 
            
                 foreach($client->getAdresses() as $adresse){
@@ -105,13 +105,13 @@ class CommandeController extends AbstractController
                 }
                 $commande->setIdClient($client);
                 $this->getDoctrine()->getManager()->persist($client);
-                $this->getDoctrine()->getManager()->persist($commande);
-                if( $commande->getIdAdresse()!=null){
+                $this->getDoctrine()->getManager()->persist($this->commande);
+                if( $this->commande->getIdAdresse()!=null){
                             $this->getDoctrine()->getManager()->flush();
+                            $this->commande=null;
                             return $this->redirectToRoute('commande_paiement');
                         }else{
                             //Ajouter warning erreur pour utilisateur - adresse pas renseignée
-                            $serviceCommande->setCommande($commande);
                             $this->getDoctrine()->getManager()->flush($client);
                         }
                 
