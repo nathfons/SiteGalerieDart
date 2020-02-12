@@ -103,13 +103,13 @@ class CommandeController extends AbstractController
                 }
                 $commande->setIdClient($client);
                 $this->getDoctrine()->getManager()->persist($this->commande);
-               // if( $this->commande->getIdAdresse()!=null){
+               if( $this->commande->getIdAdresse()!=null){
                             $this->getDoctrine()->getManager()->flush();
                             $this->commande=null;
                             return $this->redirectToRoute('commande_paiement');
-                      //  }else{
+                        }else{
                             //Ajouter warning erreur pour utilisateur - adresse pas renseignée
-                       // }
+                        }
                 
             }
            
@@ -132,10 +132,9 @@ class CommandeController extends AbstractController
      */
     public function paiement(Request $request,ClientRepository $clientRepository,CommandeRepository $commandeRepository,PanierService $servicePanier,CommandeService $serviceCommande): Response
     {
+        $form = $this->createForm(PaiementType::class, $this->commande);
+        $form->handleRequest($request);
         return $this->render('commande/paiement.html.twig', [
-            'commande' => $commande,
-            'achats' => $panierAvecDonnees,
-            'total' => $total,
             'form' => $form->createView(),
             //'formClient' => $formClient->createView(),
         ]);
